@@ -1,0 +1,32 @@
+dependencies: \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cshadowviewcontainer.cpp \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cshadowviewcontainer.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cviewcontainer.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/vstguidebug.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cview.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cpoint.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/crect.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/vstkeycode.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cbuttonstate.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cgraphicstransform.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cdrawdefs.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/iviewlistener.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/iscalefactorchangedlistener.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/coffscreencontext.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cdrawcontext.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cfont.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/optional.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/iplatformstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/../vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/ccolor.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/clinestyle.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cbitmapfilter.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cframe.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/iplatformframecallback.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/../vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cbitmap.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/cresourcedescription.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/iplatformbitmap.h

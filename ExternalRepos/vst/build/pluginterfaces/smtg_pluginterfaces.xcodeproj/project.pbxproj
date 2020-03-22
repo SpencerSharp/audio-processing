@@ -1,0 +1,649 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		5C50922D3A98421EB6B822F9 /* ALL_BUILD */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D8B03F841AA44B03AE1028D2 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */;
+			buildPhases = (
+				880921BD87544E4E9B132CE6 /* CMake Rules */,
+			);
+			dependencies = (
+				532E921BDC034A62B86D2EDD /* PBXTargetDependency */,
+				732404678DB243C0A6EDF9A4 /* PBXTargetDependency */,
+			);
+			name = ALL_BUILD;
+			productName = ALL_BUILD;
+		};
+		B1B684D15B0C41EA938AEFBE /* ZERO_CHECK */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = B64985AC2C234F5097B2BA5B /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */;
+			buildPhases = (
+				684406C786CB43ADAC35855E /* CMake Rules */,
+			);
+			dependencies = (
+			);
+			name = ZERO_CHECK;
+			productName = ZERO_CHECK;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		0174DAA9151E4CD7AF16E870 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstphysicalui.h */ = {isa = PBXBuildFile; fileRef = 1D14A18B9D074C4092B2E23D /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstphysicalui.h */; };
+		03A669D2DBDB43379E66F5CF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstautomationstate.h */ = {isa = PBXBuildFile; fileRef = 8C506C57E3354C85A0B2940A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstautomationstate.h */; };
+		03C3008D47D746E6BFA16AD3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fplatform.h */ = {isa = PBXBuildFile; fileRef = B2E1305833C24AC58A58CEB1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fplatform.h */; };
+		0D533DA338E04B659902099A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidicontrollers.h */ = {isa = PBXBuildFile; fileRef = CD8A18B840104CDDBEB098FA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidicontrollers.h */; };
+		179C6D3C14E44E1F9AA2AFB2 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstparameterchanges.h */ = {isa = PBXBuildFile; fileRef = A591100901E647188151C565 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstparameterchanges.h */; };
+		1D34B358E7D94640BC278DC8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpush.h */ = {isa = PBXBuildFile; fileRef = 638475DDD3124F509550297E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpush.h */; };
+		1D6D68334CC94FFA9A7F381A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/pluginbasefwd.h */ = {isa = PBXBuildFile; fileRef = 722743F969274338894B25ED /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/pluginbasefwd.h */; };
+		21080FBB5A9A41B589721371 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugview.h */ = {isa = PBXBuildFile; fileRef = D51B67F123864537BD9B7C1F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugview.h */; };
+		24FAF8CBF93B4653A19DD722 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstchannelcontextinfo.h */ = {isa = PBXBuildFile; fileRef = 0D70C8D8E137459B96ADD533 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstchannelcontextinfo.h */; };
+		2555F245514C41EDB66376B0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstnoteexpression.h */ = {isa = PBXBuildFile; fileRef = 3552970522B74B09979CD775 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstnoteexpression.h */; };
+		2C3489EF3A0D4F6191A31756 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstaudioprocessor.h */ = {isa = PBXBuildFile; fileRef = 16956D3C3F7E4BC7B59F0205 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstaudioprocessor.h */; };
+		34FDC4A6C2E54DE8874A30C9 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcontextmenu.h */ = {isa = PBXBuildFile; fileRef = D70B968A01CE40728C45B69B /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcontextmenu.h */; };
+		3721D9B1DE2E45C487D9F09F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ftypes.h */ = {isa = PBXBuildFile; fileRef = 1F8168D57CA74AA5B044A4D4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ftypes.h */; };
+		387CB6699C324C7F8F326B65 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpresetkeys.h */ = {isa = PBXBuildFile; fileRef = 7D45B933F44C402EB8443B82 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpresetkeys.h */; };
+		3BB89CD4EA884521A51B6139 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/geoconstants.h */ = {isa = PBXBuildFile; fileRef = 787645C23D2C44A9A40FFAA4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/geoconstants.h */; };
+		4BF9A5D169CE4C7B8851CFB5 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsthostapplication.h */ = {isa = PBXBuildFile; fileRef = 70DEE90342F74D1DB4A34A43 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsthostapplication.h */; };
+		532F51BC078F4DA6A57B0814 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpshpack4.h */ = {isa = PBXBuildFile; fileRef = 4DFE9998232448F0B567AD74 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpshpack4.h */; };
+		535764E857354F1091A957C3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstevents.h */ = {isa = PBXBuildFile; fileRef = 37B882BE1C8E4E0D9D4DE6BA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstevents.h */; };
+		58CFEB307B1D4F8EB3930EB0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstrepresentation.h */ = {isa = PBXBuildFile; fileRef = BE2FE13CB63F4715AFB224B0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstrepresentation.h */; };
+		596079D561004C969FC61918 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/typesizecheck.h */ = {isa = PBXBuildFile; fileRef = 002A18003309461BB0CF2DB3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/typesizecheck.h */; };
+		6608B6A57820457CBE718B62 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/iupdatehandler.h */ = {isa = PBXBuildFile; fileRef = 1486485F3C114B8CBFD7624A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/iupdatehandler.h */; };
+		6B9B912D5B024D00A18106C3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstplugview.h */ = {isa = PBXBuildFile; fileRef = 7190DE11E69942688814512A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstplugview.h */; };
+		7EFD81F861344BB690A3394E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/CMakeLists.txt */ = {isa = PBXBuildFile; fileRef = E94543212C604865A42D3589 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/CMakeLists.txt */; };
+		7F005A5FDA714F33A5D485BB /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipluginbase.h */ = {isa = PBXBuildFile; fileRef = C3CE59FF1B2943D1ABE44C72 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipluginbase.h */; };
+		8246D65F11384DDFBAE0ACB1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprocesscontext.h */ = {isa = PBXBuildFile; fileRef = B5998D4619F14136BE8EE401 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprocesscontext.h */; };
+		868E5B3B0BD340C89C64EF87 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstunits.h */ = {isa = PBXBuildFile; fileRef = D096CB566D254F879BFD6A29 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstunits.h */; };
+		8C671B63B5F145DFA57AA609 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.cpp */ = {isa = PBXBuildFile; fileRef = 91E930752FD34C1AAA94C561 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.cpp */; };
+		953205B05ABA401082EC37C2 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/coreiids.cpp */ = {isa = PBXBuildFile; fileRef = 2CA380DD83DE4EDC9AC740FE /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/coreiids.cpp */; };
+		98C6F98A6C2B43BD9ADEB6F6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsteditcontroller.h */ = {isa = PBXBuildFile; fileRef = 715C41CA60494CBE8D90223F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsteditcontroller.h */; };
+		9BD1AF76E3A04269BE578E2F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/istringresult.h */ = {isa = PBXBuildFile; fileRef = 129279AA2ADB46BD890B2846 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/istringresult.h */; };
+		A605CFE071174533B1EADB47 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstinterappaudio.h */ = {isa = PBXBuildFile; fileRef = B3FFD53B6AEF4B14AC7472CE /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstinterappaudio.h */; };
+		A6623996156247E496D9787E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ucolorspec.h */ = {isa = PBXBuildFile; fileRef = 99A3FD8BA23D4A9A8545DBB8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ucolorspec.h */; };
+		A86AA73A10CA48AE8DC810A5 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidilearn.h */ = {isa = PBXBuildFile; fileRef = 963190C1F7AF4BF29D0369B8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidilearn.h */; };
+		A89D938897494DE1AC9E144D /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcomponent.h */ = {isa = PBXBuildFile; fileRef = 0A32BCF4F7F048EC9080A17E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcomponent.h */; };
+		AA137752CB0C43BC81A708EB /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstpluginterfacesupport.h */ = {isa = PBXBuildFile; fileRef = A7587038948C407E9D855BE1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstpluginterfacesupport.h */; };
+		AB04471896F846BCAADAE416 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vsttypes.h */ = {isa = PBXBuildFile; fileRef = 41287EE4A17343FE8F82F467 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vsttypes.h */; };
+		AB11921AE2FA440AA08FE71B /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.h */ = {isa = PBXBuildFile; fileRef = 2BA06A5295494C198D02A531 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.h */; };
+		AC198E14569D46A7B6045AF1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprefetchablesupport.h */ = {isa = PBXBuildFile; fileRef = 6BAE538C7F83441CB5554FD0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprefetchablesupport.h */; };
+		BBDFE1FE2F364233833D5CB4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/keycodes.h */ = {isa = PBXBuildFile; fileRef = F03FD1869D594CBE90FFA07F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/keycodes.h */; };
+		C84991ED65684522B47732D6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.h */ = {isa = PBXBuildFile; fileRef = 9DEAF4335AAE40F2B0977A25 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.h */; };
+		CCE3C25B9CF74060932070CF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ierrorcontext.h */ = {isa = PBXBuildFile; fileRef = B22012A9650B41F2B63E6713 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ierrorcontext.h */; };
+		D4220134E7B44F71963AAFAB /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.h */ = {isa = PBXBuildFile; fileRef = 902700F7A8D04A47B63C926A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.h */; };
+		D6AF7A522E8A4F74A6A386D6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.cpp */ = {isa = PBXBuildFile; fileRef = 848807A48F0D478887190B53 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.cpp */; };
+		D6DB647DC0C64257AE28909C /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fvariant.h */ = {isa = PBXBuildFile; fileRef = 300CE1F8F04649439AADEF74 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fvariant.h */; };
+		DA8BF65666E646CBA07AAAFF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpop.h */ = {isa = PBXBuildFile; fileRef = D8CB1725BEA640119F415FD6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpop.h */; };
+		DBFDEAE1D1C84788B816DA08 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstattributes.h */ = {isa = PBXBuildFile; fileRef = F38D3848F7BB4C00AB4D319F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstattributes.h */; };
+		E1A531702D614D5AB657C8EF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugviewcontentscalesupport.h */ = {isa = PBXBuildFile; fileRef = E2AD336997124870B3384A9C /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugviewcontentscalesupport.h */; };
+		EA4A71E4547B49DB9CDAC2C1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/smartpointer.h */ = {isa = PBXBuildFile; fileRef = A8EB38192813440C879C6592 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/smartpointer.h */; };
+		EB3DDEDF90404B4EB6DE92F4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ibstream.h */ = {isa = PBXBuildFile; fileRef = 3A12FAE2F89D4707B9A3931A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ibstream.h */; };
+		EF470B1A466B4718AB483833 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/icloneable.h */ = {isa = PBXBuildFile; fileRef = 9C4957365E6043A68A5067D3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/icloneable.h */; };
+		EFAB3190004D454BB74F9857 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.cpp */ = {isa = PBXBuildFile; fileRef = 5FFA242C601A418A889A02F3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.cpp */; };
+		F5619D546E024D7B8E8DE15F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/futils.h */ = {isa = PBXBuildFile; fileRef = 891022CD0C97492F845185FF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/futils.h */; };
+		F790B07CE9854E4F91CA30EA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmessage.h */ = {isa = PBXBuildFile; fileRef = C4425017F8514BFF8B63DCBC /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmessage.h */; };
+		FD47AB47088243AAB1BDB6E5 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fstrdefs.h */ = {isa = PBXBuildFile; fileRef = 023672ABB7594806A47069FD /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fstrdefs.h */; };
+		FE6629DA010C4B149844F02C /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipersistent.h */ = {isa = PBXBuildFile; fileRef = B24A774BCC4848B8B994CE47 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipersistent.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXBuildStyle section */
+		E808E3B9FC7B486CB099BD67 /* Release */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Release;
+		};
+		F696BD00DAEF432E97B3FDA8 /* Debug */ = {
+			isa = PBXBuildStyle;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+			};
+			name = Debug;
+		};
+/* End PBXBuildStyle section */
+
+/* Begin PBXContainerItemProxy section */
+		97AD71D5EBC34A639D6EF4D4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F903C6A2A6584573A08BF563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DA7D6E7C1F7E41F8A96A3710;
+			remoteInfo = pluginterfaces;
+		};
+		A46BE8CDFCA04FDEA4E27072 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F903C6A2A6584573A08BF563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1B684D15B0C41EA938AEFBE;
+			remoteInfo = ZERO_CHECK;
+		};
+		E4E54B9F4BBD407788909B10 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F903C6A2A6584573A08BF563 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1B684D15B0C41EA938AEFBE;
+			remoteInfo = ZERO_CHECK;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		002A18003309461BB0CF2DB3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/typesizecheck.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = typesizecheck.h; path = base/typesizecheck.h; sourceTree = SOURCE_ROOT; };
+		023672ABB7594806A47069FD /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fstrdefs.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = fstrdefs.h; path = base/fstrdefs.h; sourceTree = SOURCE_ROOT; };
+		090BC595805B4E0C972BCC6C /* pluginterfaces */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libpluginterfaces.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A32BCF4F7F048EC9080A17E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcomponent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstcomponent.h; path = vst/ivstcomponent.h; sourceTree = SOURCE_ROOT; };
+		0D70C8D8E137459B96ADD533 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstchannelcontextinfo.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstchannelcontextinfo.h; path = vst/ivstchannelcontextinfo.h; sourceTree = SOURCE_ROOT; };
+		129279AA2ADB46BD890B2846 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/istringresult.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = istringresult.h; path = base/istringresult.h; sourceTree = SOURCE_ROOT; };
+		1486485F3C114B8CBFD7624A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/iupdatehandler.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = iupdatehandler.h; path = base/iupdatehandler.h; sourceTree = SOURCE_ROOT; };
+		16956D3C3F7E4BC7B59F0205 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstaudioprocessor.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstaudioprocessor.h; path = vst/ivstaudioprocessor.h; sourceTree = SOURCE_ROOT; };
+		1D14A18B9D074C4092B2E23D /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstphysicalui.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstphysicalui.h; path = vst/ivstphysicalui.h; sourceTree = SOURCE_ROOT; };
+		1F8168D57CA74AA5B044A4D4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ftypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ftypes.h; path = base/ftypes.h; sourceTree = SOURCE_ROOT; };
+		2BA06A5295494C198D02A531 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ustring.h; path = base/ustring.h; sourceTree = SOURCE_ROOT; };
+		2CA380DD83DE4EDC9AC740FE /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/coreiids.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = coreiids.cpp; path = base/coreiids.cpp; sourceTree = SOURCE_ROOT; };
+		300CE1F8F04649439AADEF74 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fvariant.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = fvariant.h; path = base/fvariant.h; sourceTree = SOURCE_ROOT; };
+		3552970522B74B09979CD775 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstnoteexpression.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstnoteexpression.h; path = vst/ivstnoteexpression.h; sourceTree = SOURCE_ROOT; };
+		37B882BE1C8E4E0D9D4DE6BA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstevents.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstevents.h; path = vst/ivstevents.h; sourceTree = SOURCE_ROOT; };
+		3A12FAE2F89D4707B9A3931A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ibstream.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ibstream.h; path = base/ibstream.h; sourceTree = SOURCE_ROOT; };
+		41287EE4A17343FE8F82F467 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vsttypes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = vsttypes.h; path = vst/vsttypes.h; sourceTree = SOURCE_ROOT; };
+		4DFE9998232448F0B567AD74 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpshpack4.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = vstpshpack4.h; path = vst/vstpshpack4.h; sourceTree = SOURCE_ROOT; };
+		5FFA242C601A418A889A02F3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = conststringtable.cpp; path = base/conststringtable.cpp; sourceTree = SOURCE_ROOT; };
+		638475DDD3124F509550297E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpush.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = falignpush.h; path = base/falignpush.h; sourceTree = SOURCE_ROOT; };
+		6BAE538C7F83441CB5554FD0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprefetchablesupport.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstprefetchablesupport.h; path = vst/ivstprefetchablesupport.h; sourceTree = SOURCE_ROOT; };
+		70DEE90342F74D1DB4A34A43 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsthostapplication.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivsthostapplication.h; path = vst/ivsthostapplication.h; sourceTree = SOURCE_ROOT; };
+		715C41CA60494CBE8D90223F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsteditcontroller.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivsteditcontroller.h; path = vst/ivsteditcontroller.h; sourceTree = SOURCE_ROOT; };
+		7190DE11E69942688814512A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstplugview.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstplugview.h; path = vst/ivstplugview.h; sourceTree = SOURCE_ROOT; };
+		722743F969274338894B25ED /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/pluginbasefwd.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = pluginbasefwd.h; path = base/pluginbasefwd.h; sourceTree = SOURCE_ROOT; };
+		787645C23D2C44A9A40FFAA4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/geoconstants.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = geoconstants.h; path = base/geoconstants.h; sourceTree = SOURCE_ROOT; };
+		7D45B933F44C402EB8443B82 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpresetkeys.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = vstpresetkeys.h; path = vst/vstpresetkeys.h; sourceTree = SOURCE_ROOT; };
+		848807A48F0D478887190B53 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = funknown.cpp; path = base/funknown.cpp; sourceTree = SOURCE_ROOT; };
+		891022CD0C97492F845185FF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/futils.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = futils.h; path = base/futils.h; sourceTree = SOURCE_ROOT; };
+		8C506C57E3354C85A0B2940A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstautomationstate.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstautomationstate.h; path = vst/ivstautomationstate.h; sourceTree = SOURCE_ROOT; };
+		902700F7A8D04A47B63C926A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = funknown.h; path = base/funknown.h; sourceTree = SOURCE_ROOT; };
+		91E930752FD34C1AAA94C561 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 4; name = ustring.cpp; path = base/ustring.cpp; sourceTree = SOURCE_ROOT; };
+		963190C1F7AF4BF29D0369B8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidilearn.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstmidilearn.h; path = vst/ivstmidilearn.h; sourceTree = SOURCE_ROOT; };
+		99A3FD8BA23D4A9A8545DBB8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ucolorspec.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ucolorspec.h; path = base/ucolorspec.h; sourceTree = SOURCE_ROOT; };
+		9C4957365E6043A68A5067D3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/icloneable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = icloneable.h; path = base/icloneable.h; sourceTree = SOURCE_ROOT; };
+		9DEAF4335AAE40F2B0977A25 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = conststringtable.h; path = base/conststringtable.h; sourceTree = SOURCE_ROOT; };
+		A591100901E647188151C565 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstparameterchanges.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstparameterchanges.h; path = vst/ivstparameterchanges.h; sourceTree = SOURCE_ROOT; };
+		A7587038948C407E9D855BE1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstpluginterfacesupport.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstpluginterfacesupport.h; path = vst/ivstpluginterfacesupport.h; sourceTree = SOURCE_ROOT; };
+		A8EB38192813440C879C6592 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/smartpointer.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = smartpointer.h; path = base/smartpointer.h; sourceTree = SOURCE_ROOT; };
+		B22012A9650B41F2B63E6713 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ierrorcontext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ierrorcontext.h; path = base/ierrorcontext.h; sourceTree = SOURCE_ROOT; };
+		B24A774BCC4848B8B994CE47 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipersistent.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ipersistent.h; path = base/ipersistent.h; sourceTree = SOURCE_ROOT; };
+		B2E1305833C24AC58A58CEB1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fplatform.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = fplatform.h; path = base/fplatform.h; sourceTree = SOURCE_ROOT; };
+		B3FFD53B6AEF4B14AC7472CE /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstinterappaudio.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstinterappaudio.h; path = vst/ivstinterappaudio.h; sourceTree = SOURCE_ROOT; };
+		B5998D4619F14136BE8EE401 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprocesscontext.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstprocesscontext.h; path = vst/ivstprocesscontext.h; sourceTree = SOURCE_ROOT; };
+		BE2FE13CB63F4715AFB224B0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstrepresentation.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstrepresentation.h; path = vst/ivstrepresentation.h; sourceTree = SOURCE_ROOT; };
+		C3CE59FF1B2943D1ABE44C72 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipluginbase.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ipluginbase.h; path = base/ipluginbase.h; sourceTree = SOURCE_ROOT; };
+		C4425017F8514BFF8B63DCBC /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmessage.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstmessage.h; path = vst/ivstmessage.h; sourceTree = SOURCE_ROOT; };
+		CD8A18B840104CDDBEB098FA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidicontrollers.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstmidicontrollers.h; path = vst/ivstmidicontrollers.h; sourceTree = SOURCE_ROOT; };
+		D096CB566D254F879BFD6A29 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstunits.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstunits.h; path = vst/ivstunits.h; sourceTree = SOURCE_ROOT; };
+		D51B67F123864537BD9B7C1F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugview.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = iplugview.h; path = gui/iplugview.h; sourceTree = SOURCE_ROOT; };
+		D70B968A01CE40728C45B69B /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcontextmenu.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstcontextmenu.h; path = vst/ivstcontextmenu.h; sourceTree = SOURCE_ROOT; };
+		D8CB1725BEA640119F415FD6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpop.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = falignpop.h; path = base/falignpop.h; sourceTree = SOURCE_ROOT; };
+		E2AD336997124870B3384A9C /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugviewcontentscalesupport.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = iplugviewcontentscalesupport.h; path = gui/iplugviewcontentscalesupport.h; sourceTree = SOURCE_ROOT; };
+		E94543212C604865A42D3589 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		F03FD1869D594CBE90FFA07F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/keycodes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = keycodes.h; path = base/keycodes.h; sourceTree = SOURCE_ROOT; };
+		F0AC1A7FF8404DA2B75C4174 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/CMakeLists.txt */ = {isa = PBXFileReference; explicitFileType = sourcecode.text; fileEncoding = 4; name = CMakeLists.txt; path = CMakeLists.txt; sourceTree = SOURCE_ROOT; };
+		F38D3848F7BB4C00AB4D319F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstattributes.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 4; name = ivstattributes.h; path = vst/ivstattributes.h; sourceTree = SOURCE_ROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		07BC6E2F6AFA41C38A6CECBE = {
+			isa = PBXGroup;
+			children = (
+				2DB7782D36A74B70AC6B05BA /* Libraries */,
+				08ACD9AD92394165AA1CD2F1 /* ALL_BUILD */,
+				C6F664D52B69449EB13326C3 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		08ACD9AD92394165AA1CD2F1 /* ALL_BUILD */ = {
+			isa = PBXGroup;
+			children = (
+				E06BEFCB748B47CBA77A5A87 /* CMake Rules */,
+				F0AC1A7FF8404DA2B75C4174 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/CMakeLists.txt */,
+			);
+			name = ALL_BUILD;
+			sourceTree = "<group>";
+		};
+		2DB7782D36A74B70AC6B05BA /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				98C5DB18ECD4493CA1E435AB /* pluginterfaces */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		98C5DB18ECD4493CA1E435AB /* pluginterfaces */ = {
+			isa = PBXGroup;
+			children = (
+				A4B8F0D061314C0CA16D5F64 /* Source Files */,
+				B9CB107BFC4642928F2BD55A /* Header Files */,
+				E94543212C604865A42D3589 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/CMakeLists.txt */,
+			);
+			name = pluginterfaces;
+			sourceTree = "<group>";
+		};
+		A4B8F0D061314C0CA16D5F64 /* Source Files */ = {
+			isa = PBXGroup;
+			children = (
+				5FFA242C601A418A889A02F3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.cpp */,
+				2CA380DD83DE4EDC9AC740FE /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/coreiids.cpp */,
+				848807A48F0D478887190B53 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.cpp */,
+				91E930752FD34C1AAA94C561 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.cpp */,
+			);
+			name = "Source Files";
+			sourceTree = "<group>";
+		};
+		B9CB107BFC4642928F2BD55A /* Header Files */ = {
+			isa = PBXGroup;
+			children = (
+				9DEAF4335AAE40F2B0977A25 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.h */,
+				D8CB1725BEA640119F415FD6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpop.h */,
+				638475DDD3124F509550297E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/falignpush.h */,
+				B2E1305833C24AC58A58CEB1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fplatform.h */,
+				023672ABB7594806A47069FD /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fstrdefs.h */,
+				1F8168D57CA74AA5B044A4D4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ftypes.h */,
+				902700F7A8D04A47B63C926A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.h */,
+				891022CD0C97492F845185FF /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/futils.h */,
+				300CE1F8F04649439AADEF74 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/fvariant.h */,
+				787645C23D2C44A9A40FFAA4 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/geoconstants.h */,
+				3A12FAE2F89D4707B9A3931A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ibstream.h */,
+				9C4957365E6043A68A5067D3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/icloneable.h */,
+				B22012A9650B41F2B63E6713 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ierrorcontext.h */,
+				B24A774BCC4848B8B994CE47 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipersistent.h */,
+				C3CE59FF1B2943D1ABE44C72 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ipluginbase.h */,
+				129279AA2ADB46BD890B2846 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/istringresult.h */,
+				1486485F3C114B8CBFD7624A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/iupdatehandler.h */,
+				F03FD1869D594CBE90FFA07F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/keycodes.h */,
+				722743F969274338894B25ED /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/pluginbasefwd.h */,
+				A8EB38192813440C879C6592 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/smartpointer.h */,
+				002A18003309461BB0CF2DB3 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/typesizecheck.h */,
+				99A3FD8BA23D4A9A8545DBB8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ucolorspec.h */,
+				2BA06A5295494C198D02A531 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.h */,
+				D51B67F123864537BD9B7C1F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugview.h */,
+				E2AD336997124870B3384A9C /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/gui/iplugviewcontentscalesupport.h */,
+				F38D3848F7BB4C00AB4D319F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstattributes.h */,
+				16956D3C3F7E4BC7B59F0205 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstaudioprocessor.h */,
+				8C506C57E3354C85A0B2940A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstautomationstate.h */,
+				0D70C8D8E137459B96ADD533 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstchannelcontextinfo.h */,
+				0A32BCF4F7F048EC9080A17E /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcomponent.h */,
+				D70B968A01CE40728C45B69B /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstcontextmenu.h */,
+				715C41CA60494CBE8D90223F /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsteditcontroller.h */,
+				37B882BE1C8E4E0D9D4DE6BA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstevents.h */,
+				70DEE90342F74D1DB4A34A43 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivsthostapplication.h */,
+				B3FFD53B6AEF4B14AC7472CE /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstinterappaudio.h */,
+				C4425017F8514BFF8B63DCBC /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmessage.h */,
+				CD8A18B840104CDDBEB098FA /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidicontrollers.h */,
+				963190C1F7AF4BF29D0369B8 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstmidilearn.h */,
+				3552970522B74B09979CD775 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstnoteexpression.h */,
+				A591100901E647188151C565 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstparameterchanges.h */,
+				1D14A18B9D074C4092B2E23D /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstphysicalui.h */,
+				A7587038948C407E9D855BE1 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstpluginterfacesupport.h */,
+				7190DE11E69942688814512A /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstplugview.h */,
+				6BAE538C7F83441CB5554FD0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprefetchablesupport.h */,
+				B5998D4619F14136BE8EE401 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstprocesscontext.h */,
+				BE2FE13CB63F4715AFB224B0 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstrepresentation.h */,
+				D096CB566D254F879BFD6A29 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/ivstunits.h */,
+				7D45B933F44C402EB8443B82 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpresetkeys.h */,
+				4DFE9998232448F0B567AD74 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vstpshpack4.h */,
+				41287EE4A17343FE8F82F467 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/vst/vsttypes.h */,
+			);
+			name = "Header Files";
+			sourceTree = "<group>";
+		};
+		C6F664D52B69449EB13326C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				090BC595805B4E0C972BCC6C /* pluginterfaces */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E06BEFCB748B47CBA77A5A87 /* CMake Rules */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "CMake Rules";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DA7D6E7C1F7E41F8A96A3710 /* pluginterfaces */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 08CE3DE09E7341249D3D82E4 /* Build configuration list for PBXNativeTarget "pluginterfaces" */;
+			buildPhases = (
+				4E7FDE7ADABC4D01904C7B3F /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6BD0E9051D9E4C95BA7C4E63 /* PBXTargetDependency */,
+			);
+			name = pluginterfaces;
+			productName = pluginterfaces;
+			productReference = 090BC595805B4E0C972BCC6C /* pluginterfaces */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F903C6A2A6584573A08BF563 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1130;
+			};
+			buildConfigurationList = A5B660BF1E684274BEDAACED /* Build configuration list for PBXProject "smtg_pluginterfaces" */;
+			buildSettings = {
+			};
+			buildStyles = (
+				F696BD00DAEF432E97B3FDA8 /* Debug */,
+				E808E3B9FC7B486CB099BD67 /* Release */,
+			);
+			compatibilityVersion = "Xcode 3.2";
+			hasScannedForEncodings = 0;
+			mainGroup = 07BC6E2F6AFA41C38A6CECBE;
+			projectDirPath = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces";
+			projectRoot = "";
+			targets = (
+				5C50922D3A98421EB6B822F9 /* ALL_BUILD */,
+				B1B684D15B0C41EA938AEFBE /* ZERO_CHECK */,
+				DA7D6E7C1F7E41F8A96A3710 /* pluginterfaces */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		1455AC65C92247FAA570D0CF = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		684406C786CB43ADAC35855E /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces -f /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces/CMakeScripts/ZERO_CHECK_cmakeRulesBuildPhase.make$CONFIGURATION OBJDIR=$(basename \"$OBJECT_FILE_DIR_normal\") all";
+			showEnvVarsInLog = 0;
+		};
+		7CD2641948D24938815BBBD6 = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# shell script goes here
+exit 0";
+			showEnvVarsInLog = 0;
+		};
+		880921BD87544E4E9B132CE6 /* CMake Rules */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			name = "CMake Rules";
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "make -C /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces -f /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces/CMakeScripts/ALL_BUILD_cmakeRulesBuildPhase.make$CONFIGURATION OBJDIR=$(basename \"$OBJECT_FILE_DIR_normal\") all";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		4E7FDE7ADABC4D01904C7B3F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				EFAB3190004D454BB74F9857 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/conststringtable.cpp */,
+				953205B05ABA401082EC37C2 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/coreiids.cpp */,
+				D6AF7A522E8A4F74A6A386D6 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/funknown.cpp */,
+				8C671B63B5F145DFA57AA609 /* /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/base/ustring.cpp */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		532E921BDC034A62B86D2EDD /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DA7D6E7C1F7E41F8A96A3710 /* pluginterfaces */;
+			targetProxy = 97AD71D5EBC34A639D6EF4D4 /* PBXContainerItemProxy */;
+		};
+		6BD0E9051D9E4C95BA7C4E63 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1B684D15B0C41EA938AEFBE /* ZERO_CHECK */;
+			targetProxy = E4E54B9F4BBD407788909B10 /* PBXContainerItemProxy */;
+		};
+		732404678DB243C0A6EDF9A4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1B684D15B0C41EA938AEFBE /* ZERO_CHECK */;
+			targetProxy = A46BE8CDFCA04FDEA4E27072 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		193FBE412119420FAD7C3840 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/lib/Debug";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk","/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/..");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "   -fvisibility=hidden -fvisibility-inlines-hidden '-DDEVELOPMENT=1' '-DSMTG_RENAME_ASSERT=1'  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = pluginterfaces;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		2547D8D6754B4AF2A78CA05B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+		257C4E75F188450C82568EEC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/lib/Release";
+				EXECUTABLE_PREFIX = lib;
+				EXECUTABLE_SUFFIX = .a;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				HEADER_SEARCH_PATHS = ("/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk","/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/pluginterfaces/..");
+				INSTALL_PATH = "";
+				LIBRARY_STYLE = STATIC;
+				OTHER_CPLUSPLUSFLAGS = "    -DNDEBUG -fvisibility=hidden -fvisibility-inlines-hidden '-DRELEASE=1' '-DSMTG_RENAME_ASSERT=1'  ";
+				OTHER_LIBTOOLFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = pluginterfaces;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		52F8CFA7D69A480EAEA03F5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk;
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces/build";
+			};
+			name = Release;
+		};
+		5ACEBBCBA9F14602A7A5F6FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.15.sdk;
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces/build";
+			};
+			name = Debug;
+		};
+		8073F0F316924029885365C9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		D6E4B37D65A145FCB3178668 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ZERO_CHECK;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Release;
+		};
+		E74AA2A550924BC5B5537749 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_GENERATE_DEBUGGING_SYMBOLS = YES;
+				GCC_INLINES_ARE_PRIVATE_EXTERN = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = ("'CMAKE_INTDIR=\"$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)\"'");
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				INSTALL_PATH = "";
+				OTHER_LDFLAGS = " ";
+				OTHER_REZFLAGS = "";
+				PRODUCT_NAME = ALL_BUILD;
+				SECTORDER_FLAGS = "";
+				SYMROOT = "/Users/spencersharp/Documents/Coding/Active/audio-processing/vst/build/pluginterfaces";
+				USE_HEADERMAP = NO;
+				WARNING_CFLAGS = ("-Wmost","-Wno-four-char-constants","-Wno-unknown-pragmas","$(inherited)");
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		08CE3DE09E7341249D3D82E4 /* Build configuration list for PBXNativeTarget "pluginterfaces" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				193FBE412119420FAD7C3840 /* Debug */,
+				257C4E75F188450C82568EEC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		A5B660BF1E684274BEDAACED /* Build configuration list for PBXProject "smtg_pluginterfaces" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5ACEBBCBA9F14602A7A5F6FF /* Debug */,
+				52F8CFA7D69A480EAEA03F5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		B64985AC2C234F5097B2BA5B /* Build configuration list for PBXAggregateTarget "ZERO_CHECK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2547D8D6754B4AF2A78CA05B /* Debug */,
+				D6E4B37D65A145FCB3178668 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D8B03F841AA44B03AE1028D2 /* Build configuration list for PBXAggregateTarget "ALL_BUILD" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E74AA2A550924BC5B5537749 /* Debug */,
+				8073F0F316924029885365C9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F903C6A2A6584573A08BF563 /* Project object */;
+}

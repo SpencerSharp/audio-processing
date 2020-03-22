@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/hiviewtextedit.cpp \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/hiviewtextedit.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../iplatformtextedit.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cfont.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../vstguidebug.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../optional.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../platform/iplatformstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../ccolor.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../crect.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cpoint.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cdrawcontext.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cgraphicstransform.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../clinestyle.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cdrawdefs.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/hiviewframe.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cframe.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cviewcontainer.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cview.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../vstkeycode.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../cbuttonstate.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../../platform/iplatformframecallback.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../cfontmac.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../iplatformfont.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../macstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/carbon/../../iplatformstring.h

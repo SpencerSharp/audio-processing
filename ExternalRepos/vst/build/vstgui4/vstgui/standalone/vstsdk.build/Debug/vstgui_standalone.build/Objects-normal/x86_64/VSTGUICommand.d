@@ -1,0 +1,34 @@
+dependencies: \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/VSTGUICommand.mm \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/VSTGUICommand.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../application.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/ialertbox.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/fwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/cstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/vstguidebug.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/optional.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/iplatformstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/../vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/interface.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/iapplication.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/iwindow.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/crect.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/cpoint.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/icommand.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/iwindowlistener.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../platform/iplatformwindow.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../platform/../../../lib/platform/iplatformframe.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/../vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/../dragging.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/cbitmap.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/cresourcedescription.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/iplatformbitmap.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/cbuttonstate.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/idatapackage.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/../optional.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/../cstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../../include/../../lib/platform/iplatformframecallback.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../platform/../../include/icommand.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/standalone/source/platform/mac/../../platform/../../include/iwindow.h

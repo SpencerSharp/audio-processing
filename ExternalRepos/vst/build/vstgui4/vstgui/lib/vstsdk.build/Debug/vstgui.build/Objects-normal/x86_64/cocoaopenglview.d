@@ -1,0 +1,29 @@
+dependencies: \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/cocoaopenglview.mm \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/cocoaopenglview.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../iplatformopenglview.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../vstguidebug.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/nsviewframe.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../platform_macos.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../iplatformframe.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../dragging.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cbitmap.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cpoint.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../crect.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cresourcedescription.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../platform/iplatformbitmap.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cbuttonstate.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../idatapackage.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../optional.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../platform/iplatformstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../iplatformframecallback.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cview.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../vstkeycode.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../cgraphicstransform.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/nsviewdraggingsession.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/cocoahelpers.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/../../../ccolor.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/lib/platform/mac/cocoa/autoreleasepool.h

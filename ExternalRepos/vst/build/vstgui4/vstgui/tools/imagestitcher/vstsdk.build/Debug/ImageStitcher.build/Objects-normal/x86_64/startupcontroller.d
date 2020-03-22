@@ -1,0 +1,32 @@
+dependencies: \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/source/startupcontroller.cpp \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/source/startupcontroller.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/customization.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../iuidescwindow.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../uidescription/uidescriptionfwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../fwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../icommand.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/cstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/vstguidebug.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/optional.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/platform/iplatformstring.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/platform/../vstguibase.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../interface.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../ivalue.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../iwindow.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/crect.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/cpoint.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/modelbinding.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../valuelistener.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../ivaluelistener.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/value.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/windowcontroller.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../iwindowcontroller.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../iwindowlistener.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/platform/iplatformframecallback.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/helpers/uidesc/../../../../lib/platform/../vstguifwd.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/iappdelegate.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/iapplication.h \
+  /Users/spencersharp/Documents/Coding/Active/audio-processing/vst/vst3sdk/vstgui4/vstgui/tools/imagestitcher/../../../vstgui/standalone/include/iasync.h
