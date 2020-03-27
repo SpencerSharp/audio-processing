@@ -1,5 +1,0 @@
-//
-// Prefix header for all source files.
-//
-
-#include <Carbon/Carbon.h>
