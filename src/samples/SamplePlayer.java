@@ -16,15 +16,15 @@
 	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 	OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
+package samples;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
 
-public class SamplePlayer extends MSPPerformer implements MessageReceiver
+class SamplePlayer extends MSPPerformer
 {
-    private Sample playing;
+    private Sample sample;
 	private int indexInSample;
     private int startInd;
     private int endInd;
@@ -43,7 +43,7 @@ public class SamplePlayer extends MSPPerformer implements MessageReceiver
 		setInletAssist(INLET_ASSIST);
 		setOutletAssist(OUTLET_ASSIST);
 
-        playing = sample;
+        this.sample = sample;
         indexInSample = 0;
         startInd = 0;
         endInd = sample.length();
@@ -51,16 +51,24 @@ public class SamplePlayer extends MSPPerformer implements MessageReceiver
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 	}
 
+    public Sample getSample() {
+        return sample;
+    }
+
     public void setStart(float f) {
-        startInd = f * sample.length();
+        startInd = (int) (f * sample.length());
     }
 
     public void setEnd(float f) {
-        endInd = f * sample.length();
+        endInd = (int) (f * sample.length());
     }
 
     public void retrig() {
         indexInSample = startInd;
+    }
+
+    public void setGain(float volume) {
+
     }
 
     private void incIndex() {

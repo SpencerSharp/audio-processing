@@ -16,29 +16,34 @@
 	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 	OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
+package samples;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
+import java.io.*;
 
-public class SampleSaver
+class SampleManager
 {
     Sample nextSample;
+    Process process;
 
 	public SampleManager() {
-        nextSample = getNextSample();
+        getNextSample();
     }
 
-    private Sample getNextSample() {
+    private void getNextSample() {
         nextSample = null;
-        ProcessBuilder process = new ProcessBuilder("ezsample","todo");
+        ProcessBuilder process = new ProcessBuilder("python3","/Users/spencersharp/Documents/Coding/Active/spools/build/ezsample/ezsample","todo");
+        process.redirectErrorStream(true);
         Runnable runnable = () -> {
-            process.start();
-            BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-            path = reader.readLine();
-            nextSample = new Sample(path);
-            nextSample.load();
+            try {
+                Process proc = process.start();
+                BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
+                String path = reader.readLine();
+                this.nextSample = new Sample(path);
+                nextSample.load();
+            } catch (IOException exception) {}
         };
         Thread thread = new Thread(runnable);
         thread.setPriority(Thread.MIN_PRIORITY);
@@ -52,8 +57,12 @@ public class SampleSaver
         */
         while (nextSample == null) { Thread.yield(); }
         Sample sample = nextSample;
-        nextSample = getNextSample();
+        getNextSample();
         return sample;
+    }
+
+    public void performAction(int midipitch) {
+
     }
     
     private void load(String aiff) {
@@ -68,8 +77,11 @@ public class SampleSaver
         */
         aiff.save();
 
-        CmdRunner p1 = new AsyncCmdRunner("ezsample trim start end -f aiff").run();
-        CmdRunner p2 = new AsyncCmdRunner("ezsample tag x y z -f aiff").run();
-        CmdRunner p3 = new CmdRunner("ezsample todo -f aiff").run();
+        CmdRunner p1 = new AsyncCmdRunner("ezsample trim start end -f aiff");
+        p1.run();
+        CmdRunner p2 = new AsyncCmdRunner("ezsample tag x y z -f aiff");
+        p2.run();
+        CmdRunner p3 = new CmdRunner("ezsample todo -f aiff");
+        p3.run();
     }
 }

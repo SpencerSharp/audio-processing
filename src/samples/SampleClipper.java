@@ -16,17 +16,19 @@
 	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 	OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
+package samples;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
+import java.util.*;
 
-public class SampleClipper extends MSPPerformer implements MessageReceiver
+public class SampleClipper extends MSPPerformer
 {
-    private SamplePlayer player = null;
-    private SampleManager manager = null;
-    private SampleViewer viewer = null;
-    private static final CYCLE_SAMPLE = 47; // maybe C3? just guessing what C3 is lol
+    private SamplePlayer player;
+    private SampleManager manager;
+    private SampleViewer viewer;
+    private HashSet<Integer> midiSent;
+    private static final int CYCLE_SAMPLE = 48; // maybe C3? just guessing what C3 is lol
     
     /*
     KNOBS
@@ -72,28 +74,28 @@ public class SampleClipper extends MSPPerformer implements MessageReceiver
         "displayed tags"
     };
 
-    private HashSet<Integer> midiSent;
-
-	public SampleSaver()
+	public SampleClipper()
 	{
-		declareInlets(new int[]{SIGNAL});
-		declareOutlets(new int[]{SIGNAL,SIGNAL});
+		declareInlets(new int[]{SIGNAL,SIGNAL,SIGNAL,SIGNAL,SIGNAL,SIGNAL});
+		declareOutlets(new int[]{SIGNAL,SIGNAL,SIGNAL,SIGNAL});
 
 		setInletAssist(INLET_ASSIST);
 		setOutletAssist(OUTLET_ASSIST);
 
         manager = new SampleManager();
+        midiSent = new HashSet<Integer>();
     }
 
     public void inlet(float f) {
+        System.out.println("float");
         if (player == null) {
             return;
         }
         switch(getInlet()) {
             case 1:
-                setFileStartPos(f); break;
+                setSampleStartPos(f); break;
             case 2:
-                setFileEndPos(f); break;
+                setSampleEndPos(f); break;
             case 3:
                 setPlayMode(f); break;
             case 4:
@@ -126,7 +128,8 @@ public class SampleClipper extends MSPPerformer implements MessageReceiver
     }
 
     public void inlet(int n) {
-        if midiSent.contains(n) {
+        System.out.println(n);
+        if (midiSent.contains(n)) {
             // endNote(n);
             midiSent.remove(n);
         } else {
@@ -135,7 +138,9 @@ public class SampleClipper extends MSPPerformer implements MessageReceiver
     }
 
     public void perform(MSPSignal[] ins, MSPSignal[] outs) {
-        player.perform(ins, outs);
+        if (player != null) {
+            player.perform(ins, outs);
+        }
     }
 
     private void startNote(int n) {
@@ -146,8 +151,11 @@ public class SampleClipper extends MSPPerformer implements MessageReceiver
     }
 
     private void cycleSample() {
-        manager.save(player.getSample());
+        if (player != null) {
+            manager.save(player.getSample());
+        }
         Sample newSample = manager.getNextUntrimmed();
+        System.out.println(newSample.getName());
         if (newSample != null) {
             viewer = new SampleViewer(newSample);
             player = new SamplePlayer(newSample);

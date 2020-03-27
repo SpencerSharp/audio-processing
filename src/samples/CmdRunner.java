@@ -1,21 +1,27 @@
-public class CmdRunner {
-    public CmdRunner(cmd) {
-        this.proc = new ProcessBuilder(cmd.split());
+package samples;
+
+class CmdRunner {
+    ProcessBuilder proc;
+
+    public CmdRunner(String cmd) {
+        this.proc = new ProcessBuilder(cmd.split(" "));
     }
 
-    private run() {
-        this.proc.start();
-        this.proc.waitFor();
+    protected void run() {
+        try {
+            Process process = proc.start();
+            process.waitFor();
+        } catch(Exception exception) {}
     }
 }
 
-public class AsyncCmdRunner() {
-    public AsyncCmdRunner() {
-        super();
+class AsyncCmdRunner extends CmdRunner {
+    public AsyncCmdRunner(String cmd) {
+        super(cmd);
     }
 
-    private run() {
-        Runnable runnable = () -> { super.run(); }
+    protected void run() {
+        Runnable runnable = () -> { super.run(); };
         Thread thread = new Thread(runnable);
         thread.setPriority(Thread.MIN_PRIORITY);
         thread.start();

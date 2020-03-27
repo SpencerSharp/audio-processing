@@ -1,7 +1,7 @@
 
 // https://docs.cycling74.com/max5/tutorials/jit-tut/jitterchapter51.html
-
-public SampleViewer {
+package samples;
+class SampleViewer {
     public SampleViewer(Sample sample) {
         
     }

@@ -16,13 +16,14 @@
 	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
 	OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 */
-
+package samples;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
+import java.io.*;
 
-public class Sample implements MessageReceiver
+class Sample implements MessageReceiver
 {
     private String path;
 	private AudioFileBuffer _afb = null;
@@ -30,27 +31,38 @@ public class Sample implements MessageReceiver
 
 	public Sample(String path) {
         isLoaded = false;
+        this.path = path;
     }
 
     public void load() {
-        _afb = new AudioFileBuffer(file,this);
-        while(!isLoaded){ Thread.yield(); }
+        // try {
+        //     _afb = new AudioFileBuffer(path,this);
+        // } catch (Exception exception) {}
+        // while(!isLoaded){ Thread.yield(); }
     }
 
     public void save() {
         _afb = null;
     }
 
-    public float left(int ind) {
-        return _afb[0][ind];
+    public String getName() {
+        return path;
     }
 
-    public float right() {
-        return _afb[1][ind];
+    public boolean isStereo() {
+        return true;
+    }
+
+    public float left(int ind) {
+        return _afb.buf[0][ind];
+    }
+
+    public float right(int ind) {
+        return _afb.buf[1][ind];
     }
 
     public int length() {
-        return _afb[0].length;
+        return _afb.buf[0].length;
     }
 
     //MessageReceiver interface
