@@ -28,16 +28,16 @@ class SamplePlayer extends MSPPerformer
 	private int indexInSample;
     private int startInd;
     private int endInd;
+    private double gain;
 
-	private static final String[] INLET_ASSIST = new String[]{
-		"messages in"
-	};
+	private static final String[] INLET_ASSIST = new String[]{};
 	private static final String[] OUTLET_ASSIST = new String[]{
 		"output L","output R"
 	};
+
 	public SamplePlayer(Sample sample)
 	{
-        declareInlets(new int[]{SIGNAL});
+        declareInlets(new int[]{});
 		declareOutlets(new int[]{SIGNAL,SIGNAL});
 
 		setInletAssist(INLET_ASSIST);
@@ -47,6 +47,7 @@ class SamplePlayer extends MSPPerformer
         indexInSample = 0;
         startInd = 0;
         endInd = sample.length();
+        gain = 1.0;
 
         Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
 	}
@@ -67,14 +68,19 @@ class SamplePlayer extends MSPPerformer
         indexInSample = startInd;
     }
 
-    public void setGain(float volume) {
-
+    public void setGain(double volume) {
+        if (volume > 1.0) {
+            volume = 1.0;
+        }
+        gain = volume;
     }
 
     private void incIndex() {
-        indexInSample++;
-        if (indexInSample > endInd) {
-            indexInSample = startInd;
+        if (indexInSample >= 0) {
+            indexInSample++;
+            if (indexInSample >= endInd) {
+                indexInSample = -1;
+            }
         }
     }
 
@@ -85,8 +91,13 @@ class SamplePlayer extends MSPPerformer
 
         if (sample.isStereo()) {
 			for(int i = 0; i < audioL.length; i++) {
-				audioL[i] = sample.left(indexInSample);
-				audioR[i] = sample.right(indexInSample);
+                if (indexInSample >= 0) {
+                    audioL[i] = ((float)gain) * sample.left(indexInSample);
+                    audioR[i] = ((float)gain) * sample.right(indexInSample);
+                } else {
+                    audioL[i] = (float) 0.0;
+                    audioR[i] = (float) 0.0;
+                }
 				incIndex();
 			}
 		}

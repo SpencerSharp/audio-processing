@@ -35,14 +35,18 @@ class Sample implements MessageReceiver
     }
 
     public void load() {
-        // try {
-        //     _afb = new AudioFileBuffer(path,this);
-        // } catch (Exception exception) {}
-        // while(!isLoaded){ Thread.yield(); }
+        try {
+            System.out.println("loading sample");
+            _afb = new AudioFileBuffer(path,this);
+            System.out.println("loaded sample");
+        } catch (Exception exception) {
+            System.out.println(exception);
+        }
+        while(!isLoaded){ Thread.yield(); }
     }
 
     public void save() {
-        _afb = null;
+        // _afb = null;
     }
 
     public String getName() {

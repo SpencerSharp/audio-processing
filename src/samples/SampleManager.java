@@ -25,7 +25,7 @@ import java.io.*;
 
 class SampleManager
 {
-    Sample nextSample;
+    Sample nextSample = null;
     Process process;
 
 	public SampleManager() {
@@ -33,7 +33,7 @@ class SampleManager
     }
 
     private void getNextSample() {
-        nextSample = null;
+        this.nextSample = null;
         ProcessBuilder process = new ProcessBuilder("python3","/Users/spencersharp/Documents/Coding/Active/spools/build/ezsample/ezsample","todo");
         process.redirectErrorStream(true);
         Runnable runnable = () -> {
@@ -41,8 +41,9 @@ class SampleManager
                 Process proc = process.start();
                 BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
                 String path = reader.readLine();
-                this.nextSample = new Sample(path);
-                nextSample.load();
+                Sample mysample = new Sample(path);
+                mysample.load();
+                this.nextSample = mysample;
             } catch (IOException exception) {}
         };
         Thread thread = new Thread(runnable);
@@ -55,8 +56,10 @@ class SampleManager
         get file path of an untrimmed sample
         ezsample todo
         */
-        while (nextSample == null) { Thread.yield(); }
-        Sample sample = nextSample;
+        System.out.println("untrimmed pls " + this.nextSample);
+        while (this.nextSample == null) { Thread.yield(); }
+        System.out.println("next is " + this.nextSample);
+        Sample sample = this.nextSample;
         getNextSample();
         return sample;
     }

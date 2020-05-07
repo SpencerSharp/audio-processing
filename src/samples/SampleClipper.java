@@ -76,7 +76,7 @@ public class SampleClipper extends MSPPerformer
 
 	public SampleClipper()
 	{
-		declareInlets(new int[]{SIGNAL,SIGNAL,SIGNAL,SIGNAL,SIGNAL,SIGNAL});
+		declareInlets(new int[]{DataTypes.ALL,SIGNAL,SIGNAL,SIGNAL,SIGNAL,SIGNAL});
 		declareOutlets(new int[]{SIGNAL,SIGNAL,SIGNAL,SIGNAL});
 
 		setInletAssist(INLET_ASSIST);
@@ -84,35 +84,45 @@ public class SampleClipper extends MSPPerformer
 
         manager = new SampleManager();
         midiSent = new HashSet<Integer>();
+
+        cycleSample();
+    }
+
+    public void bang() {
+        // this is working!
+        if (player != null) {
+            player.retrig();
+        }
     }
 
     public void inlet(float f) {
-        System.out.println("float");
         if (player == null) {
             return;
         }
+        System.out.println("float in " + f);
         switch(getInlet()) {
-            case 1:
+            case 0:
                 setSampleStartPos(f); break;
-            case 2:
+            case 1:
                 setSampleEndPos(f); break;
-            case 3:
+            case 2:
                 setPlayMode(f); break;
-            case 4:
+            case 3:
                 setZoomPct(f); break;
-            case 5:
+            case 4:
                 setGain(f); break;
         }
     }
 
     private void setSampleStartPos(float pos) {
-        player.setStart(pos);
-        viewer.setStart(pos);
+        System.out.println("pos now " + pos);
+        // player.setStart(pos);
+        // viewer.setStart(pos);
     }
 
     private void setSampleEndPos(float pos) {
-        player.setEnd(pos);
-        viewer.setEnd(pos);
+        // player.setEnd(pos);
+        // viewer.setEnd(pos);
     }
 
     private void setPlayMode(float mode) {
@@ -128,7 +138,7 @@ public class SampleClipper extends MSPPerformer
     }
 
     public void inlet(int n) {
-        System.out.println(n);
+        System.out.println("in comes " + n);
         if (midiSent.contains(n)) {
             // endNote(n);
             midiSent.remove(n);
