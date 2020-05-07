@@ -1,27 +1,48 @@
 import shutil, shlex
 from pathlib import Path
-import subprocess, re
+import subprocess, re, os
+
+
 
 classpath = '/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/jitter.jar:/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/jode-1.1.2-pre-embedded.jar:/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/max.jar:/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/classes/:/Users/spencersharp/Documents/Max 8/Packages/CNMAT Externals/java-classes/:/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/:/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/java-classes/classes/'
+classpath = '''
+/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/jitter.jar:
+/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/jode-1.1.2-pre-embedded.jar:
+/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/max.jar:
+/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/classes/:
+/Users/spencersharp/Documents/Max 8/Packages/CNMAT Externals/java-classes/:
+/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/:
+/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/java-classes/classes/'''
+classpath = re.sub('\n','',classpath)
 classpath = re.sub(' ','\\ ',classpath)
+
+def compile_dir(fil):
+    for sub in fil.iterdir():
+        # print(sub)
+        if sub.is_dir():
+            compile_dir(sub)
+            continue
+        cmd = shlex.split('javac -d mxj-java-classes -classpath {} {}'.format(classpath, sub.relative_to(max_dir.parent)))
+        # print(cmd)
+        print(sub.name)
+        # print(cmd)
+        print("\n-------------------------\n")
+        subprocess.call(cmd)
+        print("\n-------------------------\n")
 
 local = Path.cwd()
 
+sym = Path('/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/java-classes/classes/')
 max_dir = local / 'mxj-java-classes'
 src_dir = local / 'src'
 
-# shutil.rmtree(max_dir)
-shutil.move(src_dir,max_dir)
+shutil.rmtree(sym)
+shutil.copytree(src_dir,sym)
 
-compile(max_dir)
+max_dir.unlink()
+max_dir.symlink_to(sym)
 
-def compile(fil):
-    if fil.is_dir():
-        return compile(fil)
-    copied = max_dir / fil.name
-    cmd = shlex.split('javac -d mxj-java-classes -classpath {} {}'.format(classpath, copied.relative_to(max_dir.parent.parent)))
-    # print(cmd)
-    print(fil.name)
-    print("\n-------------------------\n")
-    subprocess.call(cmd)
-    print("\n-------------------------\n")
+# os.chdir(max_dir)
+
+compile_dir(max_dir)
+

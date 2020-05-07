@@ -1,4 +1,6 @@
-package midi.sequencing;
+package patterns;
+
+import midi.sequencing.*;
 /*
 
 SWING
@@ -20,8 +22,6 @@ state += 4 takes 256ms
 state += 8 takes 512ms
 state += 16 takes 1024ms
 */
-
-
 
 public class SnareSequencer extends ClockSequencer {
     static final int BASE_PITCH = 60;
