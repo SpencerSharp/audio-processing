@@ -8,12 +8,10 @@ import midi.MidiReceiver;
 
 class SamplePlayer extends MidiReceiver
 {
-    private Sample sample;
+    protected Sample sample;
 	protected int indexInSample;
     private int startInd;
     private int endInd;
-    private double gain;
-    private double pan;
 
 	private static final String[] INLET_ASSIST = new String[]{};
 	private static final String[] OUTLET_ASSIST = new String[]{
@@ -33,25 +31,41 @@ class SamplePlayer extends MidiReceiver
         indexInSample = 0;
         startInd = 0;
         endInd = sample.length();
-        gain = 1.0;
-        this.pan = 0.0;
+
 
         // Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
-	}
-
-    public void inlet(int i) {
-        super.inlet(i);
     }
 
     public Sample getSample() {
         return sample;
     }
 
+    public int getStart() {
+        return startInd;
+    }
+
+    public int getEnd() {
+        return endInd;
+    }
+
     public void setStart(double f) {
+        if (f > 1.0) {
+            f = 1.0;
+        } else if (f < 0.0) {
+            f = 0.0;
+        }
         startInd = (int) (f * sample.length());
+        if (indexInSample < startInd) {
+            this.retrig();
+        }
     }
 
     public void setEnd(double f) {
+        if (f > 1.0) {
+            f = 1.0;
+        } else if (f < 0.0) {
+            f = 0.0;
+        }
         endInd = (int) (f * sample.length());
     }
 
@@ -59,70 +73,30 @@ class SamplePlayer extends MidiReceiver
         indexInSample = startInd;
     }
 
-    public void setGain(double volume) {
-        if (volume > 1.0) {
-            volume = 1.0;
-        }
-        this.gain = volume;
-    }
-
-    public void setPan(double pan) {
-        if (pan < -50.0) {
-            pan = -50.0;
-        } else if (pan > 50.0) {
-            pan = 50.0;
-        }
-        this.pan = pan;
-    }
-
-    private double getPan(int channel) {
-        // left channel
-        if (channel == 0) {
-            // pan away from left channel
-            if (pan > 0) {
-                return (50.0 - pan) / 50.0;
-            } else {
-                return 1.0;
-            }
-        } else {
-            // pan towards right channel
-            if (pan > 0) {
-                return 1.0;
-            } else {
-                return (50.0 - (-1 * pan)) / 50.0;
-            }
-        }
-    }
-
     protected void step() {
-        super.step();
-        if (curTime % 10000 == 0) {
-            System.out.println("time " + curTime + " ind " + indexInSample);
-        }
+        // if (curTime % 10000 == 0) {
+        //     System.out.println("time " + curTime + " ind " + indexInSample);
+        // }
         if (indexInSample >= 0) {
             indexInSample++;
             if (indexInSample >= endInd) {
                 this.retrig();
             }
         }
+        super.step();
     }
 
-	public void perform(MSPSignal[] ins, MSPSignal[] outs)
-	{
-		float[] audioL = outs[0].vec;
-		float[] audioR = outs[1].vec;
+    protected float leftSignal() {
+        if (indexInSample >= 0) {
+            return sample.left(indexInSample);
+        }
+        return 0.0f;
+    }
 
-        if (sample.isStereo()) {
-			for(int i = 0; i < audioL.length; i++) {
-                if (indexInSample >= 0) {
-                    audioL[i] = (float)getPan(0) * sample.left(indexInSample);
-                    audioR[i] = (float)getPan(1) * sample.right(indexInSample);
-                } else {
-                    audioL[i] = (float) 0.0;
-                    audioR[i] = (float) 0.0;
-                }
-				this.step();
-			}
-		}
-	}
+    protected float rightSignal() {
+        if (indexInSample >= 0) {
+            return sample.right(indexInSample);
+        }
+        return 0.0f;
+    }
 }

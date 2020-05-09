@@ -24,10 +24,26 @@ public class Modulator {
     }
 
     public double getValAt(int ind) {
-        ind = ind % domainMax;
+        ind = ind % (domainMax - domainMin);
         double pct = ((double) ind) / (domainMax - domainMin);
         double rangeDist = rangeMax - rangeMin;
         return rangeMin + (pct * rangeDist);
+    }
+
+    public void setDomainMin(int numSamples) {
+        this.domainMin = numSamples;
+    }
+
+    public void setDomainMax(int numSamples) {
+        this.domainMax = numSamples;
+    }
+
+    public void setRangeMin(double num) {
+        this.rangeMin = num;
+    }
+
+    public void setRangeMax(double num) {
+        this.rangeMax = num;
     }
 
     // public float get(int step) {

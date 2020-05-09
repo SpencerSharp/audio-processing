@@ -24,34 +24,51 @@ public class MidiSampler extends SamplePlayer {
         t = i / 44.1
         */
 
-        startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.5, 0);
-        endMod = new Modulator(0, (int) (128 * 44.1), 0.01, 0.03, 0);
+        startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.05, 0);
+        endMod = new Modulator(0, (int) (64 * 44.1), 0.001, 0.002, 0);
         panMod = new Modulator(0, (int) (sample.length() * 0.5), -50.0, 50.0, 0);
-    }
-
-    public void inlet(int i) {
-        super.inlet(i);
-        if (velocity == 0) {
-            this.setGain(0.0);
-        } else {
-            this.setGain(0.2);
-        }
-        this.retrig();
     }
 
     public void show() {
         System.out.println("pitch " + pitch + " vel " + velocity);
     }
 
+    public void setStartPeriod(double ms) {
+        startMod.setDomainMax((int)(ms * 44.1));
+    }
+
+    public void setEndPeriod(double ms) {
+        endMod.setDomainMax((int)(ms * 44.1));
+    }
+
+    public void setStartMin(double ms) {
+        startMod.setRangeMin(ms / sample.time());
+    }
+
+    public void setStartMax(double ms) {
+        startMod.setRangeMax(ms / sample.time());
+    }
+
+    public void setEndMin(double ms) {
+        endMod.setRangeMin(ms / sample.time());
+    }
+
+    public void setEndMax(double ms) {
+        endMod.setRangeMax(ms / sample.time());
+    }
+
     protected void step() {
-        // System.out.println("step to it");
-        super.step();
         // end is set based on a time-oscillating LFO
         double start = startMod.getValAt(curTime);
         double end = endMod.getValAt(curTime);
+        if (curTime % 5000 == 0) {
+            // System.out.println("start " + start + " end " + end);
+        }
+        // 
         this.setStart(start);
         this.setEnd(start + end);
         // panning based on where in playing back the sample we are
-        this.setPan(panMod.getValAt(indexInSample));
+        // this.setPan(panMod.getValAt(indexInSample));
+        super.step();
     }
 }

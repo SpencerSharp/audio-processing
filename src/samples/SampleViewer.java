@@ -5,50 +5,51 @@ package samples;
 import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 
-class SampleViewer extends MaxObject {
+class SampleViewer {
     JitterMatrix jm = new JitterMatrix(4, "char", 320, 240);
     int frgb[] = new int[] { 255, 255, 255, 255 };
-    int on = 2, off = 1;
 
-    public SampleViewer() {
+    HashMap<Integer,MidiSampler> map;
+    HashSet<Integer> starts;
+    HashSet<Integer> ends;
 
+    public SampleViewer(HashMap<Integer,MidiSampler> map) {
+        this.map = map;
     }
 
-    public SampleViewer(Sample sample) {
-        
-    }
-
-    public void bang() {
-        jit_matrix();
-    }
-
-    public void setStart(float f) {
-
-    }
-
-    public void setEnd(float f) {
-
-    }
-
-    public void setZoom(float f) {
-
-    }
-
-    public void jit_matrix() {
+    public void getMatrix() {
         int dim[] = jm.getDim();
-        int count = 0;
-        boolean notoff = true;
-        for (int i = 0; i < dim[1]; i++)
-            for (int j = 0; j < dim[0]; j++) {
-                jm.setcell2d(j,i,frgb);
-                // if (notoff)
-                //     jm.setcell2d(j, i, frgb);
-                // if ((notoff && (++count > on)) || (!notoff && (++count > off))) {
-                //     count = 0;
-                //     notoff = !notoff;
-                // }
+
+        int color[];
+
+        starts = new HashSet<Integer>();
+        ends = new HashSet<Integer>();
+
+        for (SamplePlayer sampler : map.values()) {
+            int start = player.getStart();
+            int end = player.getEnd();
+            int len = player.getSample().length();
+
+            int startInd = (((double)start) / len) * dim[1];
+            int endInd = (((double)start) / len) * dim[1];
+
+            starts.add(sampler.getStart());
+            ends.add(sampler.getEnd());
+        }
+
+        for (int i = 0; i < dim[1]; i++) {
+            if (starts.contains(i)) {
+                color = new int[] {150, 64, 227, 32};
+            } else if (ends.contains(i)) {
+                color = new int[] {150, 255, 74, 38};
+            } else {
+                color = frgb;
             }
-        System.out.println("sent matrix");
-        outlet(0, "jit_matrix", jm.getName());
+            for (int j = 0; j < dim[0]; j++) {
+                jm.setcell2d(j,i,color);
+            }
+        }
+
+        return jm.getName();
     }
 }

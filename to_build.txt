@@ -1,7 +1,10 @@
 MidiReceiver.java
 SamplePlayer.java
-MidiSampler.java
-Modulator.java
+AudioPlayer.java
 MidiSampleLoader.java
-Sample.java
-SampleClipper.java
+MidiSampler.java
+MidiSender.java
+SnareSequencer.java
+Midi2.java
+ClockSequencer.java
+Modulator.java

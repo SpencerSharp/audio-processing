@@ -30,7 +30,8 @@ public class SnareSequencer extends ClockSequencer {
     protected int vel = 127;
     protected int dur = 0;
 
-    protected void noteTick() {
+    protected void startNotes() {
+        // System.out.println("ALOHA");
         if (state % 32 == 0) {
             // add big pitch
             pitch += 14;
@@ -54,19 +55,23 @@ public class SnareSequencer extends ClockSequencer {
             pitch--;
         }
 
+        // dur = 64 * 100;
+        // dur = 6144;
+
         if (state % 4 == 0) {
             // swing 51.2 first half
-            dur = 66;
+            dur = 128;
         } else if (state % 4 == 1) {
             // swing 51.2 second half
-            dur = 62;
+            dur = 128;
         } else if (state % 4 == 2) {
             // swing 93.7 first half
-            dur = 120;
+            dur = 128;
         } else {
             // swing 93.7 second half
-            dur = 8;
+            dur = 384;
         }
-        super.playNote(pitch,vel,dur);
+        super.playNote(pitch,vel,512);
+        startClock.delay(dur);
     }
 }

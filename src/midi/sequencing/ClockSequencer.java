@@ -1,12 +1,16 @@
 package midi.sequencing;
 
+import audio.Note;
+import midi.Midi2;
+
 import com.cycling74.max.*;
 import java.util.*;
 import java.lang.Math;
 import java.io.*;
 
-public class ClockSequencer extends MidiSender {
-    private MaxClock myClock;
+public abstract class ClockSequencer extends MidiSender {
+    private MaxClock endClock;
+    protected MaxClock startClock;
 
     protected int state = 0;
     protected int numStates = 32;
@@ -14,10 +18,15 @@ public class ClockSequencer extends MidiSender {
     // private int interval = 42;
 
     public ClockSequencer() {
+        super();
+
         state = 0;
-        myClock = new MaxClock(new Executable() { 
-            public void execute() { noteTick(); }});
-        noteTick();
+        endClock = new MaxClock(new Executable() { 
+            public void execute() { endNotes(); }});
+        startClock = new MaxClock(new Executable() { 
+            public void execute() { startNotes(); }});
+        endClock.delay(10000);
+        startClock.delay(10000);
     }
 
     protected void playNote(int pitch, int vel, int dur) {
@@ -25,14 +34,29 @@ public class ClockSequencer extends MidiSender {
         if (state == numStates) {
             state = 0;
         }
-        super.playNote(pitch, vel, dur);
-        myClock.delay(dur);
+        double clockTime = endClock.getTime();
+        Note note = new Note(pitch, vel, clockTime + dur);
+        sendOut(note.asMessage(Midi2.noteOn));
+        notes.add(note);
     }
 
-    protected void noteTick() {}
+    protected void endNotes() {
+        double clockTime = endClock.getTime();
+        while (notes.size() > 0 && notes.peek().endTime <= clockTime) {
+            sendOut(notes.poll().asMessage(Midi2.noteOff));
+        }
+        if (notes.size() > 0) {
+            endClock.delay(notes.peek().endTime - clockTime);
+        } else {
+            endClock.delay(10);
+        }
+    }
+
+    abstract protected void startNotes();
 
     protected void notifyDeleted() {
-        myClock.release();
+        endClock.release();
+        startClock.release();
 		// objectStillExists = false;
 	}
 }

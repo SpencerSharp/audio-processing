@@ -69,6 +69,10 @@ class Sample implements MessageReceiver
         return _afb.buf[0].length;
     }
 
+    public double time() {
+        return this.length() / 44.1;
+    }
+
     //MessageReceiver interface
 	public void messageReceived(Object src,int message_id,Object data)
 	{
