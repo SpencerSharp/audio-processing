@@ -1,15 +1,16 @@
 package samples;
 
-import midi.MidiReceiver;
-import midi.Midi2;
-import modulators.Modulator;
-
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
 import java.util.*;
 import java.io.*;
+
+import midi.MidiReceiver;
+import midi.Midi2;
+import modulators.Modulator;
+import viewers.SampleViewer;
 
 public class MidiSampleLoader extends MidiReceiver {
     Sample sample;
@@ -176,7 +177,9 @@ public class MidiSampleLoader extends MidiReceiver {
             sampler.step();
         }
         if (curTime % 1000 == 0) {
-            String name = viewer.getMatrix(curTime - retrigTime > 0.5 * (44.1 * 1000));
+            boolean shouldShowVoices = curTime - retrigTime > 0.5 * (44.1 * 1000);
+            viewer.setShowVoices(shouldShowVoices);
+            String name = viewer.getMatrix();
             // System.out.println("matrix is named " + name);
             outlet(2,"jit_matrix",name);
         }

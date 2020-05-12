@@ -1,7 +1,7 @@
 package midi.sequencing;
 
 import midi.Midi2;
-import audio.Note;
+import datatypes.Note;
 
 import com.cycling74.max.*;
 import java.util.*;

@@ -1,27 +1,13 @@
-/*
-	Copyright (c) 2012 Cycling '74
-
-	Permission is hereby granted, free of charge, to any person obtaining a copy of this software 
-	and associated documentation files (the "Software"), to deal in the Software without restriction, 
-	including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, 
-	and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, 
-	subject to the following conditions:
-
-	The above copyright notice and this permission notice shall be included in all copies 
-	or substantial portions of the Software.
-
-	THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, 
-	INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. 
-	IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, 
-	WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE 
-	OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-*/
 package samples;
+
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.util.*;
 
+import viewers.SampleViewer;
+
+@Deprecated
 public class SampleClipper extends MSPPerformer
 {
     private SamplePlayer player;
@@ -130,7 +116,7 @@ public class SampleClipper extends MSPPerformer
     }
 
     private void setZoomPct(float pct) {
-        viewer.setZoom(pct);
+        // viewer.setZoom(pct);
     }
 
     private void setGain(float gain) {
@@ -167,7 +153,7 @@ public class SampleClipper extends MSPPerformer
         Sample newSample = manager.getNextUntrimmed();
         System.out.println(newSample.getName());
         if (newSample != null) {
-            viewer = new SampleViewer(newSample);
+            // viewer = new SampleViewer(newSample);
             player = new SamplePlayer(newSample);
         } else {
             viewer = null;

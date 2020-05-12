@@ -1,10 +1,4 @@
-/*
-WORK CLOSELY WITH MIDIRECEIVER
-
-
-*/
-
-package audio;
+package datatypes;
 
 import midi.Midi2;
 
@@ -26,7 +20,7 @@ public class Voice {
             return false; 
 
         Voice otherVoice = (Voice) other;
-          
+
         // comparing the state of argument with  
         // the state of 'this' Object. 
         return otherVoice.hashCode() == this.hashCode();

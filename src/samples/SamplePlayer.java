@@ -4,14 +4,15 @@ import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
+
 import midi.MidiReceiver;
 
 class SamplePlayer extends MidiReceiver
 {
     protected Sample sample;
 	protected int indexInSample;
-    private int startInd;
-    private int endInd;
+    protected int startInd;
+    protected int endInd;
 
 	private static final String[] INLET_ASSIST = new String[]{};
 	private static final String[] OUTLET_ASSIST = new String[]{
@@ -40,12 +41,20 @@ class SamplePlayer extends MidiReceiver
         return sample;
     }
 
+    public int getSampleLength() {
+        return sample.length();
+    }
+
     public int getStart() {
         return startInd;
     }
 
     public int getEnd() {
         return endInd;
+    }
+
+    public int getPos() {
+        return indexInSample;
     }
 
     public void setStart(double f) {
@@ -56,7 +65,7 @@ class SamplePlayer extends MidiReceiver
         }
         startInd = (int) (f * sample.length());
         if (indexInSample < startInd) {
-            this.retrig();
+            retrig();
         }
     }
 
@@ -80,7 +89,7 @@ class SamplePlayer extends MidiReceiver
         if (indexInSample >= 0) {
             indexInSample++;
             if (indexInSample >= endInd) {
-                this.retrig();
+                retrig();
             }
         }
         super.step();

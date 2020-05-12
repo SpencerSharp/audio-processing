@@ -16,20 +16,22 @@ classpath = '''
 classpath = re.sub('\n','',classpath)
 classpath = re.sub(' ','\\ ',classpath)
 
-def compile_dir(fil):
+def compile_dir(fil,isTop,isModules):
     for sub in fil.iterdir():
         # print(sub)
         if sub.is_dir():
-            compile_dir(sub)
+            if not isModules or not isTop or sub.name in to_compile:
+                compile_dir(sub,False,isModules)
             continue
         cmd = shlex.split('javac -d mxj-java-classes -classpath {} {}'.format(classpath, sub.relative_to(max_dir.parent)))
         # print(cmd)
-        if sub.name in to_compile:
-            print(sub.name)
-            # print(cmd)
-            print("\n-------------------------\n")
-            subprocess.call(cmd)
-            print("\n-------------------------\n")
+        if sub.suffix == '.java':
+            if isModules or sub.name in to_compile:
+                print(sub.name)
+                # print(cmd)
+                print("\n-------------------------\n")
+                subprocess.call(cmd)
+                print("\n-------------------------\n")
 
 local = Path.cwd()
 
@@ -49,5 +51,8 @@ max_dir.symlink_to(sym)
 
 # os.chdir(max_dir)
 
-compile_dir(max_dir)
+if to_compile[0] == 'MODULES':
+    compile_dir(max_dir,True,True)
+else:
+    compile_dir(max_dir,True,False)
 

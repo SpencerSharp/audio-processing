@@ -11,7 +11,18 @@ Could be an audio effect MAYBE
 
 */
 
+package samples;
+
+import com.cycling74.max.*;
+import com.cycling74.msp.*;
+import java.lang.reflect.*;
+import java.lang.*;
+
+import modulators.Modulator;
+
 class Interpolator extends SamplePlayer {
+    private static final double dist = 44.1 * 0.05 * 1000;;
+
     private int threshold;
     private float startL;
     private float startR;
@@ -21,6 +32,8 @@ class Interpolator extends SamplePlayer {
     private Modulator leftMod;
     private Modulator rightMod;
 
+    private boolean interpolating;
+
     public Interpolator(Sample sample) {
         super(sample);
 
@@ -29,13 +42,12 @@ class Interpolator extends SamplePlayer {
     }
 
     private void initModulators() {
-        leftMod = new Modulator(threshold, endInd, startL, targetL);
-        rightMod = new Modulator(threshold, endInd, startR, targetR);
+        leftMod = new Modulator(threshold, endInd, startL, targetL, Modulator.LINEAR);
+        rightMod = new Modulator(threshold, endInd, startR, targetR, Modulator.LINEAR);
     }
 
     public void setEnd(double f) {
         super.setEnd(f);
-        dist = 44.1 * 0.05 * 1000;
         threshold = endInd - (int)dist;
         if (threshold < 0) {
             threshold = endInd / 2;
@@ -65,13 +77,13 @@ class Interpolator extends SamplePlayer {
         if (!interpolating) {
             return super.leftSignal();
         }
-        return leftMod.getValAt(indexInSample);
+        return (float) leftMod.getValAt(indexInSample);
     }
 
     protected float rightSignal() {
         if (!interpolating) {
             return super.rightSignal();
         }
-        return rightMod.getValAt(indexInSample);
+        return (float) rightMod.getValAt(indexInSample);
     }
 }

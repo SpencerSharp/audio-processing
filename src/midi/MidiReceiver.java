@@ -1,12 +1,12 @@
 package midi;
 
-import audio.Voice;
-import players.AudioPlayer;
-
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.util.*;
+
+import datatypes.Voice;
+import players.AudioPlayer;
 
 /*
 My "instrument" archetype

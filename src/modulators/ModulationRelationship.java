@@ -1,5 +1,3 @@
-// public class ModulationRelationship {
-//     public ModulationRelationship<Modulator,ModulationType>() {
-        
-//     }
-// }
+public class ModulationRelationship {
+    
+}

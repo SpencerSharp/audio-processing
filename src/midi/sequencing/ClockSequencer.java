@@ -1,6 +1,6 @@
 package midi.sequencing;
 
-import audio.Note;
+import datatypes.Note;
 import midi.Midi2;
 
 import com.cycling74.max.*;
@@ -8,7 +8,7 @@ import java.util.*;
 import java.lang.Math;
 import java.io.*;
 
-public abstract class ClockSequencer extends MidiSender {
+public abstract class ClockSequencer extends Sequencer {
     private MaxClock endClock;
     protected MaxClock startClock;
 
@@ -25,8 +25,9 @@ public abstract class ClockSequencer extends MidiSender {
             public void execute() { endNotes(); }});
         startClock = new MaxClock(new Executable() { 
             public void execute() { startNotes(); }});
-        endClock.delay(10000);
-        startClock.delay(10000);
+
+        endClock.delay(100);
+        startClock.delay(100);
     }
 
     protected void playNote(int pitch, int vel, int dur) {
@@ -55,6 +56,7 @@ public abstract class ClockSequencer extends MidiSender {
     abstract protected void startNotes();
 
     protected void notifyDeleted() {
+        super.notifyDeleted();
         endClock.release();
         startClock.release();
 		// objectStillExists = false;

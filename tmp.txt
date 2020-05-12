@@ -1,6 +1,9 @@
-MidiSender.java
-Midi2.java
-Voice.java
-ClockSequencer.java
-Note.java
-SnareSequencer.java
+MODULES
+datatypes
+midi
+modulators
+patterns
+players
+samples
+util
+viewers

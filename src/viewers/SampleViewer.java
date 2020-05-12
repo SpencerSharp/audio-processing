@@ -1,17 +1,17 @@
 
 // https://docs.cycling74.com/max5/tutorials/jit-tut/jitterchapter51.html
-package samples;
-
+package viewers;
 
 import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 import java.util.*;
 
+import samples.MidiSampler;
 
-
-class SampleViewer {
+public class SampleViewer {
     JitterMatrix jm = new JitterMatrix(4, "char", 200, 10);
 
+    private static final int[] white = new int[] {255, 255, 255, 255};
     private static final int[] black = new int[] { 255, 0, 0, 0 };
     private static final int[] green = new int[] {100, 64, 227, 32};
     private static final int[] red = new int[] {100, 255, 74, 38};
@@ -27,6 +27,9 @@ class SampleViewer {
     HashSet<Integer> endMaxes;
     // HashSet<Integer> starts;
     // HashSet<Integer> ends;
+    // HashSet<Integer> positions;
+
+    private boolean showVoices;
 
     public SampleViewer(HashMap<Integer,MidiSampler> map) {
         this.map = map;
@@ -56,7 +59,11 @@ class SampleViewer {
         endMaxes.add((int)(((startMax+endMax)/sampleTime) * dim[0]));
     }
 
-    public String getMatrix(boolean showVoices) {
+    public void setShowVoices(boolean shouldShow) {
+        showVoices = shouldShow;
+    }
+
+    public String getMatrix() {
         int dim[] = jm.getDim();
 
         // if (map != null && map.values().size() > 0) {
@@ -67,16 +74,20 @@ class SampleViewer {
 
         HashSet<Integer> starts = new HashSet<Integer>();
         HashSet<Integer> ends = new HashSet<Integer>();
+        HashSet<Integer> positions = new HashSet<Integer>();
 
         for (MidiSampler sampler : map.values()) {
+            int pos = sampler.getPos();
             int start = sampler.getStart();
             double startMin = sampler.getStartMin();
             double startMax = sampler.getStartMax();
             int end = sampler.getEnd();
             double endMin = sampler.getEndMin();
             double endMax = sampler.getEndMax();
-            int len = sampler.getSample().length();
+            int len = sampler.getSampleLength();
 
+
+            int posInd = (int) ((((double)pos) / len) * dim[0]);
             int startInd = (int) ((((double)start) / len) * dim[0]);
             int startMinInd = (int) (startMin * dim[0]);
             int startMaxInd = (int) (startMax * dim[0]);
@@ -85,8 +96,9 @@ class SampleViewer {
             int endMaxInd = (int) ((startMax + endMax) * dim[0]);
 
             if (showVoices) {
-                starts.add(startInd);
-                ends.add(endInd);
+                positions.add(posInd);
+                // starts.add(startInd);
+                // ends.add(endInd);
                 startMins.add(startMinInd);
                 startMaxes.add(startMaxInd);
                 endMins.add(endMinInd);
@@ -110,6 +122,8 @@ class SampleViewer {
                 color = green;
             } else if (ends.contains(i)) {
                 color = red;
+            } else if (positions.contains(i)) {
+                color = white;
             } else {
                 color = black;
             }

@@ -1,6 +1,8 @@
 package modulators;
 
 public class Modulator {
+    public static final int LINEAR = 0;
+
     private static Modulator[] modulators = new Modulator[128];
     protected int id;
     // ModulatingFunction function;
