@@ -40,22 +40,6 @@ public class MidiViewer extends MidiReceiver {
 
         int[] color;
 
-        HashSet<Integer> starts = new HashSet<Integer>();
-        HashSet<Integer> ends = new HashSet<Integer>();
-        HashSet<Integer> positions = new HashSet<Integer>();
-
-        HashSet<Note> current = new HashSet<Note>();
-
-        for (Note note : notes) {
-            if (displayed.contains(note)) {
-                // note is on already
-            } else {
-                // note isnt on
-                displayed.add(note);
-            }
-            current.add(note);
-        }
-
         // SHIFT ALL LEFT ONE
         int planecount = jm.getPlanecount();
         int len = dim[1]*planecount;
@@ -79,10 +63,6 @@ public class MidiViewer extends MidiReceiver {
                 totalSaved += saved;
             }
         }
-
-        // System.out.println("row0 " + row[0] + " l " + totalLoaded + " s " + totalSaved + " dim 0 " + dim[0] + " dim 1 " + dim[1] + " len is " + len);
-
-        HashSet<Note> toRemove = new HashSet<Note>();
 
         for (Note note : displayed) {
             if (!current.contains(note)) {

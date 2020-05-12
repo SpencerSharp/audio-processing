@@ -59,6 +59,8 @@ public class MidiSampleLoader extends MidiReceiver {
 
         this.retrig();
 
+
+
         this.sample = new Sample("/Users/spencersharp/Documents/Coding/Active/audio-processing/WhereWeAre.wav");
         this.sample.load();
 
@@ -94,6 +96,9 @@ public class MidiSampleLoader extends MidiReceiver {
     private void retrig() {
         if (voicePlayers != null) {
             voicePlayers.clear();
+            knobs = new KnobControl(this, baseOutlet);
+            knobs[0].setMaxValue(sample.time());
+            knobs[1].setMaxValue()
         } else {
             voicePlayers = new HashMap<Integer,MidiSampler>();
             viewer = new SampleViewer(voicePlayers);
