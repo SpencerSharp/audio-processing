@@ -8,3 +8,4 @@ SnareSequencer.java
 Midi2.java
 ClockSequencer.java
 Modulator.java
+SampleViewer.java

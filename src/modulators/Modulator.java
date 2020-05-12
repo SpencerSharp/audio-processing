@@ -33,17 +33,33 @@ public class Modulator {
     public void setDomainMin(int numSamples) {
         this.domainMin = numSamples;
     }
+    
+    public int getDomainMin() {
+        return this.domainMin;
+    }
 
     public void setDomainMax(int numSamples) {
         this.domainMax = numSamples;
+    }
+
+    public int getDomainMax() {
+        return this.domainMax;
     }
 
     public void setRangeMin(double num) {
         this.rangeMin = num;
     }
 
+    public double getRangeMin() {
+        return this.rangeMin;
+    }
+
     public void setRangeMax(double num) {
         this.rangeMax = num;
+    }
+
+    public double getRangeMax() {
+        return this.rangeMax;
     }
 
     // public float get(int step) {

@@ -9,6 +9,7 @@ import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
 import java.util.*;
+import java.io.*;
 
 public class MidiSampleLoader extends MidiReceiver {
     Sample sample;
@@ -19,6 +20,8 @@ public class MidiSampleLoader extends MidiReceiver {
     private static double startMax = 512.0;
     private static double endMin = 128.0;
     private static double endMax = 1024.0;
+
+    private static int retrigTime;
 
     public HashMap<Integer,MidiSampler> voicePlayers;
     public SampleViewer viewer;
@@ -50,13 +53,15 @@ public class MidiSampleLoader extends MidiReceiver {
 
         setInletAssist(INLET_ASSIST);
 
-        declareOutlets(new int[]{SIGNAL,SIGNAL,JITMATRIX});
+        declareOutlets(new int[]{SIGNAL,SIGNAL,DataTypes.ALL});
         setOutletAssist(OUTLET_ASSIST);
 
         this.retrig();
 
         this.sample = new Sample("/Users/spencersharp/Documents/Coding/Active/audio-processing/WhereWeAre.wav");
         this.sample.load();
+
+        // this.retrig();
     }
 
     public void handleMidiMsg(long msg) {
@@ -66,7 +71,7 @@ public class MidiSampleLoader extends MidiReceiver {
         
         int noteId = Midi2.getNoteId(msg);
         // System.out.println("current keys " + voicePlayers.keySet());
-        if (!voicePlayers.containsKey(noteId)) {
+        if (sample != null && !voicePlayers.containsKey(noteId)) {
             // the note is new
             // let's add it
             if (Midi2.isNoteOn(msg)) {
@@ -80,14 +85,46 @@ public class MidiSampleLoader extends MidiReceiver {
                 voicePlayers.put(noteId, sampler);
             }
         } else {
-            System.out.println("num voices " + voicePlayers.keySet().size());
+            // System.out.println("num voices " + voicePlayers.keySet().size());
             voicePlayers.remove(noteId);
         }
     }
 
     private void retrig() {
-        voicePlayers = new HashMap<Integer,MidiSampler>();
-        viewer = new SampleViewer(voicePlayers);
+        if (voicePlayers != null) {
+            voicePlayers.clear();
+        } else {
+            voicePlayers = new HashMap<Integer,MidiSampler>();
+            viewer = new SampleViewer(voicePlayers);
+        }
+        retrigTime = curTime;
+    }
+
+    public void anything(String message, Atom args[]) {
+        // System.out.println("I AM ANYTHING " + message + " " + (message == null) + " " + ("none".equals(message)));
+        if (message == null || message.equals("none")) {
+            return;
+        }
+        String path = message.substring(message.indexOf(":")+1,message.length());
+        if (sample == null || sample.path.equals(path)) {
+            return;
+        }
+        System.out.println("Loading " + path);
+        this.sample = null;
+        Runnable runnable = () -> {
+            Sample mysample = new Sample(path);
+            mysample.load();
+            this.sample = mysample;
+            this.retrig();
+            System.out.println("Sample is now " + path);
+        };
+        Thread thread = new Thread(runnable);
+        thread.setPriority(Thread.MIN_PRIORITY);
+        thread.start();
+    }
+
+    public void inlet(String msg) {
+        System.out.println("STRING " + msg + " INLET " + getInlet());
     }
 
     public void inlet(float msg) {
@@ -112,7 +149,10 @@ public class MidiSampleLoader extends MidiReceiver {
         } else {
             return;
         }
-        this.retrig();
+        retrigTime = curTime;
+        if (sample != null) {
+            viewer.setBounds(startMin, startMax, endMin, endMax, sample.time());
+        }
     }
 
     protected float leftSignal() {
@@ -135,8 +175,10 @@ public class MidiSampleLoader extends MidiReceiver {
         for (MidiSampler sampler : voicePlayers.values()) {
             sampler.step();
         }
-        if (curTime % 100 == 0) {
-            outlet(2,viewer.getMatrix());
+        if (curTime % 1000 == 0) {
+            String name = viewer.getMatrix(curTime - retrigTime > 0.5 * (44.1 * 1000));
+            // System.out.println("matrix is named " + name);
+            outlet(2,"jit_matrix",name);
         }
         super.step();
     }

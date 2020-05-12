@@ -45,16 +45,32 @@ public class MidiSampler extends SamplePlayer {
         startMod.setRangeMin(ms / sample.time());
     }
 
+    public double getStartMin() {
+        return startMod.getRangeMin();
+    }
+
     public void setStartMax(double ms) {
         startMod.setRangeMax(ms / sample.time());
+    }
+
+    public double getStartMax() {
+        return startMod.getRangeMax();
     }
 
     public void setEndMin(double ms) {
         endMod.setRangeMin(ms / sample.time());
     }
 
+    public double getEndMin() {
+        return endMod.getRangeMin();
+    }
+
     public void setEndMax(double ms) {
         endMod.setRangeMax(ms / sample.time());
+    }
+
+    public double getEndMax() {
+        return endMod.getRangeMax();
     }
 
     protected void step() {

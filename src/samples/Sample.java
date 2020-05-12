@@ -25,7 +25,7 @@ import java.io.*;
 
 class Sample implements MessageReceiver
 {
-    private String path;
+    public String path;
 	private AudioFileBuffer _afb = null;
     private boolean isLoaded = false;
 
