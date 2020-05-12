@@ -4,9 +4,10 @@ import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
+
 import modulators.Modulator;
 
-public class MidiSampler extends SamplePlayer {
+public class MidiSampler extends Interpolator {
     Modulator startMod;
     Modulator endMod;
     Modulator panMod;

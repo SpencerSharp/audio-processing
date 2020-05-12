@@ -57,7 +57,6 @@ class Interpolator extends SamplePlayer {
                 targetR = sample.right(startInd);
                 initModulators();
             }
-
         }
         super.step();
     }
