@@ -34,9 +34,9 @@ public class SnareSequencer extends ClockSequencer {
         // System.out.println("ALOHA");
         if (state % 32 == 0) {
             // add big pitch
-            pitch += 14;
+            pitch += 8;
         } else if (state % 32 == 16) {
-            pitch -= 14;
+            pitch -= 8;
         }
 
         // little stutter pitch

@@ -6,11 +6,14 @@ import java.lang.reflect.*;
 import java.lang.*;
 
 import modulators.Modulator;
+import util.Pitch;
 
 public class MidiSampler extends Interpolator {
     Modulator startMod;
     Modulator endMod;
     Modulator panMod;
+
+    int pitch;
 
     public MidiSampler(Sample sample) {
         super(sample);
@@ -74,6 +77,10 @@ public class MidiSampler extends Interpolator {
         return endMod.getRangeMax();
     }
 
+    public void setPitch(int p) {
+        pitch = p;
+    }
+
     protected void step() {
         // end is set based on a time-oscillating LFO
         double start = startMod.getValAt(curTime);
@@ -82,10 +89,11 @@ public class MidiSampler extends Interpolator {
             // System.out.println("start " + start + " end " + end);
         }
         // 
-        this.setStart(start);
-        this.setEnd(start + end);
+        setStart(start);
+        setEnd(start + end);
         // panning based on where in playing back the sample we are
         // this.setPan(panMod.getValAt(indexInSample));
+        stepSize = Pitch.stepSize(pitch);
         super.step();
     }
 }

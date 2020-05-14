@@ -109,6 +109,9 @@ public class MidiSampleLoader extends MidiReceiver {
                 sampler.setStartMax(startMax);
                 sampler.setEndMin(endMin);
                 sampler.setEndMax(endMax);
+                int spitch = Midi2.getPitch(msg);
+                System.out.println("sPitch " + spitch);
+                sampler.setPitch(spitch);
                 voicePlayers.put(noteId, sampler);
             }
         } else {
@@ -154,10 +157,6 @@ public class MidiSampleLoader extends MidiReceiver {
         Thread thread = new Thread(runnable);
         thread.setPriority(Thread.MIN_PRIORITY);
         thread.start();
-    }
-
-    public void inlet(String msg) {
-        System.out.println("STRING " + msg + " INLET " + getInlet());
     }
 
     public void inlet(float msg) {

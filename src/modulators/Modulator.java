@@ -1,5 +1,12 @@
 package modulators;
 
+/*
+derivative viewer
+https://www.desmos.com/calculator/mslfnckxs6
+
+i think i want like f(g(x)) or f'(g(x)) or something
+*/
+
 public class Modulator {
     public static final int LINEAR = 0;
 

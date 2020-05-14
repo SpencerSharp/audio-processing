@@ -21,6 +21,8 @@ public class Note implements Comparable<Note> {
         this.endTime = end;
     }
 
+
+
     public long asMessage(long messageType) {
         return Midi2.prepareMessage(messageType,id,pitch,velocity);
     }

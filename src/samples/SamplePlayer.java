@@ -10,9 +10,10 @@ import midi.MidiReceiver;
 class SamplePlayer extends MidiReceiver
 {
     protected Sample sample;
-	protected int indexInSample;
+	protected double indexInSample;
     protected int startInd;
     protected int endInd;
+    protected double stepSize;
 
 	private static final String[] INLET_ASSIST = new String[]{};
 	private static final String[] OUTLET_ASSIST = new String[]{
@@ -29,8 +30,9 @@ class SamplePlayer extends MidiReceiver
 		// setOutletAssist(OUTLET_ASSIST);
 
         this.sample = sample;
-        indexInSample = 0;
+        indexInSample = 0.0;
         startInd = 0;
+        stepSize = 1.0;
         endInd = sample.length();
 
 
@@ -54,7 +56,7 @@ class SamplePlayer extends MidiReceiver
     }
 
     public int getPos() {
-        return indexInSample;
+        return ((int)indexInSample);
     }
 
     public void setStart(double f) {
@@ -79,6 +81,7 @@ class SamplePlayer extends MidiReceiver
     }
 
     public void retrig() {
+        System.out.println("rt");
         indexInSample = startInd;
     }
 
@@ -87,7 +90,7 @@ class SamplePlayer extends MidiReceiver
         //     System.out.println("time " + curTime + " ind " + indexInSample);
         // }
         if (indexInSample >= 0) {
-            indexInSample++;
+            indexInSample += stepSize;
             if (indexInSample >= endInd) {
                 retrig();
             }
@@ -96,15 +99,15 @@ class SamplePlayer extends MidiReceiver
     }
 
     protected float leftSignal() {
-        if (indexInSample >= 0) {
-            return sample.left(indexInSample);
+        if (indexInSample >= 0.0) {
+            return sample.left((int)indexInSample);
         }
         return 0.0f;
     }
 
     protected float rightSignal() {
-        if (indexInSample >= 0) {
-            return sample.right(indexInSample);
+        if (indexInSample >= 0.0) {
+            return sample.right((int)indexInSample);
         }
         return 0.0f;
     }

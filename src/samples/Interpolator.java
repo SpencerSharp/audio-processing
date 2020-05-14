@@ -21,8 +21,6 @@ import java.lang.*;
 import modulators.Modulator;
 
 class Interpolator extends SamplePlayer {
-    private static final double dist = 44.1 * 0.05 * 1000;;
-
     private int threshold;
     private float startL;
     private float startR;
@@ -46,12 +44,23 @@ class Interpolator extends SamplePlayer {
         rightMod = new Modulator(threshold, endInd, startR, targetR, Modulator.LINEAR);
     }
 
+    private void calcThreshold() {
+        threshold = (int) (startInd + (0.99 * (endInd - startInd)));
+        if (threshold < startInd) {
+            threshold -= startInd;
+            threshold *= -1;
+            threshold += startInd;
+        }
+    }
+
+    public void setStart(double f) {
+        super.setStart(f);
+        calcThreshold();
+    }
+
     public void setEnd(double f) {
         super.setEnd(f);
-        threshold = endInd - (int)dist;
-        if (threshold < 0) {
-            threshold = endInd / 2;
-        }
+        calcThreshold();
     }
 
     public void retrig() {
@@ -77,13 +86,13 @@ class Interpolator extends SamplePlayer {
         if (!interpolating) {
             return super.leftSignal();
         }
-        return (float) leftMod.getValAt(indexInSample);
+        return (float) leftMod.getValAt((int)indexInSample);
     }
 
     protected float rightSignal() {
         if (!interpolating) {
             return super.rightSignal();
         }
-        return (float) rightMod.getValAt(indexInSample);
+        return (float) rightMod.getValAt((int)indexInSample);
     }
 }
