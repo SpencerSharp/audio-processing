@@ -6,9 +6,12 @@ import java.lang.Math;
 import java.io.*;
 
 public class KnobControl extends MaxObject {
-    private static final int NUM_KNOBS = 8;
-    private Knob[] knobs;
+    protected static final int NUM_KNOBS = 8;
+    protected Knob[] knobs;
+    protected MaxBox ctl;
+
     private int curKnob;
+    private int max = -1;
 
     private static final String[] INLET_ASSIST = new String[]{
         "ctlin",
@@ -29,57 +32,63 @@ public class KnobControl extends MaxObject {
     };
 
     public KnobControl() {
-        super();
-        declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
-		declareOutlets(new int[]{DataTypes.ALL,DataTypes.ALL});
+        declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
+		declareOutlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
 
         setInletAssist(INLET_ASSIST);
 		setOutletAssist(OUTLET_ASSIST);
-
-        curKnob = 48;
     }
 
-    protected void setup() {
+    public void setup() {
+        System.out.println("TOP");
         MaxPatcher parent = getParentPatcher();
 
-        MaxBox ctl = parent.getNamedBox("ctl");
+        ctl = parent.getNamedBox("ctl");
         MaxBox box = getMaxBox();
 
-        if (ctl == null) {
-            Atom[] things = new Atom[1];
-            things[0] = Atom.newAtom("");
-            ctl = parent.newObject("ctlin",things);
-            ctl.setName("ctl");
-        }
-
-        parent.connect(ctl, 0, box, 0);
-        parent.connect(ctl, 1, box, 1);
+        parent.connect(ctl, 0, box, 2);
+        parent.connect(ctl, 1, box, 3);
 
         knobs = new Knob[NUM_KNOBS];
 
+        knobSetup();
+    }
+
+    protected void knobSetup() {
+        System.out.println("heLL on eARth");
         for (int i = 1; i <= NUM_KNOBS; i++) {
-            Knob knob = new Knob("dial" + i, i + 1, ctl, this);
+            Knob knob = new Knob("dial" + i, i + 1, this);
             knobs[i-1] = knob;
         }
     }
 
-    // public void loadbang() {
-    //     this.setup();
-    // }
-
-    public void bang() {
-        this.setup();
-    }
-
-    public void inlet(int n) {
-        if (getInlet() == 1) {
-            curKnob = n - 48;
-        } else if (getInlet() == 0) {
-            knobs[curKnob].setValue(n);
+    public void inlet(int in) {
+        System.out.println("int " + in + " inl " + getInlet());
+        if (getInlet() == 0) {
+            if (max != -1) {
+                max = in;
+                for (int i = 0; i < NUM_KNOBS; i++) {
+                    knobs[i].setRange(0,max);
+                }
+            } else {
+                max = in;
+                setup();
+            }
+        }
+        if (getInlet() == 2) {
+            knobs[curKnob].setValue((float)(Math.pow(in / 127.0,2) * max));
+        }
+        if (getInlet() == 3) {
+            curKnob = in - 48;
         }
     }
 
+    // public void bang() {
+    //     this.setup();
+    // }
+
     public void inlet(float f) {
-        System.out.println("float " + f);
+        System.out.println("float " + f + " inl" + getInlet());
+        this.setup();
     }
 }

@@ -11,6 +11,7 @@ import midi.MidiReceiver;
 import midi.Midi2;
 import modulators.Modulator;
 import viewers.SampleViewer;
+import interfaces.SamplerKnobControl;
 
 public class MidiSampleLoader extends MidiReceiver {
     Sample sample;
@@ -26,6 +27,7 @@ public class MidiSampleLoader extends MidiReceiver {
 
     public HashMap<Integer,MidiSampler> voicePlayers;
     public SampleViewer viewer;
+    public SamplerKnobControl knobs;
 
     private static final String[] INLET_ASSIST = new String[]{
         "none",
@@ -50,28 +52,50 @@ public class MidiSampleLoader extends MidiReceiver {
 
         declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
         DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
-        DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
+        DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
+        DataTypes.ALL,DataTypes.ALL});
 
         setInletAssist(INLET_ASSIST);
 
         declareOutlets(new int[]{SIGNAL,SIGNAL,DataTypes.ALL});
         setOutletAssist(OUTLET_ASSIST);
 
+        this.sample = new Sample("/Users/spencersharp/Documents/Music/Files/Library/Audio/Electronic/WhereWeAre.wav");
+        this.sample.load();
+
+        System.out.println("retrig");
+
         this.retrig();
 
-
-
-        this.sample = new Sample("/Users/spencersharp/Documents/Coding/Active/audio-processing/WhereWeAre.wav");
-        this.sample.load();
+        retrigTime = -1;
 
         // this.retrig();
     }
 
+    // public void loadbang() {
+    //     System.out.println("BANG NANANA");
+    // }
+
+    private void trySetup() {
+        if (retrigTime == -1) {
+            retrigTime = curTime;
+            if (knobs != null) {
+                try {
+                    for (int i = 0; i < 200; i++) {
+                        Thread.sleep(1);
+                    }
+                } catch (InterruptedException e) {
+                    System.out.println("interrupted rip");
+                }
+                knobs.setup();
+            }
+        }
+    }
+
     public void handleMidiMsg(long msg) {
         // updates voices to be correct
-
         super.handleMidiMsg(msg);
-        
+
         int noteId = Midi2.getNoteId(msg);
         // System.out.println("current keys " + voicePlayers.keySet());
         if (sample != null && !voicePlayers.containsKey(noteId)) {
@@ -96,18 +120,21 @@ public class MidiSampleLoader extends MidiReceiver {
     private void retrig() {
         if (voicePlayers != null) {
             voicePlayers.clear();
-            knobs = new KnobControl(this, baseOutlet);
-            knobs[0].setMaxValue(sample.time());
-            knobs[1].setMaxValue()
         } else {
             voicePlayers = new HashMap<Integer,MidiSampler>();
             viewer = new SampleViewer(voicePlayers);
+            knobs = new SamplerKnobControl(this, 3);
         }
+        if (sample != null) {
+            knobs.setSample(sample);
+        }
+        
         retrigTime = curTime;
     }
 
     public void anything(String message, Atom args[]) {
         // System.out.println("I AM ANYTHING " + message + " " + (message == null) + " " + ("none".equals(message)));
+        trySetup();
         if (message == null || message.equals("none")) {
             return;
         }
@@ -134,22 +161,23 @@ public class MidiSampleLoader extends MidiReceiver {
     }
 
     public void inlet(float msg) {
+        trySetup();
         if (getInlet() == 2) {
             System.out.println("Set start period to " + msg);
             startPeriod = (double) msg;
-        } else if (getInlet() == 3) {
+        } else if (getInlet() == 6) {
             System.out.println("Set end period to " + msg);
             endPeriod = (double) msg;
-        } else if (getInlet() == 4) {
+        } else if (getInlet() == 3) {
             System.out.println("Set start min to " + msg);
             startMin = (double) msg;
-        } else if (getInlet() == 5) {
+        } else if (getInlet() == 4) {
             System.out.println("Set start max to " + msg);
             startMax = (double) msg;
-        } else if (getInlet() == 6) {
+        } else if (getInlet() == 7) {
             System.out.println("Set end min to " + msg);
             endMin = (double) msg;
-        } else if (getInlet() == 7) {
+        } else if (getInlet() == 8) {
             System.out.println("Set end max to " + msg);
             endMax = (double) msg;
         } else {

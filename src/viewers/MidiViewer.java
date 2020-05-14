@@ -2,21 +2,21 @@
 // https://docs.cycling74.com/max5/tutorials/jit-tut/jitterchapter51.html
 package viewers;
 
-import util.Colors;
-import midi.sequencing.MidiSender;
-import datatypes.Note;
-
 import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 import java.util.*;
 
-public class MidiViewer extends MidiReceiver {
+import util.Colors;
+import midi.sequencing.MidiSender;
+import datatypes.Note;
+
+public class MidiViewer extends Viewer {
     private static final int matrix_cols = 128;
     private static final int matrix_rows = 128;
 
     JitterMatrix jm = new JitterMatrix(4, "char", matrix_cols, matrix_rows);
 
-    HashSet<Note> notes;
+    PriorityQueue<Note> notes;
     HashSet<Note> displayed;
 
     public MidiViewer(PriorityQueue<Note> notes) {
@@ -24,21 +24,20 @@ public class MidiViewer extends MidiReceiver {
         displayed = new HashSet<Note>();
     }
 
-    public void handleMidiMsg(long msg) {
-        // System.out.println("msg is " + msg);
-        int id = Midi2.getNoteId(msg);
-        Note note = Note.fromMessage(msg);
-        if (note.velocity > 0) {
-            notes.add(note);
-        } else {
-            notes.remove(note);
-        }
-    }
-
     public String getMatrix() {
         int dim[] = jm.getDim();
 
-        int[] color;
+        HashSet<Note> current = new HashSet<Note>();
+
+        for (Note note : notes) {
+            if (displayed.contains(note)) {
+                // note is on already
+            } else {
+                // note isnt on
+                displayed.add(note);
+            }
+            current.add(note);
+        }
 
         // SHIFT ALL LEFT ONE
         int planecount = jm.getPlanecount();
@@ -63,6 +62,8 @@ public class MidiViewer extends MidiReceiver {
                 totalSaved += saved;
             }
         }
+
+        HashSet<Note> toRemove = new HashSet<Note>();
 
         for (Note note : displayed) {
             if (!current.contains(note)) {

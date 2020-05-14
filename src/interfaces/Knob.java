@@ -6,34 +6,37 @@ import java.lang.Math;
 import java.io.*;
 
 class Knob {
-    MaxBox controller;
-    MaxObject output;
-    MaxBox myBox;
+    MaxObject knobControl;
+    public MaxBox myBox;
     String name;
     int inlet;
     String valType;
     Object val;
 
-    public Knob(String name, int inlet, MaxBox controller, MaxObject output) {
+    public Knob(String name, MaxPatcher patcher) {
+        this.name = name;
+        myBox = patcher.getNamedBox(name);
+    }
+
+    public Knob(String name, int inlet, MaxObject knobControl) {
         this.name = name;
         this.inlet = inlet;
-        this.controller = controller;
-        this.output = output;
+        this.knobControl = knobControl;
         this.setup();
     }
 
+
+
     private void setup() {
-        MaxPatcher patcher = output.getParentPatcher();
+        MaxPatcher patcher = knobControl.getParentPatcher();
+
+        System.out.println("patcher " + patcher);
         
-        MaxBox outputBox = output.getMaxBox();
         myBox = patcher.getNamedBox(name);
 
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 2; j++) {
-                patcher.disconnect(myBox, j, outputBox, i);
-            }
-        }
-        patcher.connect(myBox, 0, outputBox, inlet);
+        patcher.connect(knobControl.getMaxBox(), inlet, myBox, 0);
+        // patcher.connect(ctl, 0, myBox, 0);
+        // patcher.connect(myBox, 0, outputBox, inlet);
 
         setAppearance(2);
 
@@ -41,7 +44,9 @@ class Knob {
 
         setRange(0, 1000);
 
-        setUnitStyle(3);
+        setModMode(0);
+
+        setUnit(3);
     }
 
     private void sendMsg(String msg, int i) {
@@ -57,6 +62,22 @@ class Knob {
         myBox.send(msg,ray);
     }
 
+    private void sendMsg(String msg, float f) {
+        Atom[] ray = new Atom[1];
+        ray[0] = Atom.newAtom(f);
+        myBox.send(msg,ray);
+    }
+
+    private void sendMsg(String msg, String s) {
+        Atom[] ray = new Atom[1];
+        ray[0] = Atom.newAtom(s);
+        myBox.send(msg,ray);
+    }
+
+    public void setModMode(int i) {
+        sendMsg("_parameter_modmode",i);
+    }
+
     public void setAppearance(int i) {
         sendMsg("appearance",i);
     }
@@ -65,7 +86,7 @@ class Knob {
         sendMsg("_parameter_type",i);
     }
 
-    public void setUnitStyle(int i) {
+    public void setUnit(int i) {
         sendMsg("_parameter_unitstyle",i);
     }
 
@@ -73,8 +94,12 @@ class Knob {
         sendMsg("_parameter_range",i,j);
     }
 
-    public void setValue(Object o) {
+    public void setName(String s) {
+        sendMsg("_parameter_shortname",s);
+    }
 
+    public void setValue(float f) {
+        sendMsg("assign",f);
     }
 
     // Atom[] thing = new Atom[1];

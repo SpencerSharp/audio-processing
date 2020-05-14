@@ -27,13 +27,14 @@ public class Note implements Comparable<Note> {
 
     public static Note fromMessage(long message) {
         Note note = new Note();
-        note.id = Midi2.getNodeId(message);
+        note.id = Midi2.getNoteId(message);
         note.pitch = (double) Midi2.getPitch(message);
         if (Midi2.isNoteOn(message)) {
             note.velocity = (char) 1;
         } else if (Midi2.isNoteOff(message)) {
             note.velocity = (char) 0;
         }
+        return note;
     }
 
     @Override
