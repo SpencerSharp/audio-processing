@@ -10,7 +10,7 @@ public class GlobalFunction {
     protected static final String GLOBAL_FUNCTION_FILE_PATH = 
         "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/functions";
 
-    public int id;
+    public int id = -1;
     public String name;
     public String text;
 
@@ -34,7 +34,7 @@ public class GlobalFunction {
     }
 
     public String getRightSide() {
-        return text.substring(text.indexOf("="),text.length());
+        return text.substring(text.indexOf("=")+1,text.length()).trim();
     }
 
     public Function asFunction() {
@@ -69,6 +69,10 @@ public class GlobalFunction {
 
             reader.close();
         } catch (IOException e) {}
+
+        if (id == -1) {
+            id = functions.size();
+        }
     }
 
     private void updateGlobalMap() {
@@ -92,15 +96,28 @@ public class GlobalFunction {
     private void loadFunction() {
         String expandedText = this.getRightSide();
         boolean isDone = false;
-        while (!isDone) {
-            isDone = true;
-            for (GlobalFunction function : functions) {
-                if (expandedText.contains(function.name)) {
-                    isDone = false;
-                    expandedText = expandedText.replaceAll(function.name, function.getRightSide());
-                }
+        for (GlobalFunction function : functions) {
+            if (expandedText.contains(function.name)) {
+                System.out.println("found |" + function.name + "|");
+                isDone = false;
+                expandedText = expandedText.replace(function.name, function.getRightSide());
             }
         }
+        // while (!isDone) {
+        //     isDone = true;
+        //     for (GlobalFunction function : functions) {
+        //         if (expandedText.contains(function.name)) {
+        //             isDone = false;
+        //             expandedText = expandedText.replaceAll(function.name, function.getRightSide());
+        //         }
+        //     }
+        //     System.out.println("text expanded to: " + expandedText);
+        //     try {
+        //         Thread.sleep(100);
+        //     } catch(Exception e) {}
+        // }
+        System.out.println(""+functions.size() + " | " + expandedText);
+        expandedText = name + " =" + expandedText;
         this.function = new Function(expandedText);
     }
 }
