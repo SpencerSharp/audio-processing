@@ -7,7 +7,6 @@ import com.cycling74.msp.*;
 import utils.global.GlobalFunction;
 
 public class RawMathModulator extends MaxObject {
-
     private static final String testVal = "3";
 
     private static final String[] INLET_ASSIST = new String[]{
@@ -20,12 +19,22 @@ public class RawMathModulator extends MaxObject {
         "function val at " + testVal
     };
 
+    private GlobalFunction globalFunction;
+
     public RawMathModulator() {
         declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL});
         setInletAssist(INLET_ASSIST);
 
         declareOutlets(new int[]{DataTypes.ALL,DataTypes.ALL});
         setOutletAssist(OUTLET_ASSIST);
+    }
+
+    public void inlet(int i) {
+        if (getInlet() == 2) {
+            if (globalFunction != null) {
+                globalFunction.reload();
+            }
+        }
     }
 
     public void anything(String message, Atom args[]) {
@@ -38,6 +47,6 @@ public class RawMathModulator extends MaxObject {
             fString += word.toString() + " ";
         }
         fString = fString.substring(0, fString.length()-1);
-        GlobalFunction f = new GlobalFunction(fName, fString);
+        globalFunction = new GlobalFunction(fName, fString);
     }
 }

@@ -4,6 +4,7 @@ import java.nio.channels.*;
 import java.io.*;
 import java.lang.*;
 import java.util.*;
+import org.mariuszgromada.math.mxparser.*;
 
 public class GlobalFunction {
     protected static final String GLOBAL_FUNCTION_FILE_PATH = 
@@ -13,7 +14,7 @@ public class GlobalFunction {
     public String name;
     public String text;
 
-    private String expandedText;
+    public Function function;
 
     private ArrayList<GlobalFunction> functions;
 
@@ -23,13 +24,7 @@ public class GlobalFunction {
         this.name = name;
         this.text = func;
 
-        functionFile.acquireLock();
-
-        setupGlobalMap();
-        updateGlobalMap();
-        expandText();
-
-        functionFile.releaseLock();
+        this.reload();
     }
 
     private GlobalFunction(int id, String name, String func) {
@@ -40,6 +35,20 @@ public class GlobalFunction {
 
     public String getRightSide() {
         return text.substring(text.indexOf("="),text.length());
+    }
+
+    public Function asFunction() {
+        return function;
+    }
+
+    public void reload() {
+        functionFile.acquireLock();
+
+        setupGlobalMap();
+        updateGlobalMap();
+        loadFunction();
+
+        functionFile.releaseLock();
     }
 
     private void setupGlobalMap() {
@@ -63,7 +72,11 @@ public class GlobalFunction {
     }
 
     private void updateGlobalMap() {
-        functions.set(id, this);
+        if (id < functions.size()) {
+            functions.set(id, this);
+        } else {
+            functions.add(this);
+        }
 
         functionFile.clear();
 
@@ -76,8 +89,8 @@ public class GlobalFunction {
         writer.close();
     }
 
-    private void expandText() {
-        expandedText = text;
+    private void loadFunction() {
+        String expandedText = this.getRightSide();
         boolean isDone = false;
         while (!isDone) {
             isDone = true;
@@ -88,5 +101,6 @@ public class GlobalFunction {
                 }
             }
         }
+        this.function = new Function(expandedText);
     }
 }
