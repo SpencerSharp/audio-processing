@@ -1,10 +1,3 @@
-MODULES
-audio
-datatypes
-midi
-modulators
-patterns
-players
-samples
-util
-viewers
+RawMathModulator.java
+GlobalFunction.java
+LockableFile.java

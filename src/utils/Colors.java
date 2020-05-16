@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 public class Colors {
     public static final int[] white = new int[] {255, 255, 255, 255};

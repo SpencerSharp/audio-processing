@@ -1,4 +1,4 @@
-package samples;
+package utils;
 
 class CmdRunner {
     ProcessBuilder proc;

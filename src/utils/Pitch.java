@@ -1,4 +1,4 @@
-package util;
+package utils;
 
 public class Pitch {
     public static double stepSize(int pitch) {

@@ -9,6 +9,7 @@ classpath = '''
 /Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/jitter.jar:
 /Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/jode-1.1.2-pre-embedded.jar:
 /Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/lib/max.jar:
+/Users/spencersharp/Documents/Coding/Active/audio-processing/bin/MathParser.org-mXparser-v.4.4.0-jdk13.jar:
 /Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/classes/:
 /Users/spencersharp/Documents/Max 8/Packages/CNMAT Externals/java-classes/:
 /Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes/:
@@ -17,7 +18,7 @@ classpath = re.sub('\n','',classpath)
 classpath = re.sub(' ','\\ ',classpath)
 
 def compile_dir(fil,isTop,isModules):
-    print(fil)
+    # print(fil)
     for sub in fil.iterdir():
         # print(sub)
         if sub.is_dir():
@@ -49,6 +50,13 @@ shutil.copytree(src_dir,sym)
 
 max_dir.unlink()
 max_dir.symlink_to(sym)
+
+shared_resources = Path.cwd() / 'global'
+if shared_resources.exists():
+    shutil.rmtree(shared_resources)
+shared_resources.mkdir()
+global_equations = shared_resources / 'functions'
+global_equations.touch()
 
 # os.chdir(max_dir)
 
