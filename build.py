@@ -17,6 +17,7 @@ classpath = re.sub('\n','',classpath)
 classpath = re.sub(' ','\\ ',classpath)
 
 def compile_dir(fil,isTop,isModules):
+    print(fil)
     for sub in fil.iterdir():
         # print(sub)
         if sub.is_dir():

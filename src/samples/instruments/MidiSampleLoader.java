@@ -22,6 +22,7 @@ public class MidiSampleLoader extends MidiReceiver {
     private static double startMax = 512.0;
     private static double endMin = 128.0;
     private static double endMax = 1024.0;
+    private static double delay = 0.0;
 
     private static int retrigTime;
 
@@ -109,6 +110,7 @@ public class MidiSampleLoader extends MidiReceiver {
                 sampler.setStartMax(startMax);
                 sampler.setEndMin(endMin);
                 sampler.setEndMax(endMax);
+                sampler.setDelay(delay);
                 int spitch = Midi2.getPitch(msg);
                 System.out.println("sPitch " + spitch);
                 sampler.setPitch(spitch);
@@ -173,6 +175,9 @@ public class MidiSampleLoader extends MidiReceiver {
         } else if (getInlet() == 4) {
             System.out.println("Set start max to " + msg);
             startMax = (double) msg;
+        } else if (getInlet() == 5) {
+            System.out.println("Set delay to " + msg);
+            delay = (double) msg;
         } else if (getInlet() == 7) {
             System.out.println("Set end min to " + msg);
             endMin = (double) msg;

@@ -78,7 +78,6 @@ public abstract class AudioPlayer extends MSPPerformer {
     protected abstract float leftSignal();
     protected abstract float rightSignal();
 
-
     public void perform(MSPSignal[] ins, MSPSignal[] outs)
 	{
 		float[] audioL = outs[0].vec;

@@ -6,9 +6,9 @@ import java.lang.reflect.*;
 import java.lang.*;
 
 import midi.MidiReceiver;
+import audio.DelayAudio;
 
-class SamplePlayer extends MidiReceiver
-{
+class SamplePlayer extends MidiReceiver {
     protected Sample sample;
 	protected double indexInSample;
     protected int startInd;
@@ -20,8 +20,7 @@ class SamplePlayer extends MidiReceiver
 		"output L","output R"
 	};
 
-	public SamplePlayer(Sample sample)
-	{
+	public SamplePlayer(Sample sample) {
         super();
         // declareInlets(new int[]{});
 		// declareOutlets(new int[]{SIGNAL,SIGNAL});
@@ -81,7 +80,7 @@ class SamplePlayer extends MidiReceiver
     }
 
     public void retrig() {
-        System.out.println("rt");
+        // System.out.println("rt");
         indexInSample = startInd;
     }
 

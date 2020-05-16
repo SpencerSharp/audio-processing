@@ -1,4 +1,5 @@
 MODULES
+audio
 datatypes
 midi
 modulators

@@ -7,13 +7,16 @@ import java.lang.*;
 
 import modulators.Modulator;
 import util.Pitch;
+import audio.DelayAudio;
 
-public class MidiSampler extends Interpolator {
+public class MidiSampler extends SamplePlayer {
     Modulator startMod;
     Modulator endMod;
     Modulator panMod;
 
     int pitch;
+
+    DelayAudio delayer;
 
     public MidiSampler(Sample sample) {
         super(sample);
@@ -31,6 +34,8 @@ public class MidiSampler extends Interpolator {
         startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.05, 0);
         endMod = new Modulator(0, (int) (64 * 44.1), 0.001, 0.002, 0);
         panMod = new Modulator(0, (int) (sample.length() * 0.5), -50.0, 50.0, 0);
+
+        delayer = new DelayAudio();
     }
 
     public void show() {
@@ -81,14 +86,22 @@ public class MidiSampler extends Interpolator {
         pitch = p;
     }
 
+    public void setDelay(double d) {
+        delayer.setDelay(d);
+    }
+
+    protected float leftSignal() {
+        return delayer.getLeftDelayed(super.leftSignal());
+    }
+
+    protected float rightSignal() {
+        return delayer.getRightDelayed(super.rightSignal());
+    }
+
     protected void step() {
         // end is set based on a time-oscillating LFO
-        double start = startMod.getValAt(curTime);
+        double start = startMod.getValAt(curTime); // curtime doesnt use stepsize!
         double end = endMod.getValAt(curTime);
-        if (curTime % 5000 == 0) {
-            // System.out.println("start " + start + " end " + end);
-        }
-        // 
         setStart(start);
         setEnd(start + end);
         // panning based on where in playing back the sample we are

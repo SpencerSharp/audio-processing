@@ -70,11 +70,11 @@ public class MidiViewer extends Viewer {
                 // note isn't in current played notes
                 toRemove.add(note);
             } else {
-                jm.setcell2d(matrix_cols-1, (int) note.pitch, Colors.white);
+                jm.setcell2d(matrix_cols-1, (int) (127-note.pitch), Colors.white);
             }
         }
 
-        System.out.println("rem " + toRemove.size());
+        // System.out.println("rem " + toRemove.size());
 
         for (Note note : toRemove) {
             displayed.remove(note);

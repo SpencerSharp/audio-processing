@@ -1,4 +1,4 @@
-package patterns;
+package midi.patterns;
 
 import midi.sequencing.*;
 /*

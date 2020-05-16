@@ -63,22 +63,27 @@ public class KnobControl extends MaxObject {
     }
 
     public void inlet(int in) {
-        System.out.println("int " + in + " inl " + getInlet());
         if (getInlet() == 0) {
             if (max != -1) {
                 max = in;
                 for (int i = 0; i < NUM_KNOBS; i++) {
-                    knobs[i].setRange(0,max);
+                    if (i == 3) {
+                        knobs[i].setRange(-20.0,20.0);
+                    } else {
+                        knobs[i].setRange(0,max);
+                    }
                 }
             } else {
                 max = in;
                 setup();
             }
-        }
-        if (getInlet() == 2) {
-            knobs[curKnob].setValue((float)(Math.pow(in / 127.0,2) * max));
-        }
-        if (getInlet() == 3) {
+        } else if (getInlet() == 2) {
+            if (curKnob == 3) {
+                knobs[curKnob].setValue((float)(-20.0 + ((in / 127.0)*(40.0))));
+            } else {
+                knobs[curKnob].setValue((float)(Math.pow(in / 127.0,2) * max));
+            }
+        } else if (getInlet() == 3) {
             curKnob = in - 48;
         }
     }

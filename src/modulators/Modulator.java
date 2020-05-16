@@ -5,6 +5,14 @@ derivative viewer
 https://www.desmos.com/calculator/mslfnckxs6
 
 i think i want like f(g(x)) or f'(g(x)) or something
+
+KNOB SELECT
+Type
+Start
+End
+Period
+Sync
+Scale
 */
 
 public class Modulator {
