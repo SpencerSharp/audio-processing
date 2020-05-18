@@ -6,7 +6,7 @@ import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 import java.util.*;
 
-import util.Colors;
+import utils.Colors;
 import midi.sequencing.MidiSender;
 import datatypes.Note;
 

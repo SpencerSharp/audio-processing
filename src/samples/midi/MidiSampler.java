@@ -4,12 +4,17 @@ import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
+import org.mariuszgromada.math.mxparser.*;
 
 import modulators.Modulator;
-import util.Pitch;
+import utils.*;
+import utils.global.GlobalFunction;
 import audio.DelayAudio;
 
+
 public class MidiSampler extends SamplePlayer {
+    Function startFunc;
+    Function endFunc;
     Modulator startMod;
     Modulator endMod;
     Modulator panMod;
@@ -30,9 +35,21 @@ public class MidiSampler extends SamplePlayer {
         i = t * 44.1
         t = i / 44.1
         */
+        // GlobalFunction.refresh();
 
-        startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.05, 0);
+        
+        // GlobalFunction tryEnd = new GlobalFunction("n(t)");
+        // if (tryEnd.isValid()) {
+        //     endFunc = tryEnd.asFunction();
+        // }
         endMod = new Modulator(0, (int) (64 * 44.1), 0.001, 0.002, 0);
+
+        // GlobalFunction tryStart = new GlobalFunction("s(t)");
+        // if (tryStart.isValid()) {
+        //     startFunc = tryStart.asFunction();
+        // }
+        startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.05, 0);
+
         panMod = new Modulator(0, (int) (sample.length() * 0.5), -50.0, 50.0, 0);
 
         delayer = new DelayAudio();
@@ -100,8 +117,21 @@ public class MidiSampler extends SamplePlayer {
 
     protected void step() {
         // end is set based on a time-oscillating LFO
-        double start = startMod.getValAt(curTime); // curtime doesnt use stepsize!
-        double end = endMod.getValAt(curTime);
+        double start = 0.0;
+        if (startFunc != null) {
+            start = startFunc.calculate(curTime);
+        } else {
+            start = startMod.getValAt(curTime); // curtime doesnt use stepsize!
+        }
+        double end = 0.0;
+        if (endFunc != null) {
+            end = endFunc.calculate(curTime);
+        } else {
+            end = endMod.getValAt(curTime);
+        }
+        if (curTime % 44100 == 0) {
+            System.out.println("start " + start + "|end " + end + "|start + end " + (start + end) + "|");
+        }
         setStart(start);
         setEnd(start + end);
         // panning based on where in playing back the sample we are

@@ -1,6 +1,7 @@
 MODULES
 audio
 datatypes
+effects
 midi
 modulators
 patterns

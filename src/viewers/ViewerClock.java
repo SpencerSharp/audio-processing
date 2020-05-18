@@ -40,6 +40,7 @@ public class ViewerClock {
 
     public void notifyDeleted() {
         internal.release();
+        viewer = null;
 		// objectStillExists = false;
 	}
 }

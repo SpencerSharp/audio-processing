@@ -90,7 +90,7 @@ public abstract class AudioPlayer extends MSPPerformer {
             audioL[i] = leftSignal();
             audioR[i] = rightSignal();
 
-            this.step();
+            step();
         }
 	}
 }

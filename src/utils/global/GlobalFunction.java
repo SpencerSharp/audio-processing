@@ -16,9 +16,14 @@ public class GlobalFunction {
 
     public Function function;
 
-    private ArrayList<GlobalFunction> functions;
+    private static ArrayList<GlobalFunction> functions = null;
 
     private LockableFile functionFile = new LockableFile(GLOBAL_FUNCTION_FILE_PATH);
+
+    public GlobalFunction(String name) {
+        this.name = name;
+        this.load();
+    }
 
     public GlobalFunction(String name, String func) {
         this.name = name;
@@ -39,6 +44,42 @@ public class GlobalFunction {
 
     public Function asFunction() {
         return function;
+    }
+
+    public boolean isValid() {
+        System.out.println("eq of " + this.name + " is " + this.text);
+        return !this.text.equals("error");
+    }
+
+    public static void refresh() {
+        functions = null;
+    }
+
+    public void load() {
+        if (functions == null) {
+            System.out.println("LEGIT LOADING");
+            functionFile.acquireLock();
+
+            setupGlobalMap();
+
+            if (id < functions.size()) {
+                this.text = functions.get(id).text;
+                loadFunction();
+            } else {
+                this.text = "error";
+            }
+
+            functionFile.releaseLock();
+        } else {
+            text = "error";
+            for (GlobalFunction function : functions) {
+                if(function.name.equals(name)) {
+                    id = function.id;
+                    text = function.text;
+                }
+            }
+            loadFunction();
+        }
     }
 
     public void reload() {
@@ -66,7 +107,6 @@ public class GlobalFunction {
                 }
                 functions.add(new GlobalFunction(functions.size(), curName, line));
             }
-
             reader.close();
         } catch (IOException e) {}
 
@@ -96,27 +136,18 @@ public class GlobalFunction {
     private void loadFunction() {
         String expandedText = this.getRightSide();
         boolean isDone = false;
-        for (GlobalFunction function : functions) {
-            if (expandedText.contains(function.name)) {
-                System.out.println("found |" + function.name + "|");
-                isDone = false;
-                expandedText = expandedText.replace(function.name, function.getRightSide());
+        while (!isDone) {
+            isDone = true;
+            for (GlobalFunction function : functions) {
+                if (expandedText.contains(function.name)) {
+                    // System.out.println("found |" + function.name + "|");
+                    isDone = false;
+                    expandedText = expandedText.replace(function.name, "(" + function.getRightSide() + ")");
+                }
             }
+            // System.out.println("|" + expandedText);
         }
-        // while (!isDone) {
-        //     isDone = true;
-        //     for (GlobalFunction function : functions) {
-        //         if (expandedText.contains(function.name)) {
-        //             isDone = false;
-        //             expandedText = expandedText.replaceAll(function.name, function.getRightSide());
-        //         }
-        //     }
-        //     System.out.println("text expanded to: " + expandedText);
-        //     try {
-        //         Thread.sleep(100);
-        //     } catch(Exception e) {}
-        // }
-        System.out.println(""+functions.size() + " | " + expandedText);
+        // System.out.println(""+functions.size() + " | " + expandedText);
         expandedText = name + " =" + expandedText;
         this.function = new Function(expandedText);
     }
