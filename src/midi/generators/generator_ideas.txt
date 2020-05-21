@@ -1,0 +1,8 @@
+CONTINUOUS TO MELODY
+
+Y value is pitch
+X is time
+
+narrowing the area where a note will be played
+i.e. within 0.25 of a whole number, the note is played
+outside of it, it goes off

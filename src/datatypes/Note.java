@@ -14,14 +14,18 @@ public class Note implements Comparable<Note> {
 
     }
 
+    public Note(int pitch, int vel) {
+        this.id = (int) (maxNoteNum++);
+        this.pitch = (double) pitch;
+        this.velocity = (char) vel;
+    }
+
     public Note(int pitch, int vel, double end) {
         this.id = (int) (maxNoteNum++);
         this.pitch = (double) pitch;
         this.velocity = (char) vel;
         this.endTime = end;
     }
-
-
 
     public long asMessage(long messageType) {
         return Midi2.prepareMessage(messageType,id,pitch,velocity);

@@ -16,6 +16,7 @@ public class CustomKnobControl extends KnobControl {
     }
 
     protected void setup(String[] names, int[] ranges, int[] units) {
+        isSetup = true;
         MaxBox knobControl = outputObj.getParentPatcher().getNamedBox("knobControl");
         int zero = 0;
         knobControl.send(ranges[1]);

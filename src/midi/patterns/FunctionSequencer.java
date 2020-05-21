@@ -2,16 +2,18 @@ package midi.patterns;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
-import java.lang.reflect.*;
 import java.lang.*;
 import java.io.*;
 import org.mariuszgromada.math.mxparser.*;
 
 import midi.sequencing.*;
 import utils.global.*;
+import datatypes.Note;
 import interfaces.*;
+import midi.Midi2;
+import midi.normalizing.Scale;
 
-public class FunctionSequencer extends ClockSequencer {
+public class FunctionSequencer extends Sequencer {
     static final int BASE_PITCH = 69;
     static int BASE_DELAY = 512;
 
@@ -19,8 +21,13 @@ public class FunctionSequencer extends ClockSequencer {
     protected int vel = 127;
     protected int dur = 0;
 
-    private Function delayFunc;
     private Function pitchFunc;
+    private Scale scale;
+
+    private MaxClock tickClock;
+
+    protected int state = 0;
+    protected int numStates = 4096;
 
     SequencerKnobControl knobs;
 
@@ -30,20 +37,18 @@ public class FunctionSequencer extends ClockSequencer {
         DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
         DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
         knobs = new SequencerKnobControl(this, 2);
+
+        tickClock = new MaxClock(new Executable() { 
+            public void execute() { tick(); }});
+
+        tickClock.delay(1000);
     }
 
     private void initFunctions() {
-        if (super.numStates != 10) {
+        if (!knobs.isSetup) {
             knobs.setup();
         }
-        super.numStates = 10;
-
         GlobalFunction.refresh();
-
-        GlobalFunction delayFunction = new GlobalFunction("d(t)");
-        if (delayFunction.isValid()) {
-            delayFunc = delayFunction.asFunction();
-        }
 
         GlobalFunction pitchFunction = new GlobalFunction("p(t)");
         if (pitchFunction.isValid()) {
@@ -52,30 +57,41 @@ public class FunctionSequencer extends ClockSequencer {
     }
 
     public void inlet(int i) {
-        
-        if (getInlet() == 2) {
-            BASE_DELAY = i;
-        }
+        // if (getInlet() == 2) {
+        //     BASE_DELAY = i;
+        // }
     }
 
-    protected void startNotes() {
-        if (state % numStates == 0) {
+    protected void playNote(int pitch, int vel, int dur) {
+        if (notes.size() > 0) {
+            sendOut(notes.poll().asMessage(Midi2.noteOff));
+        }
+        if (notes.size() > 1) {
+            notes.clear();
+        }
+        notes.add(new Note(pitch, vel));
+        sendOut(notes.peek().asMessage(Midi2.noteOn));
+    }
+
+    protected void tick() {
+        if (this.state == 0) {
             initFunctions();
         }
+        pitch = (int) Math.round(pitchFunc.calculate(state));
 
-        dur = (int) (BASE_DELAY * (1.0 + delayFunc.calculate(state)));
-
-        double frac = dur / (BASE_DELAY/4);
-        frac = Math.round(frac);
-        dur = ((int)frac)*(BASE_DELAY/4);
-
-        System.out.println("dur " + dur);
-
-        pitch = BASE_PITCH;
-
-        // pitch = BASE_PITCH + delayFunc.calculate(state);
-
-        super.playNote(pitch,vel,BASE_DELAY);
-        startClock.delay(dur);
+        if (notes.size() == 0 || pitch != ((int)(notes.peek().pitch))) {
+            System.out.println("MIDI PITCH " + pitch);
+            playNote(pitch, vel, dur);
+        }
+        state++;
+        if (state == numStates) {
+            state = 0;
+        }
+        tickClock.delay(1);
     }
+
+    protected void notifyDeleted() {
+        super.notifyDeleted();
+        tickClock.release();
+	}
 }

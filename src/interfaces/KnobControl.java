@@ -10,6 +10,8 @@ public class KnobControl extends MaxObject {
     protected Knob[] knobs;
     protected MaxBox ctl;
 
+    public boolean isSetup;
+
     private int curKnob;
     private int max = -1;
 
@@ -40,6 +42,7 @@ public class KnobControl extends MaxObject {
     }
 
     public void setup() {
+        isSetup = true;
         System.out.println("TOP");
         MaxPatcher parent = getParentPatcher();
 
