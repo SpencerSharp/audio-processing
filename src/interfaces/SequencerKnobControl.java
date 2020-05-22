@@ -16,42 +16,42 @@ public class SequencerKnobControl extends CustomKnobControl {
         "Base delay",
         "NONE",
         "NONE",
+        "Y Zoom Pct",
         "NONE",
         "NONE",
         "NONE",
-        "NONE",
-        "NONE"
+        "Y Offset"
     };
 
     int[] KNOB_RANGES = new int[]{
-        0,    1024,
-        0,    0,
-        0,    0,
-        0,    0,
-        0,    0,
-        0,    0,
-        0,    0,
-        0,    0
+        1024,    4096,
+        0,          0,
+        0,          0,
+        0,        100,
+        0,          0,
+        0,          0,
+        0,          0,
+        0,        127
     };
 
     int[] KNOB_UNITS = {
         Units.ms,
         Units.ms,
         Units.ms,
+        Units.percent,
         Units.ms,
         Units.ms,
         Units.ms,
-        Units.ms,
-        Units.ms
+        Units.semitones
     };
 
     public SequencerKnobControl(MaxObject obj, int outlet) {
         super(obj, outlet);
-        System.out.println("super done");
+        // System.out.println("super done");
     }
 
     public void setup() {
-        System.out.println("BOT");
+        // System.out.println("BOT");
         super.setup(KNOB_NAMES, KNOB_RANGES, KNOB_UNITS);
     }
 }

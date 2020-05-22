@@ -14,7 +14,7 @@ package players;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 
-public abstract class AudioPlayer extends MSPPerformer {
+public abstract class AudioPlayer extends StereoSignalDevice {
     protected int curTime;
     private double gain;
     private double pan;
@@ -36,11 +36,11 @@ public abstract class AudioPlayer extends MSPPerformer {
         if (volume > 1.0) {
             volume = 1.0;
         }
-        this.gain = volume;
+        gain = volume;
     }
 
-    public double getGain() {
-        return this.gain;
+    public float getGain() {
+        return (float)gain;
     }
 
     public void setPan(double pan) {
@@ -75,8 +75,13 @@ public abstract class AudioPlayer extends MSPPerformer {
         this.curTime++;
     }
 
-    protected abstract float leftSignal();
-    protected abstract float rightSignal();
+    protected float leftSignal() {
+        return getGain();
+    }
+
+    protected float rightSignal() {
+        return getGain();
+    }
 
     public void perform(MSPSignal[] ins, MSPSignal[] outs)
 	{

@@ -19,9 +19,26 @@ public class MidiViewer extends Viewer {
     PriorityQueue<Note> notes;
     HashSet<Note> displayed;
 
+    private int minPitch = 0;
+    private int maxPitch = 127;
+
+    private double zoomPct = 100.0;
+
     public MidiViewer(PriorityQueue<Note> notes) {
         this.notes = notes;
         displayed = new HashSet<Note>();
+    }
+
+    public void setYZoom(double pct) {
+        zoomPct = pct;
+        maxPitch = minPitch + ((int)((127 - minPitch) * (zoomPct/100.0)));
+        System.out.println("minPitch " + minPitch + " maxPitch " + maxPitch);
+    }
+
+    public void setYOffset(double amt) {
+        minPitch = (int) amt;
+        maxPitch = minPitch + ((int)((127 - minPitch) * (zoomPct/100.0)));
+        System.out.println("minPitch " + minPitch + " maxPitch " + maxPitch);
     }
 
     public String getMatrix() {
@@ -70,7 +87,14 @@ public class MidiViewer extends Viewer {
                 // note isn't in current played notes
                 toRemove.add(note);
             } else {
-                jm.setcell2d(matrix_cols-1, (int) (127-note.pitch), Colors.white);
+                int steps = (int) (note.pitch - minPitch);
+                int numSteps = maxPitch - minPitch + 1;
+                int rowsPerStep = matrix_rows/numSteps;
+                if (steps >= 0 && steps < numSteps) {
+                    for (int i = 0; i < rowsPerStep; i++) {
+                        jm.setcell2d(matrix_cols-1, matrix_rows - (steps * rowsPerStep + i), Colors.white);
+                    }
+                }
             }
         }
 

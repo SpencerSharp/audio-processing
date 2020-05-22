@@ -7,7 +7,7 @@ import java.util.*;
 import utils.Colors;
 import org.mariuszgromada.math.mxparser.*;
 
-public class ModulatorViewer extends Viewer {
+public abstract class ModulatorViewer extends Viewer {
     private static final int matrix_cols = 128;
     private static final int matrix_rows = 128;
 

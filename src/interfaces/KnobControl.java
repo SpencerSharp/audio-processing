@@ -81,11 +81,7 @@ public class KnobControl extends MaxObject {
                 setup();
             }
         } else if (getInlet() == 2) {
-            if (curKnob == 3) {
-                knobs[curKnob].setValue((float)(-20.0 + ((in / 127.0)*(40.0))));
-            } else {
-                knobs[curKnob].setValue((float)(Math.pow(in / 127.0,2) * max));
-            }
+            knobs[curKnob].setValue(in);
         } else if (getInlet() == 3) {
             curKnob = in - 48;
         }

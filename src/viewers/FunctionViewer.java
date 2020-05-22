@@ -21,6 +21,14 @@ public class FunctionViewer extends Viewer {
         System.out.println("fstr " + function.getFunctionExpressionString());
     }
 
+    public void setYZoom(double d) {
+        System.out.println("FunctionViewer setYZoom is NOT IMPLEMENTED");
+    }
+
+    public void setYOffset(double d) {
+        System.out.println("FunctionViewer setYZoom is NOT IMPLEMENTED");
+    }
+
     public String getMatrix() {
         // System.out.println("call me baby");
         int dim[] = jm.getDim();

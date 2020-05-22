@@ -42,6 +42,7 @@ public class CustomKnobControl extends KnobControl {
             double max = (double) ranges[i*2+1];
             knob.setRange(min, max);
             knob.setUnit(units[i]);
+            knob.setValue(127.0);
             knobs[i] = knob;
         }
     }

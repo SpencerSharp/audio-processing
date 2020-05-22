@@ -14,8 +14,10 @@ import midi.Midi2;
 import midi.normalizing.Scale;
 
 public class FunctionSequencer extends Sequencer {
-    static final int BASE_PITCH = 69;
-    static int BASE_DELAY = 512;
+    private static final int BASE_INLET = 1;
+
+    static int BASE_PITCH = 72;
+    static int BASE_BEAT_LENGTH = 1024;
 
     protected int pitch = BASE_PITCH - 6;
     protected int vel = 127;
@@ -27,16 +29,13 @@ public class FunctionSequencer extends Sequencer {
     private MaxClock tickClock;
 
     protected int state = 0;
-    protected int numStates = 4096;
 
     SequencerKnobControl knobs;
 
     public FunctionSequencer() {
         super();
-        declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
-        DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
-        DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
-        knobs = new SequencerKnobControl(this, 2);
+
+        knobs = new SequencerKnobControl(this, BASE_INLET);
 
         tickClock = new MaxClock(new Executable() { 
             public void execute() { tick(); }});
@@ -57,36 +56,40 @@ public class FunctionSequencer extends Sequencer {
     }
 
     public void inlet(int i) {
-        // if (getInlet() == 2) {
-        //     BASE_DELAY = i;
-        // }
+        if (getInlet() == BASE_INLET + 3) {
+            super.viewerClock.viewer.setYZoom((double)i);
+        } else if (getInlet() == BASE_INLET + 7) {
+            super.viewerClock.viewer.setYOffset((double)i);
+        }
     }
 
     protected void playNote(int pitch, int vel, int dur) {
-        if (notes.size() > 0) {
-            sendOut(notes.poll().asMessage(Midi2.noteOff));
-        }
         if (notes.size() > 1) {
             notes.clear();
         }
-        notes.add(new Note(pitch, vel));
-        sendOut(notes.peek().asMessage(Midi2.noteOn));
+        Note newNote = new Note(pitch, vel);
+        sendOut(newNote.asMessage(Midi2.noteOn));
+        if (notes.size() > 0) {
+            sendOut(notes.poll().asMessage(Midi2.noteOff));
+        }
+        notes.add(newNote);
     }
 
     protected void tick() {
-        if (this.state == 0) {
+        if (this.state % BASE_BEAT_LENGTH == 0) {
             initFunctions();
         }
-        pitch = (int) Math.round(pitchFunc.calculate(state));
+        double inp = ((double)state)/BASE_BEAT_LENGTH;
+        double calc = pitchFunc.calculate(inp);
+
+        pitch = (int) Math.round(BASE_PITCH + calc);
 
         if (notes.size() == 0 || pitch != ((int)(notes.peek().pitch))) {
+            // System.out.println("base pitch " + BASE_PITCH + " base beat " + BASE_BEAT_LENGTH + " inp " + inp + " calc " + calc + " MIDI PITCH " + pitch);
             System.out.println("MIDI PITCH " + pitch);
             playNote(pitch, vel, dur);
         }
         state++;
-        if (state == numStates) {
-            state = 0;
-        }
         tickClock.delay(1);
     }
 

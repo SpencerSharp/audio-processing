@@ -17,11 +17,14 @@ public class MidiSampler extends SamplePlayer {
     Function endFunc;
     Modulator startMod;
     Modulator endMod;
+    Modulator gainMod;
     Modulator panMod;
 
     int pitch;
 
     DelayAudio delayer;
+
+    private int endTime = Integer.MAX_VALUE;
 
     public MidiSampler(Sample sample) {
         super(sample);
@@ -51,6 +54,8 @@ public class MidiSampler extends SamplePlayer {
         startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.05, 0);
 
         panMod = new Modulator(0, (int) (sample.length() * 0.5), -50.0, 50.0, 0);
+
+        gainMod = new Modulator(0, (int) (4 * 44.1), 0.0, 1.0, 0);
 
         delayer = new DelayAudio();
     }
@@ -115,6 +120,15 @@ public class MidiSampler extends SamplePlayer {
         return delayer.getRightDelayed(super.rightSignal());
     }
 
+    public void end() {
+        gainMod = new Modulator(curTime, (int) (curTime + (4 * 44.1)), 1.0, 0.0, 0);
+        endTime = gainMod.getDomainMax();
+    }
+
+    public boolean hasEnded() {
+        return curTime > endTime;
+    }
+
     protected void step() {
         // end is set based on a time-oscillating LFO
         double start = 0.0;
@@ -129,11 +143,20 @@ public class MidiSampler extends SamplePlayer {
         } else {
             end = endMod.getValAt(curTime);
         }
-        if (curTime % 44100 == 0) {
-            System.out.println("start " + start + "|end " + end + "|start + end " + (start + end) + "|");
+        double gain = 0.0;
+        if (curTime < gainMod.getDomainMax()) {
+            gain = gainMod.getValAt(curTime);
+        } else if (hasEnded()) {
+            gain = 0.0;
+        } else {
+            gain = 1.0;
         }
+        // if (curTime % 44100 == 0) {
+        //     System.out.println("start " + start + "|end " + end + "|start + end " + (start + end) + "|");
+        // }
         setStart(start);
         setEnd(start + end);
+        setGain(gain);
         // panning based on where in playing back the sample we are
         // this.setPan(panMod.getValAt(indexInSample));
         stepSize = Pitch.stepSize(pitch);

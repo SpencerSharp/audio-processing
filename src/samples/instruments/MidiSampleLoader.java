@@ -24,6 +24,9 @@ public class MidiSampleLoader extends MidiReceiver {
     private static double endMax = 1024.0;
     private static double delay = 0.0;
 
+    private static float leftSignal = 0.5f;
+    private static float rightSignal = 0.5f;
+
     private static int retrigTime;
 
     public HashMap<Integer,MidiSampler> voicePlayers;
@@ -112,13 +115,15 @@ public class MidiSampleLoader extends MidiReceiver {
                 sampler.setEndMax(endMax);
                 sampler.setDelay(delay);
                 int spitch = Midi2.getPitch(msg);
-                System.out.println("sPitch " + spitch);
+                // System.out.println("sPitch " + spitch);
                 sampler.setPitch(spitch);
+                System.out.println("MIDI IN");
                 voicePlayers.put(noteId, sampler);
             }
         } else {
             // System.out.println("num voices " + voicePlayers.keySet().size());
-            voicePlayers.remove(noteId);
+            // voicePlayers.remove(noteId);
+            voicePlayers.get(noteId).end();
         }
     }
 
@@ -193,6 +198,8 @@ public class MidiSampleLoader extends MidiReceiver {
         }
     }
 
+    private float regressRate = 0.97f;
+
     protected float leftSignal() {
         float total = 0.0f;
         for (MidiSampler sampler : voicePlayers.values()) {
@@ -206,12 +213,21 @@ public class MidiSampleLoader extends MidiReceiver {
         for (MidiSampler sampler : voicePlayers.values()) {
             total += sampler.rightSignal();
         }
-        return total;
+        return rightSignal;
     }
 
     protected void step() {
-        for (MidiSampler sampler : voicePlayers.values()) {
-            sampler.step();
+        HashSet<Integer> toRemove = new HashSet<Integer>();
+        for (int id : voicePlayers.keySet()) {
+            MidiSampler sampler = voicePlayers.get(id);
+            if (sampler.hasEnded()) {
+                toRemove.add(id);
+            } else {
+                sampler.step();
+            }
+        }
+        for (int id : toRemove) {
+            voicePlayers.remove(id);
         }
         if (curTime % 1000 == 0) {
             boolean shouldShowVoices = curTime - retrigTime > 0.5 * (44.1 * 1000);

@@ -16,6 +16,8 @@ public abstract class MidiSender extends MaxObject {
 
     protected PriorityQueue<Note> notes;
 
+    protected int inlet;
+
     private static final String[] INLET_ASSIST = new String[]{
         "stuff in"
     };

@@ -10,7 +10,7 @@ public class ViewerClock {
     private static final int FRAME_DELAY = (int) (1000.0 / FRAME_RATE);
 
     MaxClock internal;
-    Viewer viewer;
+    public Viewer viewer;
     MaxObject parent;
     int myOutlet;
 

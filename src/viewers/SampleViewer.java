@@ -8,7 +8,7 @@ import java.util.*;
 
 import samples.MidiSampler;
 
-public class SampleViewer {
+public class SampleViewer extends Viewer {
     JitterMatrix jm = new JitterMatrix(4, "char", 200, 10);
 
     private static final int[] white = new int[] {255, 255, 255, 255};
@@ -34,6 +34,14 @@ public class SampleViewer {
     public SampleViewer(HashMap<Integer,MidiSampler> map) {
         this.map = map;
         this.resetBounds();
+    }
+
+    public void setYZoom(double d) {
+        System.out.println("SampleViewer y zoom is MEANINGLESS");
+    }
+
+    public void setYOffset(double d) {
+        System.out.println("SampleViewer y offset is MEANINGLESS");
     }
 
     private void resetBounds() {

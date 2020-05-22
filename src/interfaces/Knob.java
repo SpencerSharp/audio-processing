@@ -13,6 +13,9 @@ class Knob {
     String valType;
     Object val;
 
+    double min;
+    double max;
+
     public Knob(String name, MaxPatcher patcher) {
         this.name = name;
         myBox = patcher.getNamedBox(name);
@@ -91,6 +94,8 @@ class Knob {
     }
 
     public void setRange(double i, double j) {
+        this.min = i;
+        this.max = j;
         sendMsg("_parameter_range",i,j);
     }
 
@@ -98,10 +103,14 @@ class Knob {
         sendMsg("_parameter_shortname",s);
     }
 
-    public void setValue(float f) {
+    public void setRawValue(float f) {
         sendMsg("assign",f);
     }
 
-    // Atom[] thing = new Atom[1];
-    // thing[0] = Atom.newAtom(0);
+    public void setValue(double d) {
+        double f = d / 127.0;
+        double conv = min + f * (max - min);
+        float fmt = (float) conv;
+        setRawValue(fmt);
+    }
 }

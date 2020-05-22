@@ -98,16 +98,22 @@ class SamplePlayer extends MidiReceiver {
     }
 
     protected float leftSignal() {
+        float sig = super.leftSignal();
         if (indexInSample >= 0.0) {
-            return sample.left((int)indexInSample);
+            sig *= sample.left((int)indexInSample);
+        } else {
+            sig *= 0.0f;
         }
-        return 0.0f;
+        return sig;
     }
 
     protected float rightSignal() {
+        float sig = super.rightSignal();
         if (indexInSample >= 0.0) {
-            return sample.right((int)indexInSample);
+            sig *= sample.right((int)indexInSample);
+        } else {
+            sig *= 0.0f;
         }
-        return 0.0f;
+        return sig;
     }
 }
