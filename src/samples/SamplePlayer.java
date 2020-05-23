@@ -100,7 +100,15 @@ class SamplePlayer extends MidiReceiver {
     protected float leftSignal() {
         float sig = super.leftSignal();
         if (indexInSample >= 0.0) {
-            sig *= sample.left((int)indexInSample);
+            int floor = (int) indexInSample;
+            int ceil = floor + 1;
+            if (ceil >= getEnd()) {
+                sig *= sample.left(floor);
+            } else {
+                double w1 = (1 - (indexInSample - floor)) * sample.left(floor);
+                double w2 = (1 - (ceil - indexInSample)) * sample.left(ceil);
+                sig *= (float) (w1 + w2);
+            }
         } else {
             sig *= 0.0f;
         }
@@ -110,7 +118,15 @@ class SamplePlayer extends MidiReceiver {
     protected float rightSignal() {
         float sig = super.rightSignal();
         if (indexInSample >= 0.0) {
-            sig *= sample.right((int)indexInSample);
+            int floor = (int) indexInSample;
+            int ceil = floor + 1;
+            if (ceil >= getEnd()) {
+                sig *= sample.right(floor);
+            } else {
+                double w1 = (1 - (indexInSample - floor)) * sample.right(floor);
+                double w2 = (1 - (ceil - indexInSample)) * sample.right(ceil);
+                sig *= (float) (w1 + w2);
+            }
         } else {
             sig *= 0.0f;
         }

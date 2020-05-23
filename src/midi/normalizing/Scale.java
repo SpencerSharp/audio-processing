@@ -1,7 +1,7 @@
 package midi.normalizing;
 
 public class Scale {
-    public static void getOffset(int steps) {
+    public static int getOffset(int steps) {
         int semis = steps + 5*(steps/7);
         if (steps > 0) {
             switch(steps % 7) {

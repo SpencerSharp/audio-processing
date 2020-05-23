@@ -213,7 +213,7 @@ public class MidiSampleLoader extends MidiReceiver {
         for (MidiSampler sampler : voicePlayers.values()) {
             total += sampler.rightSignal();
         }
-        return rightSignal;
+        return total;
     }
 
     protected void step() {
