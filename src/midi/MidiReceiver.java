@@ -6,7 +6,7 @@ import java.lang.reflect.*;
 import java.util.*;
 
 import datatypes.Voice;
-import players.AudioPlayer;
+import audio.AudioPlayer;
 
 /*
 My "instrument" archetype

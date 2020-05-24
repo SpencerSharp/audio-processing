@@ -1,0 +1,13 @@
+a(t) = 1 + (mod(t,64)/(64/3))
+b(t) = 1.9
+c(t) = 0.7
+d(t) = 3.4
+f(t) = -2.4
+j(t) = mod(t, 4*(a(t)))
+k(t) = mod(t, a(t))
+l(t) = cos(2*pi*j(t))
+m(t) = max(min(j(t),3*a(t)),2*a(t))
+n(t) = b(t)*k(t)+c(t)*l(t)
+o(t) = min(min(m(t),r(t)),n(t))
+p(t) = d(t)*o(t)+f(t)
+r(t) = -1*floor(j(t)-(5*a(t)))

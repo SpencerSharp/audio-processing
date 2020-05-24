@@ -9,3 +9,4 @@ On freebang, each MXJ saves all of its preset data to the file
 MXJs are unique by combo of track# + index in track
 They somehow inherit from "PersistentDevice" and declare attributes in a way that works with this polymorphic paradigm
 */
+

@@ -9,7 +9,7 @@ Pan
 Gain/volume
 */
 
-package players;
+package audio;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;

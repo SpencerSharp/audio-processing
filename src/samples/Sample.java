@@ -6,8 +6,7 @@ import java.lang.reflect.*;
 import java.lang.*;
 import java.io.*;
 
-public class Sample implements MessageReceiver
-{
+public class Sample implements MessageReceiver {
     public String path;
 	private AudioFileBuffer _afb = null;
     private boolean isLoaded = false;
