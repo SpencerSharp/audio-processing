@@ -11,7 +11,7 @@ import midi.MidiReceiver;
 import midi.Midi2;
 import modulators.Modulator;
 import viewers.SampleViewer;
-import interfaces.SamplerKnobControl;
+import interfaces.custom.SamplerKnobControl;
 
 public class MidiSampleLoader extends MidiReceiver {
     Sample sample;

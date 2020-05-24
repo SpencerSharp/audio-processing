@@ -1,10 +1,11 @@
-package interfaces;
+package interfaces.custom;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
 import java.io.*;
+import interfaces.*;
 
 import samples.Sample;
 import datatypes.Units;

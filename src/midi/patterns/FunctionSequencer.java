@@ -10,6 +10,7 @@ import midi.sequencing.*;
 import utils.global.*;
 import datatypes.Note;
 import interfaces.*;
+import interfaces.custom.SequencerKnobControl;
 import midi.Midi2;
 import midi.normalizing.Scale;
 
@@ -81,6 +82,8 @@ public class FunctionSequencer extends Sequencer {
         }
         double inp = ((double)state)/BASE_BEAT_LENGTH;
         double calc = pitchFunc.calculate(inp);
+
+        // System.out.println(calc);
 
         pitch = (int) Math.round(BASE_PITCH + calc);
 

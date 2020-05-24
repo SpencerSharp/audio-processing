@@ -41,6 +41,7 @@ public class Modulator {
     }
 
     public double getValAt(int ind) {
+        ind -= domainMin;
         ind = ind % (domainMax - domainMin);
         double pct = ((double) ind) / (domainMax - domainMin);
         double rangeDist = rangeMax - rangeMin;

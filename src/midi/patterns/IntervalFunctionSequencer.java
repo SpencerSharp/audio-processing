@@ -10,6 +10,7 @@ import org.mariuszgromada.math.mxparser.*;
 import midi.sequencing.*;
 import utils.global.*;
 import interfaces.*;
+import interfaces.custom.SequencerKnobControl;
 
 public class IntervalFunctionSequencer extends ClockSequencer {
     static final int BASE_PITCH = 69;

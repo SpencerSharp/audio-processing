@@ -13,6 +13,9 @@ import audio.DelayAudio;
 
 
 public class MidiSampler extends SamplePlayer {
+    private static final int ATTACK_TIME = 1;
+    private static final int RELEASE_TIME = 1;
+
     Function startFunc;
     Function endFunc;
     Modulator startMod;
@@ -45,6 +48,7 @@ public class MidiSampler extends SamplePlayer {
         // if (tryEnd.isValid()) {
         //     endFunc = tryEnd.asFunction();
         // }
+        setGain(0.0);
         endMod = new Modulator(0, (int) (64 * 44.1), 0.001, 0.002, 0);
 
         // GlobalFunction tryStart = new GlobalFunction("s(t)");
@@ -55,7 +59,7 @@ public class MidiSampler extends SamplePlayer {
 
         panMod = new Modulator(0, (int) (sample.length() * 0.5), -50.0, 50.0, 0);
 
-        gainMod = new Modulator(0, (int) (4 * 44.1), 0.0, 1.0, 0);
+        gainMod = new Modulator(0, (int) (ATTACK_TIME * 44.1), 0.0, 1.0, 0);
 
         delayer = new DelayAudio();
     }
@@ -121,28 +125,31 @@ public class MidiSampler extends SamplePlayer {
     }
 
     public void end() {
-        gainMod = new Modulator(curTime, (int) (curTime + (4 * 44.1)), 1.0, 0.0, 0);
+        gainMod = new Modulator(curTime, (int) (curTime + (RELEASE_TIME * 44.1)), getGain(), 0.0, 0);
         endTime = gainMod.getDomainMax();
     }
 
     public boolean hasEnded() {
-        return curTime > endTime;
+        return curTime >= endTime;
     }
 
     protected void step() {
-        // end is set based on a time-oscillating LFO
         double start = 0.0;
         if (startFunc != null) {
             start = startFunc.calculate(curTime);
         } else {
-            start = startMod.getValAt(curTime); // curtime doesnt use stepsize!
+            start = startMod.getValAt(curTime);
         }
+        setStart(start);
+
         double end = 0.0;
         if (endFunc != null) {
             end = endFunc.calculate(curTime);
         } else {
             end = endMod.getValAt(curTime);
         }
+        setEnd(start + end);
+
         double gain = 0.0;
         if (curTime < gainMod.getDomainMax()) {
             gain = gainMod.getValAt(curTime);
@@ -151,14 +158,8 @@ public class MidiSampler extends SamplePlayer {
         } else {
             gain = 1.0;
         }
-        // if (curTime % 44100 == 0) {
-        //     System.out.println("start " + start + "|end " + end + "|start + end " + (start + end) + "|");
-        // }
-        setStart(start);
-        setEnd(start + end);
         setGain(gain);
-        // panning based on where in playing back the sample we are
-        // this.setPan(panMod.getValAt(indexInSample));
+
         stepSize = Pitch.stepSize(pitch);
         super.step();
     }

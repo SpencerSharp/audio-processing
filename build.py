@@ -56,7 +56,9 @@ if shared_resources.exists():
     shutil.rmtree(shared_resources)
 shared_resources.mkdir()
 global_equations = shared_resources / 'functions'
-global_equations.touch()
+shutil.copyfile(Path.cwd() / 'perm_functions', global_equations)
+# global_equations.touch()
+
 
 # os.chdir(max_dir)
 
