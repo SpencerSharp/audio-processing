@@ -35,20 +35,11 @@ public class MidiSampleLoader extends MidiReceiver {
 	};
 
     private static final String[] OUTLET_ASSIST = new String[]{
-		"output L",
-        "output R",
         "view matrix"
     };
 
     public MidiSampleLoader() {
         super();
-
-        declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
-        DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
-        DataTypes.ALL,DataTypes.ALL,DataTypes.ALL,
-        DataTypes.ALL,DataTypes.ALL});
-
-        setInletAssist(INLET_ASSIST);
 
         declareOutlets(new int[]{SIGNAL,SIGNAL,DataTypes.ALL});
         setOutletAssist(OUTLET_ASSIST);

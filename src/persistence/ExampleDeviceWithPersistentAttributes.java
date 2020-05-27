@@ -5,8 +5,19 @@ import com.cycling74.msp.*;
 import java.lang.*;
 import java.nio.file.*;
 import java.io.*;
+import java.util.stream.Stream; 
+import java.util.Arrays;
 
-public class ExampleDeviceWithPersistentAttributes extends MaxObject {
+import midi.MidiReceiver;
+import utils.ArrayUtils;
+
+public class ExampleDeviceWithPersistentAttributes extends MidiReceiver {
+    private static final int NUM_INLETS = 2;
+    private static String[] INLET_NAMES = new String[]{
+		"channel",
+        "index"
+	};
+
     private static final int LOAD_TIME = 11000;
 
     ExamplePersistentObject myAttrs;
@@ -14,19 +25,36 @@ public class ExampleDeviceWithPersistentAttributes extends MaxObject {
     MaxClock loadingTimer;
 
     public ExampleDeviceWithPersistentAttributes() {
-        declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL,DataTypes.ALL});
-        declareOutlets(new int[]{});
+        super(NUM_INLETS, INLET_NAMES);
 
         loadingTimer = new MaxClock(new Executable() {public void execute() { setup(); }});
         loadingTimer.delay(LOAD_TIME);
     }
 
-    public void inlet(int i) {
-        if (getInlet() == 2) {
-            System.out.println("Channel is " + i);
-        } else if (getInlet() == 1) {
-            System.out.println("Index is " + i);
+    public ExampleDeviceWithPersistentAttributes(int numInlets, String[] inletNames) {
+        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames));
+    }
+
+    protected void sendString(String message) {
+        super.sendString(message);
+        if (message.equals("persist")) {
+            persist();
+            return;
         }
+    }
+
+    protected int sendInt(int i) {
+        switch (getInlet() - super.sendInt(i)) {
+            case 0:
+                System.out.println("Channel is " + i);
+                PersistentObject.channel = i;
+                break;
+            case 1:
+                System.out.println("Index is " + i);
+                PersistentObject.ind = i;
+                break;
+        }
+        return this.NUM_INLETS;
     }
 
     private void setup() {
@@ -41,5 +69,9 @@ public class ExampleDeviceWithPersistentAttributes extends MaxObject {
         // } else {
         //     myAttrs.showNumber();
         // }
+    }
+
+    private void persist() {
+        System.out.println("I HAVE BEEN ALERTED TO BACKUP TO DISC");
     }
 }

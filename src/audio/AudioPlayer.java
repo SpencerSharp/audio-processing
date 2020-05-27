@@ -13,23 +13,49 @@ package audio;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
+import java.util.*;
+import java.io.*;
+import java.lang.*;
 
 public abstract class AudioPlayer extends StereoSignalDevice {
+    private static final int NUM_OUTLETS = 2;
+
     protected int curTime;
     private double gain;
     private double pan;
 
-    private static final String[] OUTLET_ASSIST = new String[]{
+    private static final String[] OUTLET_NAMES = new String[]{
 		"output L",
         "output R"
     };
 
     public AudioPlayer() {
-        declareOutlets(new int[]{SIGNAL,SIGNAL});
-        setOutletAssist(OUTLET_ASSIST);
+        int[] outletInfo = new int[numOutlets()];
+        for(int i = 0; i < outletInfo.length; i++) {
+            outletInfo[i] = DataTypes.ALL;
+        }
+        declareOutlets(outletInfo);
+        setOutletAssist(getOutletNames());
 
         this.gain = 1.0;
         this.pan = 0.0;
+    }
+
+    protected String[] getOutletNames() {
+        ArrayList<String> outletNames = new ArrayList<String>();
+        for (String s : super.getOutletNames()) {
+            outletNames.add(s);
+        }
+        for(String s : this.OUTLET_NAMES) {
+            outletNames.add(s);
+        }
+        String[] outletNamesRay = new String[outletNames.size()]; 
+        outletNamesRay = outletNames.toArray(outletNamesRay); 
+        return outletNamesRay;
+    }
+
+    protected int numOutlets() {
+        return this.NUM_OUTLETS + super.numOutlets();
     }
 
     public void setGain(double volume) {

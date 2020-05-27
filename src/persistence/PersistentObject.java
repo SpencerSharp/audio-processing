@@ -9,18 +9,11 @@ public class PersistentObject implements Serializable {
     public static int channel = 2;
     public static int ind = 3;
 
-    protected int myChannel = 2;
-    protected int myInd = 3;
-
     public String name;
     public int inlet;
     public int appearance;
 
-    public static File getFile(PersistentObject obj, boolean shouldOverwrite) throws IOException {
-        if (obj != null) {
-            channel = obj.myChannel;
-            ind = obj.myInd;
-        }
+    public static File getFile(boolean shouldOverwrite) throws IOException {
         System.out.println("start");
         File parentDir = new File(PersistentInfo.getPath());
         Path parentPath = parentDir.toPath();
@@ -55,7 +48,7 @@ public class PersistentObject implements Serializable {
 
     public static void save(PersistentObject device) {
         try{
-            FileOutputStream f = new FileOutputStream(getFile(device, true));
+            FileOutputStream f = new FileOutputStream(getFile(true));
             ObjectOutputStream o = new ObjectOutputStream(f);
 
             // Write objects to file
@@ -97,7 +90,7 @@ public class PersistentObject implements Serializable {
         }
         try {
             System.out.println("starting the load op");
-            FileInputStream fileInputStream = new FileInputStream(getFile(device, false));
+            FileInputStream fileInputStream = new FileInputStream(getFile(false));
             System.out.println("got device file successfully");
             ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
             device = (PersistentObject) objectInputStream.readObject();

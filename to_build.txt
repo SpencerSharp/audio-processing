@@ -1,2 +1,7 @@
-PersistentDevice.java
-PersistentMidiReceiver.java
+ProjectSetupDevice.java
+PersistentInfo.java
+PersistentObject.java
+ExamplePersistentObject.java
+ExampleDeviceWithPersistentAttributes.java
+LockableFile.java
+MidiReceiver.java

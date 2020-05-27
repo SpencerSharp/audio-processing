@@ -15,7 +15,7 @@ public class ProjectSetupDevice extends MaxObject {
 
     public ProjectSetupDevice() {
         declareInlets(new int[]{DataTypes.ALL,DataTypes.ALL});
-        declareOutlets(new int[]{});
+        declareOutlets(new int[]{DataTypes.ALL});
 
         loadingTimer = new MaxClock(new Executable() {public void execute() { checkIfHasReceivedPath(); }});
         loadingTimer.delay(LOAD_TIME);
@@ -30,6 +30,10 @@ public class ProjectSetupDevice extends MaxObject {
 
     public void anything(String message, Atom args[]) {
         if (message.equals("none")) {
+            return;
+        }
+        if (message.equals("persist")) {
+            pingAllToPersist();
             return;
         }
         String path = message.substring(message.indexOf(":")+1,message.length());
@@ -83,6 +87,10 @@ public class ProjectSetupDevice extends MaxObject {
         System.out.println("CHECK infoSetup " + PersistentInfo.checkIfProjectHasBeenSetup());
         System.out.println("CHECK infoPath " + PersistentInfo.checkIfProjectPathHasBeenSearchedFor());
         // System.out.println("received path status is " + hasReceivedPath);
+    }
+
+    private void pingAllToPersist() {
+        outlet(0, "persist");
     }
 
     protected void notifyDeleted() {
