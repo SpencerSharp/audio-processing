@@ -24,7 +24,7 @@ public class Voice {
         // comparing the state of argument with  
         // the state of 'this' Object. 
         return otherVoice.hashCode() == this.hashCode();
-    } 
+    }
 
     @Override
     public int hashCode() {

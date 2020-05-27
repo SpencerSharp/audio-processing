@@ -28,17 +28,6 @@ public class AudioEffect extends AudioPlayer {
         setInletAssist(INLET_ASSIST);
     }
 
-    protected float leftSignal() { return 0.0f; }
-    protected float rightSignal() { return 0.0f; }
-
-    protected float leftSignal(float f) {
-        return (float) (getGain() * f);
-    }
-
-    protected float rightSignal(float f) {
-        return (float) (getGain() * f);
-    }
-
     protected void step() {
         super.step();
     }

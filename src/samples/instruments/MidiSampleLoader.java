@@ -15,23 +15,12 @@ import interfaces.custom.SamplerKnobControl;
 
 public class MidiSampleLoader extends MidiReceiver {
     Sample sample;
-    // MidiSampler sampler;
-    private double startPeriod = 1024.0;
-    private double endPeriod = 1024.0;
-    private double startMin = 0.0;
-    private double startMax = 512.0;
-    private double endMin = 128.0;
-    private double endMax = 1024.0;
-    private double delay = 0.0;
-
-    // private float leftSignal = 0.5f;
-    // private float rightSignal = 0.5f;
+    SamplerKnobControl knobs;
 
     private transient int retrigTime;
 
     public transient HashMap<Integer,MidiSampler> voicePlayers;
     public transient SampleViewer viewer;
-    public SamplerKnobControl knobs;
 
     private static final String[] INLET_ASSIST = new String[]{
         "none",

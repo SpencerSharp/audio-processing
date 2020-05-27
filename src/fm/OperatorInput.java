@@ -46,10 +46,6 @@ public class OperatorInput extends MSPPerformer
         }
         if (endTime < 0 && inInd > backlogSize - 128) {
             endTime = System.currentTimeMillis();
-            System.out.println(inInd + " steps took " + (1.0/1000 * (endTime - startTime)) + " seconds\n");
-        }
-        if (inInd % 10000 == 0) {
-            System.out.println("curstep " + inInd + "\n");
         }
         float[] in  = ins[0].vec;
         float[] out = outs[0].vec;
@@ -63,6 +59,5 @@ public class OperatorInput extends MSPPerformer
 
             out[i] = backlog[divInd];
 		}
-        // System.out.println("time is " + MaxClock.getTime() + "\n");
     }
 }

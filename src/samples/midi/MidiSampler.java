@@ -32,29 +32,9 @@ public class MidiSampler extends SamplePlayer {
     public MidiSampler(Sample sample) {
         super(sample);
 
-        /*
-        t is time in ms, i is index in samples (curTime)
-        t = (i / (44.1 * 1000)) * 1000
-        t / 1000 = i / (44.1 * 1000)
-        (t / 1000) * (44.1 * 1000) = i
-        44.1 * t = i
-        i = t * 44.1
-        t = i / 44.1
-        */
-        // GlobalFunction.refresh();
-
-        
-        // GlobalFunction tryEnd = new GlobalFunction("n(t)");
-        // if (tryEnd.isValid()) {
-        //     endFunc = tryEnd.asFunction();
-        // }
         setGain(0.0);
         endMod = new Modulator(0, (int) (64 * 44.1), 0.001, 0.002, 0);
 
-        // GlobalFunction tryStart = new GlobalFunction("s(t)");
-        // if (tryStart.isValid()) {
-        //     startFunc = tryStart.asFunction();
-        // }
         startMod = new Modulator(0, (int) (4096 * 44.1), 0.0, 0.05, 0);
 
         panMod = new Modulator(0, (int) (sample.length() * 0.5), -50.0, 50.0, 0);

@@ -80,14 +80,6 @@ public class Modulator {
         return this.rangeMax;
     }
 
-    // public float get(int step) {
-    //     value = function.get(step);
-    //     for(ModulationRelationship relationship : modulatedBy) {
-    //         value = relationship.applyTo(step, value);
-    //     }
-    //     return value;
-    // }
-
     public static Modulator get(int id) {
         return modulators[id];
     }

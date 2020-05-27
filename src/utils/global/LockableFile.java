@@ -5,12 +5,18 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-class LockableFile {
+public class LockableFile {
     private File file;
     private FileLock lock;
 
     public LockableFile(String path) {
         this.file = new File(path);
+        if (!this.file.exists()) {
+            try {
+                this.file.createNewFile();
+            } catch (Exception e) {}
+            
+        }
     }
 
     public void acquireLock() {

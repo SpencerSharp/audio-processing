@@ -18,9 +18,6 @@ I think live.drop persists the file
 So each time u reopen, it should auto send the file out
 nice!
 */
-public void anything(String message, Atom args[]) {
-    String path = message.substring(message.indexOf(":")+1,message.length());
-}
 
 /*
 Next, we need to figure out how to alert all devices to this file

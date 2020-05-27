@@ -28,8 +28,6 @@ class Knob {
         this.setup();
     }
 
-
-
     private void setup() {
         MaxPatcher patcher = knobControl.getParentPatcher();
 

@@ -28,7 +28,7 @@ public class SamplerKnobControl extends CustomKnobControl {
         0,    (int)sample.time(),
         0,    (int)sample.time(),
         0,    (int)sample.time(),
-      -20,                   -20,
+      -20,                    20,
         0,    (int)sample.time(),
         0,    (int)sample.time(),
         0,    (int)sample.time(),
@@ -48,7 +48,6 @@ public class SamplerKnobControl extends CustomKnobControl {
 
     public SamplerKnobControl(MaxObject obj, int outlet) {
         super(obj, outlet);
-        System.out.println("super done");
     }
 
     public void setSample(Sample s) {
