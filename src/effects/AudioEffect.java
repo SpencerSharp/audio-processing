@@ -13,9 +13,9 @@ package effects;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
-import players.AudioPlayer;
+import audio.AudioPlayer;
 
-public class AudioEffect extends AudioPlayer {
+public abstract class AudioEffect extends AudioPlayer {
 
     private static final String[] INLET_ASSIST = new String[]{
 		"input L",
@@ -49,4 +49,7 @@ public class AudioEffect extends AudioPlayer {
             step();
         }
 	}
+
+    protected abstract float leftSignal(float in);
+    protected abstract float rightSignal(float in);
 }

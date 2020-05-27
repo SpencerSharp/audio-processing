@@ -2,7 +2,7 @@ package audio;
 
 import java.lang.*;
 
-import players.AudioPlayer;
+import audio.AudioPlayer;
 
 public class DelayAudio {
     protected int delay;

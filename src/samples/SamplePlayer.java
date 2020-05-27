@@ -15,27 +15,14 @@ class SamplePlayer extends MidiReceiver {
     protected int endInd;
     protected double stepSize;
 
-	private static final String[] INLET_ASSIST = new String[]{};
-	private static final String[] OUTLET_ASSIST = new String[]{
-		"output L","output R"
-	};
-
 	public SamplePlayer(Sample sample) {
         super();
-        // declareInlets(new int[]{});
-		// declareOutlets(new int[]{SIGNAL,SIGNAL});
-
-		// setInletAssist(INLET_ASSIST);
-		// setOutletAssist(OUTLET_ASSIST);
 
         this.sample = sample;
         indexInSample = 0.0;
         startInd = 0;
         stepSize = 1.0;
         endInd = sample.length();
-
-
-        // Thread.currentThread().setPriority(Thread.MAX_PRIORITY);
     }
 
     public Sample getSample() {
@@ -80,14 +67,10 @@ class SamplePlayer extends MidiReceiver {
     }
 
     public void retrig() {
-        // System.out.println("rt");
         indexInSample = startInd;
     }
 
     protected void step() {
-        // if (curTime % 10000 == 0) {
-        //     System.out.println("time " + curTime + " ind " + indexInSample);
-        // }
         if (indexInSample >= 0) {
             indexInSample += stepSize;
             if (indexInSample >= endInd) {

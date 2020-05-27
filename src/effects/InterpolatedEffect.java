@@ -14,7 +14,7 @@ package effects;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 
-public class InterpolatedEffect extends AudioEffect {
+public abstract class InterpolatedEffect extends AudioEffect {
     private double prevGain;
     private double target;
     private boolean interpolating;

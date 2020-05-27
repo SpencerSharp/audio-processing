@@ -6,7 +6,7 @@ import java.lang.Math;
 import java.io.*;
 
 public class KnobControl extends MaxObject {
-    protected static final int NUM_KNOBS = 8;
+    public static final int NUM_KNOBS = 8;
     protected Knob[] knobs;
     protected MaxBox ctl;
 

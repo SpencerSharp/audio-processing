@@ -50,6 +50,12 @@ public class SamplerKnobControl extends CustomKnobControl {
         super(obj, outlet);
     }
 
+    public SamplerKnobControl(MaxObject obj, int outlet, Sample sample) {
+        super();
+        super.init(null, obj, outlet);
+        this.setSample(sample);
+    }
+
     public void setSample(Sample s) {
         sample = s;
         KNOB_RANGES = new int[]{
@@ -69,5 +75,33 @@ public class SamplerKnobControl extends CustomKnobControl {
     public void setup() {
         System.out.println("BOT");
         super.setup(KNOB_NAMES, KNOB_RANGES, KNOB_UNITS);
+    }
+
+    public double getStartPeriod() {
+        return getValue(0);
+    }
+
+    public double getStartMin() {
+        return getValue(1);
+    }
+
+    public double getStartMax() {
+        return getValue(2);
+    }
+
+    public double getDelay() {
+        return getValue(3);
+    }
+
+    public double getEndPeriod() {
+        return getValue(4);
+    }
+
+    public double getEndMin() {
+        return getValue(5);
+    }
+
+    public double getEndMax() {
+        return getValue(6);
     }
 }

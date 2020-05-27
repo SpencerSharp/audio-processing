@@ -12,68 +12,40 @@ import midi.Midi2;
 import modulators.Modulator;
 import viewers.SampleViewer;
 import interfaces.custom.SamplerKnobControl;
+import persistence.KnobControlledMidiReceiver;
+import interfaces.*;
 
-public class MidiSampleLoader extends MidiReceiver {
+public class MidiSampleLoader extends KnobControlledMidiReceiver {
     Sample sample;
+
+    private int retrigTime;
+
+    public HashMap<Integer,MidiSampler> voicePlayers;
+    public SampleViewer viewer;
+
     SamplerKnobControl knobs;
 
-    private transient int retrigTime;
-
-    public transient HashMap<Integer,MidiSampler> voicePlayers;
-    public transient SampleViewer viewer;
-
-    private static final String[] INLET_ASSIST = new String[]{
-        "none",
-		"midi 2.0 in (last 32 bits)",
-        "midi 2.0 in (first 32 bits)",
-        "start period",
-        "end period",
-        "start min",
-        "start max",
-        "end min",
-        "end max"
-	};
-
-    private static final String[] OUTLET_ASSIST = new String[]{
+    private static final String[] OUTLET_NAMES = new String[]{
         "view matrix"
     };
 
     public MidiSampleLoader() {
         super();
 
-        declareOutlets(new int[]{SIGNAL,SIGNAL,DataTypes.ALL});
-        setOutletAssist(OUTLET_ASSIST);
-
         this.sample = new Sample("/Users/spencersharp/Documents/Music/Files/Library/Audio/Electronic/WhereWeAre.wav");
         this.sample.load();
-
-        System.out.println("retrig");
 
         this.retrig();
 
         retrigTime = -1;
-
-        // this.retrig();
     }
 
-    // public void loadbang() {
-    //     System.out.println("BANG NANANA");
-    // }
+    protected void setup() {
+        knobs = new SamplerKnobControl(this, 3);
+    }
 
-    private void trySetup() {
-        if (retrigTime == -1) {
-            retrigTime = curTime;
-            if (knobs != null) {
-                try {
-                    for (int i = 0; i < 200; i++) {
-                        Thread.sleep(1);
-                    }
-                } catch (InterruptedException e) {
-                    System.out.println("interrupted rip");
-                }
-                knobs.setup();
-            }
-        }
+    protected CustomKnobControl getKnobs() {
+        return knobs;
     }
 
     public void handleMidiMsg(long msg) {
@@ -87,15 +59,14 @@ public class MidiSampleLoader extends MidiReceiver {
             // let's add it
             if (Midi2.isNoteOn(msg)) {
                 MidiSampler sampler = new MidiSampler(sample);
-                sampler.setStartPeriod(startPeriod);
-                sampler.setEndPeriod(endPeriod);
-                sampler.setStartMin(startMin);
-                sampler.setStartMax(startMax);
-                sampler.setEndMin(endMin);
-                sampler.setEndMax(endMax);
-                sampler.setDelay(delay);
+                sampler.setStartPeriod(knobs.getStartPeriod());
+                sampler.setEndPeriod(knobs.getEndPeriod());
+                sampler.setStartMin(knobs.getStartMin());
+                sampler.setStartMax(knobs.getStartMax());
+                sampler.setEndMin(knobs.getEndMin());
+                sampler.setEndMax(knobs.getEndMax());
+                sampler.setDelay(knobs.getDelay());
                 int spitch = Midi2.getPitch(msg);
-                // System.out.println("sPitch " + spitch);
                 sampler.setPitch(spitch);
                 System.out.println("MIDI IN");
                 voicePlayers.put(noteId, sampler);
@@ -113,18 +84,13 @@ public class MidiSampleLoader extends MidiReceiver {
         } else {
             voicePlayers = new HashMap<Integer,MidiSampler>();
             viewer = new SampleViewer(voicePlayers);
-            knobs = new SamplerKnobControl(this, 3);
-        }
-        if (sample != null) {
-            knobs.setSample(sample);
+            knobs = new SamplerKnobControl(this, 3, sample);
         }
         
         retrigTime = curTime;
     }
 
     public void anything(String message, Atom args[]) {
-        // System.out.println("I AM ANYTHING " + message + " " + (message == null) + " " + ("none".equals(message)));
-        trySetup();
         if (message == null || message.equals("none")) {
             return;
         }
@@ -147,38 +113,12 @@ public class MidiSampleLoader extends MidiReceiver {
     }
 
     public void inlet(float msg) {
-        trySetup();
-        if (getInlet() == 2) {
-            System.out.println("Set start period to " + msg);
-            startPeriod = (double) msg;
-        } else if (getInlet() == 6) {
-            System.out.println("Set end period to " + msg);
-            endPeriod = (double) msg;
-        } else if (getInlet() == 3) {
-            System.out.println("Set start min to " + msg);
-            startMin = (double) msg;
-        } else if (getInlet() == 4) {
-            System.out.println("Set start max to " + msg);
-            startMax = (double) msg;
-        } else if (getInlet() == 5) {
-            System.out.println("Set delay to " + msg);
-            delay = (double) msg;
-        } else if (getInlet() == 7) {
-            System.out.println("Set end min to " + msg);
-            endMin = (double) msg;
-        } else if (getInlet() == 8) {
-            System.out.println("Set end max to " + msg);
-            endMax = (double) msg;
-        } else {
-            return;
-        }
+        super.inlet(msg);
         retrigTime = curTime;
         if (sample != null) {
-            viewer.setBounds(startMin, startMax, endMin, endMax, sample.time());
+            viewer.setBounds(knobs.getStartMin(), knobs.getStartMax(), knobs.getEndMin(), knobs.getEndMax(), sample.time());
         }
     }
-
-    private float regressRate = 0.97f;
 
     protected float leftSignal() {
         float total = 0.0f;
@@ -213,7 +153,6 @@ public class MidiSampleLoader extends MidiReceiver {
             boolean shouldShowVoices = curTime - retrigTime > 0.5 * (44.1 * 1000);
             viewer.setShowVoices(shouldShowVoices);
             String name = viewer.getMatrix();
-            // System.out.println("matrix is named " + name);
             outlet(2,"jit_matrix",name);
         }
         super.step();

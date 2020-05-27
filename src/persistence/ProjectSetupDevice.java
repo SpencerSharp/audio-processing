@@ -18,14 +18,14 @@ public class ProjectSetupDevice extends MaxObject {
         declareOutlets(new int[]{DataTypes.ALL});
 
         loadingTimer = new MaxClock(new Executable() {public void execute() { checkIfHasReceivedPath(); }});
-        loadingTimer.delay(LOAD_TIME);
+        // loadingTimer.delay(LOAD_TIME);
 
-        PersistentInfo.markProjectAsSetup();
-        PersistentInfo.markProjectPathAsNotSearchedFor();
-        PersistentInfo.flush();
+        // PersistentInfo.markProjectAsSetup();
+        // PersistentInfo.markProjectPathAsNotSearchedFor();
+        // PersistentInfo.flush();
 
-        System.out.println("CONST infoSetup " + PersistentInfo.checkIfProjectHasBeenSetup());
-        System.out.println("CONST infoPath " + PersistentInfo.checkIfProjectPathHasBeenSearchedFor());
+        // System.out.println("CONST infoSetup " + PersistentInfo.checkIfProjectHasBeenSetup());
+        // System.out.println("CONST infoPath " + PersistentInfo.checkIfProjectPathHasBeenSearchedFor());
     }
 
     public void anything(String message, Atom args[]) {
@@ -36,6 +36,10 @@ public class ProjectSetupDevice extends MaxObject {
             pingAllToPersist();
             return;
         }
+        if (true) {
+            return;
+        }
+
         String path = message.substring(message.indexOf(":")+1,message.length());
         System.out.println("my path is " + path);
 

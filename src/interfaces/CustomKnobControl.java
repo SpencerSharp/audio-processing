@@ -3,16 +3,38 @@ package interfaces;
 import com.cycling74.max.*;
 import java.io.*;
 
-public class CustomKnobControl extends KnobControl {
-    protected MaxObject outputObj;
-    int baseOutlet;
+import persistence.PersistentObject;
+
+public abstract class CustomKnobControl extends PersistentObject {
+    transient protected MaxObject outputObj;
+    transient int baseOutlet;
+    transient public boolean isSetup = false;
+    transient protected Knob[] knobs;
+    private double[] values;
+
+    public CustomKnobControl() {
+        
+    }
 
     public CustomKnobControl(MaxObject obj, int outlet) {
-        System.out.println("i am the parent");
+        this.init(PersistentObject.tryLoad(this), obj, outlet);
+    }
+
+    protected void init(PersistentObject pers, MaxObject obj, int outlet) {
+        if (pers == null) {
+            knobs = new Knob[KnobControl.NUM_KNOBS];
+        }
+
         outputObj = obj;
         baseOutlet = outlet;
+    }
 
-        knobs = new Knob[NUM_KNOBS];
+    public void assignValue(int knob, double value) {
+        values[knob] = value;
+    }
+
+    protected double getValue(int knob) {
+        return values[knob];
     }
 
     protected void setup(String[] names, int[] ranges, int[] units) {
@@ -30,7 +52,7 @@ public class CustomKnobControl extends KnobControl {
 
         MaxBox outBox = outputObj.getMaxBox();
         MaxPatcher patcher = outputObj.getParentPatcher();
-        for (int i = 1; i <= NUM_KNOBS; i++) {
+        for (int i = 1; i <= KnobControl.NUM_KNOBS; i++) {
             Knob knob = new Knob("dial" + i, patcher);
             knobs[i-1] = knob;
         }

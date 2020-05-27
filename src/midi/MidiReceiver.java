@@ -29,9 +29,17 @@ public abstract class MidiReceiver extends AudioPlayer {
 
     protected HashSet<Voice> voices;
 
+    public MidiReceiver() {
+        super();
+        this.setup(0, new String[0]);
+    }
+
 	public MidiReceiver(int numInlets, String[] inletNames) {
         super();
+        this.setup(numInlets, inletNames);
+    }
 
+    private void setup(int numInlets, String[] inletNames) {
         int[] inletInfo = new int[numInlets + NUM_INLETS];
         System.out.println("numInlets is " + inletInfo.length);
         for(int i = 0; i < inletInfo.length; i++) {
@@ -96,6 +104,10 @@ public abstract class MidiReceiver extends AudioPlayer {
         handleMidiMsg(midiMsg);
     }
 
+    public void inlet(float f) {
+        sendDouble((double)f);
+    }
+
     public void inlet(int i) {
         sendInt(i);
     }
@@ -108,6 +120,10 @@ public abstract class MidiReceiver extends AudioPlayer {
         if (message.equals("none")) {
             return;
         }
+    }
+
+    protected int sendDouble(double msg) {
+        return this.NUM_INLETS;
     }
 
     protected int sendInt(int msg) {

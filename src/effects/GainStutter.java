@@ -14,7 +14,7 @@ package effects;
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 
-public class GainStutter extends InterpolatedEffect {
+public abstract class GainStutter extends InterpolatedEffect {
     private double prevGain;
 
     protected void step() {

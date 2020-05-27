@@ -9,12 +9,13 @@ class Knob {
     MaxObject knobControl;
     public MaxBox myBox;
     String name;
-    int inlet;
     String valType;
-    Object val;
 
     double min;
     double max;
+
+    int inlet;
+    String val;
 
     public Knob(String name, MaxPatcher patcher) {
         this.name = name;

@@ -4,8 +4,7 @@ datatypes
 effects
 midi
 modulators
-patterns
-players
+persistence
 samples
 util
 viewers

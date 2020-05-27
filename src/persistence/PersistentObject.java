@@ -64,16 +64,14 @@ public class PersistentObject implements Serializable {
         if (!PersistentInfo.checkIfProjectHasBeenSetup()) {
             System.out.println("LOAD infoSetup " + PersistentInfo.checkIfProjectHasBeenSetup());
             System.out.println("LOAD infoPath " + PersistentInfo.checkIfProjectPathHasBeenSearchedFor());
-            device = null;
-            return device;
+            return null;
         }
         // For loadpings that occur before ProjectSetupDevice is done running
         // BUT before it has resolved the path and set it
         while (!PersistentInfo.checkIfProjectPathHasBeenSearchedFor()) {
             // This allows ProjectSetupDevice to notify us if the project isn't set up yet
             if (!PersistentInfo.checkIfProjectHasBeenSetup()) {
-                device = null;
-                return device;
+                return null;
             }
             for (int i = 0; i < 100; i++) {
                 try {
@@ -86,7 +84,7 @@ public class PersistentObject implements Serializable {
         // Checks if the project has been saved yet, cuz then ProjectSetupDevice leaves the path as empty string
         // If it hasn't been saved yet, then there is nothing to load, duh
         if (PersistentInfo.getPath().equals("")) {
-            return device;
+            return null;
         }
         try {
             System.out.println("starting the load op");
@@ -99,7 +97,7 @@ public class PersistentObject implements Serializable {
             fileInputStream.close();
         } catch(Exception e) {
             System.out.println("THE LOAD OP HAS FAILED");
-            device = null;
+            return null;
         }
         return device;
     }

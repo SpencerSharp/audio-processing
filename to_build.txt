@@ -1,7 +1,10 @@
-ProjectSetupDevice.java
-PersistentInfo.java
-PersistentObject.java
-ExamplePersistentObject.java
-ExampleDeviceWithPersistentAttributes.java
-LockableFile.java
-MidiReceiver.java
+MODULES
+audio
+datatypes
+effects
+midi
+modulators
+persistence
+samples
+util
+viewers

@@ -34,14 +34,14 @@ public class FunctionSequencer extends Sequencer {
     SequencerKnobControl knobs;
 
     public FunctionSequencer() {
-        super();
+        // super();
 
-        knobs = new SequencerKnobControl(this, BASE_INLET);
+        // knobs = new SequencerKnobControl(this, BASE_INLET);
 
-        tickClock = new MaxClock(new Executable() { 
-            public void execute() { tick(); }});
+        // tickClock = new MaxClock(new Executable() { 
+        //     public void execute() { tick(); }});
 
-        tickClock.delay(1000);
+        // tickClock.delay(1000);
     }
 
     private void initFunctions() {

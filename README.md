@@ -1,5 +1,15 @@
 My Audio Processing Codebase
 
+HIERARCHY IDEAS
+
+PersistentDevice
+KnobControlledDevice
+
+MidiReceiver
+PersistentMidiReceiver
+KnobControlledMidiReceiver
+
+
 TODO
 - Persistence
     - Implement, test freebang
