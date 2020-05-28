@@ -11,9 +11,9 @@ import samples.Sample;
 import datatypes.Units;
 
 public class SamplerKnobControl extends CustomKnobControl {
-    Sample sample = new Sample("");
+    transient Sample sample = new Sample("");
 
-    String[] KNOB_NAMES = {
+    transient String[] KNOB_NAMES = {
         "Start Pd",
         "Start Min",
         "Start Max",
@@ -24,7 +24,7 @@ public class SamplerKnobControl extends CustomKnobControl {
         "NONE"
     };
 
-    int[] KNOB_RANGES = new int[]{
+    transient int[] KNOB_RANGES = new int[]{
         0,    (int)sample.time(),
         0,    (int)sample.time(),
         0,    (int)sample.time(),
@@ -35,7 +35,7 @@ public class SamplerKnobControl extends CustomKnobControl {
         0,          0
     };
 
-    int[] KNOB_UNITS = {
+    transient int[] KNOB_UNITS = {
         Units.ms,
         Units.ms,
         Units.ms,

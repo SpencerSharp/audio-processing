@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import midi.MidiReceiver;
 import utils.ArrayUtils;
+import interfaces.custom.*;
 
 public class ExampleDeviceWithPersistentAttributes extends MidiReceiver {
     private static final int NUM_INLETS = 2;
@@ -20,7 +21,7 @@ public class ExampleDeviceWithPersistentAttributes extends MidiReceiver {
 
     private static final int LOAD_TIME = 11000;
 
-    ExamplePersistentObject myAttrs;
+    SamplerKnobControl myKnobs;
 
     MaxClock loadingTimer;
 
@@ -58,17 +59,7 @@ public class ExampleDeviceWithPersistentAttributes extends MidiReceiver {
     }
 
     private void setup() {
-        // myAttrs = (ExamplePersistentObject) PersistentObject.tryLoad(myAttrs);
-
-        // if (myAttrs == null) {
-        //     myAttrs = new ExamplePersistentObject();
-        // }
-
-        // if (myAttrs == null) {
-        //     System.out.println("yeah this isnt good");
-        // } else {
-        //     myAttrs.showNumber();
-        // }
+        myKnobs = new SamplerKnobControl(this, 4);
     }
 
     private void persist() {

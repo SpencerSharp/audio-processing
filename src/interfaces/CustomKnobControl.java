@@ -8,9 +8,8 @@ import persistence.PersistentObject;
 public abstract class CustomKnobControl extends PersistentObject {
     transient protected MaxObject outputObj;
     transient int baseOutlet;
-    transient public boolean isSetup = false;
     transient protected Knob[] knobs;
-    private double[] values;
+    transient private double[] values;
 
     public CustomKnobControl() {
         
@@ -22,23 +21,27 @@ public abstract class CustomKnobControl extends PersistentObject {
 
     protected void init(PersistentObject pers, MaxObject obj, int outlet) {
         if (pers == null) {
-            knobs = new Knob[KnobControl.NUM_KNOBS];
+            values = new double[KnobControl.NUM_KNOBS];
+        } else {
+            values = ((CustomKnobControl)pers).values;
         }
+
+        knobs = new Knob[KnobControl.NUM_KNOBS];
 
         outputObj = obj;
         baseOutlet = outlet;
     }
 
     public void assignValue(int knob, double value) {
+        System.out.println("Assign " + value + " to " + knob);
         values[knob] = value;
     }
 
-    protected double getValue(int knob) {
+    public double getValue(int knob) {
         return values[knob];
     }
 
     protected void setup(String[] names, int[] ranges, int[] units) {
-        isSetup = true;
         MaxBox knobControl = outputObj.getParentPatcher().getNamedBox("knobControl");
         int zero = 0;
         knobControl.send(ranges[1]);
@@ -66,6 +69,30 @@ public abstract class CustomKnobControl extends PersistentObject {
             knob.setUnit(units[i]);
             knob.setValue(127.0);
             knobs[i] = knob;
+        }
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.defaultWriteObject();
+
+        int dimension = values.length;
+
+        s.writeInt(dimension);
+
+        for (int i = 0; i < values.length; i++) {
+            s.writeDouble(values[i]);
+        }
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException  {
+        s.defaultReadObject();
+
+        int dimension = s.readInt();
+
+        values = new double[dimension];
+
+        for (int i = 0; i < values.length; i++) {
+            values[i] = s.readDouble();
         }
     }
 }

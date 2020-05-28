@@ -10,6 +10,7 @@ import java.util.Arrays;
 
 import midi.MidiReceiver;
 import utils.ArrayUtils;
+import interfaces.custom.*;
 
 public abstract class PersistentMidiReceiver extends MidiReceiver {
     private static final int NUM_INLETS = 2;
@@ -18,19 +19,12 @@ public abstract class PersistentMidiReceiver extends MidiReceiver {
         "index"
 	};
 
-    private static final int LOAD_TIME = 11000;
-
-    MaxClock loadingTimer;
-
     public PersistentMidiReceiver() {
-        super(NUM_INLETS, INLET_NAMES);
-
-        loadingTimer = new MaxClock(new Executable() {public void execute() { setup(); }});
-        loadingTimer.delay(LOAD_TIME);
+        super(NUM_INLETS, INLET_NAMES, 0, new String[0]);
     }
 
-    public PersistentMidiReceiver(int numInlets, String[] inletNames) {
-        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames));
+    public PersistentMidiReceiver(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
+        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), numOutlets, outletNames);
     }
 
     protected void sendString(String message) {
@@ -39,10 +33,20 @@ public abstract class PersistentMidiReceiver extends MidiReceiver {
             persist();
             return;
         }
+        if (message.equals("setupfromdisc")) {
+            setup();
+            return;
+        }
+    }
+
+    protected int sendDouble(double d) {
+        super.sendDouble(d);
+        return this.NUM_INLETS;
     }
 
     protected int sendInt(int i) {
-        switch (getInlet() - super.sendInt(i)) {
+        int parent = super.sendInt(i);
+        switch (getInlet() - parent) {
             case 0:
                 System.out.println("Channel is " + i);
                 PersistentObject.channel = i;
@@ -52,7 +56,7 @@ public abstract class PersistentMidiReceiver extends MidiReceiver {
                 PersistentObject.ind = i;
                 break;
         }
-        return this.NUM_INLETS;
+        return parent + this.NUM_INLETS;
     }
 
     protected abstract void setup();

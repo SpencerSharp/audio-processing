@@ -30,12 +30,35 @@ public abstract class AudioPlayer extends StereoSignalDevice {
     };
 
     public AudioPlayer() {
-        int[] outletInfo = new int[numOutlets()];
+        super();
+        this.setup(0, new String[0]);
+    }
+
+    public AudioPlayer(int numOutlets, String[] outletNames) {
+        super();
+        this.setup(numOutlets, outletNames);
+    }
+
+    private void setup(int numOutlets, String[] outletNames) {
+        int[] outletInfo = new int[numOutlets + NUM_OUTLETS];
         for(int i = 0; i < outletInfo.length; i++) {
             outletInfo[i] = DataTypes.ALL;
         }
         declareOutlets(outletInfo);
-        setOutletAssist(getOutletNames());
+
+        ArrayList<String> outletNamesList = new ArrayList<String>();
+        for(String s : this.OUTLET_NAMES) {
+            outletNamesList.add(s);
+        }
+        for (String s : outletNames) {
+            outletNamesList.add(s);
+        }
+
+        String[] outletNamesRay = new String[outletNamesList.size()]; 
+        outletNamesRay = outletNamesList.toArray(outletNamesRay); 
+
+		setOutletAssist(outletNamesRay);
+
 
         this.gain = 1.0;
         this.pan = 0.0;
@@ -52,10 +75,6 @@ public abstract class AudioPlayer extends StereoSignalDevice {
         String[] outletNamesRay = new String[outletNames.size()]; 
         outletNamesRay = outletNames.toArray(outletNamesRay); 
         return outletNamesRay;
-    }
-
-    protected int numOutlets() {
-        return this.NUM_OUTLETS + super.numOutlets();
     }
 
     public void setGain(double volume) {

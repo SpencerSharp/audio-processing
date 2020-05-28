@@ -1,10 +1,2 @@
-MODULES
-audio
-datatypes
-effects
-midi
-modulators
-persistence
-samples
-util
-viewers
+SimplePersistentReceiver.java
+ProjectSetupDevice.java

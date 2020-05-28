@@ -14,7 +14,7 @@ public class PersistentObject implements Serializable {
     public int appearance;
 
     public static File getFile(boolean shouldOverwrite) throws IOException {
-        System.out.println("start");
+        System.out.println("start " + shouldOverwrite);
         File parentDir = new File(PersistentInfo.getPath());
         Path parentPath = parentDir.toPath();
         Path channelPath = parentPath.resolve(""+channel);
@@ -53,6 +53,7 @@ public class PersistentObject implements Serializable {
 
             // Write objects to file
             o.writeObject(device);
+            o.flush();
 
             o.close();
             f.close();
@@ -79,7 +80,6 @@ public class PersistentObject implements Serializable {
                 } catch (InterruptedException e) {}
             }
         }
-        System.out.println("path is " + PersistentInfo.getPath());
         // Only runs once path has been resolved and set
         // Checks if the project has been saved yet, cuz then ProjectSetupDevice leaves the path as empty string
         // If it hasn't been saved yet, then there is nothing to load, duh

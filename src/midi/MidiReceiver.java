@@ -34,14 +34,13 @@ public abstract class MidiReceiver extends AudioPlayer {
         this.setup(0, new String[0]);
     }
 
-	public MidiReceiver(int numInlets, String[] inletNames) {
-        super();
+	public MidiReceiver(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
+        super(numOutlets, outletNames);
         this.setup(numInlets, inletNames);
     }
 
     private void setup(int numInlets, String[] inletNames) {
         int[] inletInfo = new int[numInlets + NUM_INLETS];
-        System.out.println("numInlets is " + inletInfo.length);
         for(int i = 0; i < inletInfo.length; i++) {
             inletInfo[i] = DataTypes.ALL;
         }
@@ -123,10 +122,12 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     protected int sendDouble(double msg) {
-        return this.NUM_INLETS;
+        int parent = -1;
+        return parent + this.NUM_INLETS;
     }
 
     protected int sendInt(int msg) {
+        int parent = 0;
         switch (getInlet()) {
             case 0:
                 last32bits.add(msg);
@@ -141,7 +142,7 @@ public abstract class MidiReceiver extends AudioPlayer {
                 }
                 break;
         }
-        return this.NUM_INLETS;
+        return parent + this.NUM_INLETS;
     }
 
     protected void step() {

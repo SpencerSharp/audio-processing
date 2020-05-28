@@ -25,34 +25,44 @@ public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver 
         "knob8 in"
     };
 
+    private static final int NUM_OUTLETS = 0;
+    private static final String[] OUTLET_NAMES = new String[]{};
+
     public KnobControlledMidiReceiver() {
-        super(NUM_INLETS, INLET_NAMES);
+        super(NUM_INLETS, INLET_NAMES, NUM_OUTLETS, OUTLET_NAMES);
     }
 
-    public KnobControlledMidiReceiver(int numInlets, String[] inletNames) {
-        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames));
+    public KnobControlledMidiReceiver(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
+        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), numOutlets, outletNames);
     }
 
-    protected void sendString(String message) {
-        super.sendString(message);
-        if (message.equals("persist")) {
-            persist();
-            return;
+    private void tryAssignValue(int knob, double val) {
+        System.out.println("trying to assign " + val + " to " + knob);
+        if (getKnobs() != null) {
+            getKnobs().assignValue(knob, val);
         }
     }
 
     protected int sendDouble(double d) {
-        int knobInd = getInlet() - super.sendDouble(d);
+        int parent = super.sendDouble(d);
+        int knobInd = getInlet() - parent;
         if (knobInd >= 0 && knobInd < NUM_INLETS) {
-            this.getKnobs().assignValue(knobInd, d);
+            tryAssignValue(knobInd, d);
         }
-        return this.NUM_INLETS;
+        return parent + this.NUM_INLETS;
+    }
+
+    protected int sendInt(int i) {
+        int parent = super.sendInt(i);
+        int knobInd = getInlet() - parent;
+        if (knobInd >= 0 && knobInd < NUM_INLETS) {
+            tryAssignValue(knobInd, (double) i);
+        }
+        return parent + this.NUM_INLETS;
     }
 
     protected void persist() {
-        System.out.println("I HAVE BEEN ALERTED TO BACKUP TO DISC");
         PersistentObject.save(this.getKnobs());
-        System.out.println("discccccccccccc dun");
     }
     
     protected abstract CustomKnobControl getKnobs();
