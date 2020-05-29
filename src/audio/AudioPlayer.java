@@ -19,15 +19,16 @@ import java.lang.*;
 
 public abstract class AudioPlayer extends StereoSignalDevice {
     private static final int NUM_OUTLETS = 2;
+    private static final String[] OUTLET_NAMES = new String[]{
+		"output L",
+        "output R"
+    };
 
     protected int curTime;
     private double gain;
     private double pan;
 
-    private static final String[] OUTLET_NAMES = new String[]{
-		"output L",
-        "output R"
-    };
+
 
     public AudioPlayer() {
         super();
@@ -58,7 +59,6 @@ public abstract class AudioPlayer extends StereoSignalDevice {
         outletNamesRay = outletNamesList.toArray(outletNamesRay); 
 
 		setOutletAssist(outletNamesRay);
-
 
         this.gain = 1.0;
         this.pan = 0.0;

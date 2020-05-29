@@ -1,29 +1,30 @@
-package persistence;
+package midi.controlled;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.*;
 import java.nio.file.*;
 import java.io.*;
-import java.util.stream.Stream; 
+import java.util.stream.Stream;
 import java.util.Arrays;
 
-import midi.MidiReceiver;
+import midi.MidiSender;
 import utils.ArrayUtils;
 import interfaces.custom.*;
+import persistence.*;
 
-public abstract class PersistentMidiReceiver extends MidiReceiver {
+public abstract class PersistentMidiSender extends MidiSender {
     private static final int NUM_INLETS = 2;
     private static String[] INLET_NAMES = new String[]{
 		"channel",
         "index"
 	};
 
-    public PersistentMidiReceiver() {
+    public PersistentMidiSender() {
         super(NUM_INLETS, INLET_NAMES, 0, new String[0]);
     }
 
-    public PersistentMidiReceiver(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
+    public PersistentMidiSender(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
         super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), numOutlets, outletNames);
     }
 

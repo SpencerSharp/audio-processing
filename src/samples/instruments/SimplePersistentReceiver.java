@@ -7,13 +7,13 @@ import java.lang.*;
 import java.util.*;
 import java.io.*;
 
-import midi.MidiReceiver;
-import midi.Midi2;
-import modulators.Modulator;
-import viewers.SampleViewer;
-import interfaces.custom.SamplerKnobControl;
-import persistence.KnobControlledMidiReceiver;
+import midi.*;
+import midi.controlled.*;
+import tools.effects.*;
+import tools.modulators.*;
+import viewers.custom.*;
 import interfaces.*;
+import interfaces.custom.*;
 
 public class SimplePersistentReceiver extends KnobControlledMidiReceiver {
     private static final int NUM_INLETS = 0;
@@ -51,7 +51,6 @@ public class SimplePersistentReceiver extends KnobControlledMidiReceiver {
     }
 
     protected void setup() {
-        // System.out.println("SETUP YEEHAW");
         knobs = new SamplerKnobControl(this, 3);
     }
 

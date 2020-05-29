@@ -1,4 +1,4 @@
-package persistence;
+package midi.controlled;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
@@ -11,6 +11,7 @@ import java.util.Arrays;
 import midi.MidiReceiver;
 import utils.ArrayUtils;
 import interfaces.CustomKnobControl;
+import persistence.*;
 
 public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver {
     private static final int NUM_INLETS = 8;
@@ -37,7 +38,6 @@ public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver 
     }
 
     private void tryAssignValue(int knob, double val) {
-        System.out.println("trying to assign " + val + " to " + knob);
         if (getKnobs() != null) {
             getKnobs().assignValue(knob, val);
         }

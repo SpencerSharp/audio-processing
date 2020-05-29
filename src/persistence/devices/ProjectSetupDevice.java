@@ -8,7 +8,7 @@ import java.io.*;
 import utils.*;
 
 public class ProjectSetupDevice extends MaxObject {
-    private static final int LOAD_TIME = 2000;
+    private static final int LOAD_TIME = 500;
 
     boolean hasReceivedPath = false;
 

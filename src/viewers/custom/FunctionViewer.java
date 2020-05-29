@@ -1,9 +1,10 @@
-package viewers;
+package viewers.custom;
 
 import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 import java.util.*;
 
+import viewers.*;
 import utils.Colors;
 import org.mariuszgromada.math.mxparser.*;
 

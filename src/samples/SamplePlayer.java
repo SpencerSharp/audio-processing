@@ -5,8 +5,8 @@ import com.cycling74.msp.*;
 import java.lang.reflect.*;
 import java.lang.*;
 
-import midi.MidiReceiver;
-import audio.DelayAudio;
+import midi.*;
+import tools.effects.*;
 
 class SamplePlayer extends MidiReceiver {
     protected Sample sample;

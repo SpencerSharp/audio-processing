@@ -7,7 +7,6 @@ import java.util.*;
 import java.io.*;
 import java.lang.*;
 
-import datatypes.Voice;
 import audio.AudioPlayer;
 
 /*
@@ -15,7 +14,6 @@ My "instrument" archetype
 */
 public abstract class MidiReceiver extends AudioPlayer {
     private static final int NUM_INLETS = 2;
-
     private static final String[] INLET_NAMES = new String[]{
 		"midi 2.0 in (last 32 bits)",
         "midi 2.0 in (first 32 bits)"
@@ -27,7 +25,7 @@ public abstract class MidiReceiver extends AudioPlayer {
     private ArrayList<Integer> first32bits;
     private ArrayList<Integer> last32bits;
 
-    protected HashSet<Voice> voices;
+    // protected HashSet<Voice> voices;
 
     public MidiReceiver() {
         super();
@@ -62,7 +60,7 @@ public abstract class MidiReceiver extends AudioPlayer {
         first32bits = new ArrayList<Integer>();
         last32bits = new ArrayList<Integer>();
 
-        voices = new HashSet<Voice>();
+        // voices = new HashSet<Voice>();
 
         this.curTime = 0;
     }
@@ -86,15 +84,12 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     public void handleMidiMsg(long msg) {
-        // System.out.println("msg is " + msg);
-        int id = Midi2.getNoteId(msg);
-        if (Midi2.isNoteOn(msg)) {
-            voices.add(new Voice(id, Midi2.getPitch(msg)));
-        } else if (Midi2.isNoteOff(msg)) {
-            // HOW TO HAVE MULTIPLE VOICES WITH SAME PITCH???
-            // use note #
-            voices.remove(id);
-        }
+        // int id = Midi2.getNoteId(msg);
+        // if (Midi2.isNoteOn(msg)) {
+        //     voices.add(new Voice(id, Midi2.getPitch(msg)));
+        // } else if (Midi2.isNoteOff(msg)) {
+        //     voices.remove(id);
+        // }
     }
 
     private void handleMidiBits() {
@@ -122,7 +117,7 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     protected int sendDouble(double msg) {
-        int parent = -1;
+        int parent = 0;
         return parent + this.NUM_INLETS;
     }
 

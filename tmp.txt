@@ -1,10 +1,10 @@
 MODULES
 audio
 datatypes
-effects
+interfaces
 midi
-modulators
 persistence
 samples
-util
+tools
+utils
 viewers

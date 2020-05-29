@@ -1,11 +1,12 @@
 
 // https://docs.cycling74.com/max5/tutorials/jit-tut/jitterchapter51.html
-package viewers;
+package viewers.custom;
 
 import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 import java.util.*;
 
+import viewers.*;
 import samples.MidiSampler;
 
 public class SampleViewer extends Viewer {

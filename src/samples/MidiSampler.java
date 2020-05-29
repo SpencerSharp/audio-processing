@@ -6,10 +6,10 @@ import java.lang.reflect.*;
 import java.lang.*;
 import org.mariuszgromada.math.mxparser.*;
 
-import modulators.Modulator;
+import tools.effects.*;
+import tools.modulators.*;
 import utils.*;
 import utils.global.GlobalFunction;
-import audio.DelayAudio;
 
 
 public class MidiSampler extends SamplePlayer {

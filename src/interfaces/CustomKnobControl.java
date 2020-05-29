@@ -33,7 +33,6 @@ public abstract class CustomKnobControl extends PersistentObject {
     }
 
     public void assignValue(int knob, double value) {
-        System.out.println("Assign " + value + " to " + knob);
         values[knob] = value;
     }
 
