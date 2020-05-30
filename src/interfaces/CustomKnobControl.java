@@ -9,7 +9,7 @@ public abstract class CustomKnobControl extends PersistentObject {
     transient protected MaxObject outputObj;
     transient int baseOutlet;
     transient protected Knob[] knobs;
-    transient private double[] values;
+    transient protected double[] values;
 
     public CustomKnobControl() {
         

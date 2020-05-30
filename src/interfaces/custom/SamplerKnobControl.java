@@ -11,7 +11,7 @@ import samples.Sample;
 import datatypes.Units;
 
 public class SamplerKnobControl extends CustomKnobControl {
-    transient Sample sample = new Sample("");
+    public transient Sample sample = new Sample("");
 
     transient String[] KNOB_NAMES = {
         "Start Pd",
@@ -73,7 +73,6 @@ public class SamplerKnobControl extends CustomKnobControl {
     }
 
     public void setup() {
-        System.out.println("BOT");
         super.setup(KNOB_NAMES, KNOB_RANGES, KNOB_UNITS);
     }
 
@@ -103,5 +102,33 @@ public class SamplerKnobControl extends CustomKnobControl {
 
     public double getEndMax() {
         return getValue(6);
+    }
+
+    private void writeObject(ObjectOutputStream s) throws IOException {
+        s.defaultWriteObject();
+
+        int dimension = values.length;
+
+        s.writeInt(dimension);
+
+        for (int i = 0; i < values.length; i++) {
+            s.writeDouble(values[i]);
+        }
+
+        s.writeUTF(sample.getName());
+    }
+
+    private void readObject(ObjectInputStream s) throws IOException, ClassNotFoundException  {
+        s.defaultReadObject();
+
+        int dimension = s.readInt();
+
+        values = new double[dimension];
+
+        for (int i = 0; i < values.length; i++) {
+            values[i] = s.readDouble();
+        }
+
+        sample = new Sample(s.readUTF());
     }
 }

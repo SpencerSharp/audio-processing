@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import java.util.Arrays;
 
 import midi.MidiReceiver;
-import utils.ArrayUtils;
+import utils.*;
 import interfaces.custom.*;
 import persistence.*;
 
@@ -28,16 +28,21 @@ public abstract class PersistentMidiReceiver extends MidiReceiver {
         super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), numOutlets, outletNames);
     }
 
-    protected void sendString(String message) {
-        super.sendString(message);
+    protected boolean sendString(String message) {
+        if (super.sendString(message)) {
+            return true;
+        }
+        System.out.println("received message " + message);
         if (message.equals("persist")) {
-            persist();
-            return;
+            Timer.sleep(1000, new Executable() {public void execute() { persist(); }});
+            return true;
         }
         if (message.equals("setupfromdisc")) {
-            setup();
-            return;
+            Timer.sleep(1000, new Executable() {public void execute() { setup(); }});
+            return true;
         }
+        System.out.println("couldnt perform action " + message);
+        return false;
     }
 
     protected int sendDouble(double d) {

@@ -1,14 +1,16 @@
-package persistence;
+package persistence.devices;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
 import java.lang.*;
 import java.nio.file.*;
 import java.io.*;
+
+import persistence.*;
 import utils.*;
 
 public class ProjectSetupDevice extends MaxObject {
-    private static final int LOAD_TIME = 500;
+    private static final int LOAD_TIME = 2000;
 
     boolean hasReceivedPath = false;
 

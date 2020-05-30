@@ -1,4 +1,4 @@
-package samples;
+package samples.instruments;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
@@ -14,11 +14,9 @@ import tools.modulators.*;
 import viewers.custom.*;
 import interfaces.*;
 import interfaces.custom.*;
-
+import samples.*;
 
 public class MidiSampleLoader extends KnobControlledMidiReceiver {
-    Sample sample;
-
     private int retrigTime;
 
     public HashMap<Integer,MidiSampler> voicePlayers;
@@ -26,27 +24,40 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
 
     SamplerKnobControl knobs;
 
+    private static final int NUM_OUTLETS = 1;
     private static final String[] OUTLET_NAMES = new String[]{
         "view matrix"
     };
 
     public MidiSampleLoader() {
-        super();
-
-        this.sample = new Sample("/Users/spencersharp/Documents/Music/Files/Library/Audio/Electronic/WhereWeAre.wav");
-        this.sample.load();
+        super(0, new String[0], NUM_OUTLETS, OUTLET_NAMES);
 
         this.retrig();
 
         retrigTime = -1;
+
+        for (int i = 0; i < 8; i++) {
+            outlet(2+i, -47.0);
+        }
     }
 
     protected void setup() {
+        System.out.println("setter");
         knobs = new SamplerKnobControl(this, 3);
+        for (int i = 0; i < 8; i++) {
+            outlet(2+i, this.getKnobs().getValue(i));
+        }
     }
 
     protected CustomKnobControl getKnobs() {
         return knobs;
+    }
+
+    private Sample getSample() {
+        if (knobs == null) {
+            return null;
+        }
+        return knobs.sample;
     }
 
     public void handleMidiMsg(long msg) {
@@ -55,11 +66,11 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
 
         int noteId = Midi2.getNoteId(msg);
         // System.out.println("current keys " + voicePlayers.keySet());
-        if (sample != null && !voicePlayers.containsKey(noteId)) {
+        if (getSample() != null && !voicePlayers.containsKey(noteId)) {
             // the note is new
             // let's add it
             if (Midi2.isNoteOn(msg)) {
-                MidiSampler sampler = new MidiSampler(sample);
+                MidiSampler sampler = new MidiSampler(getSample());
                 sampler.setStartPeriod(knobs.getStartPeriod());
                 sampler.setEndPeriod(knobs.getEndPeriod());
                 sampler.setStartMin(knobs.getStartMin());
@@ -85,40 +96,31 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
         } else {
             voicePlayers = new HashMap<Integer,MidiSampler>();
             viewer = new SampleViewer(voicePlayers);
-            knobs = new SamplerKnobControl(this, 3, sample);
         }
-        
         retrigTime = curTime;
     }
 
-    public void anything(String message, Atom args[]) {
-        if (message == null || message.equals("none")) {
-            return;
+    public boolean sendString(String message) {
+        if (super.sendString(message)) {
+            return true;
         }
         String path = message.substring(message.indexOf(":")+1,message.length());
+        Sample sample = getSample();
         if (sample == null || sample.path.equals(path)) {
-            return;
+            return true;
         }
         System.out.println("Loading " + path);
-        this.sample = null;
+        this.knobs.sample = null;
         Runnable runnable = () -> {
             Sample mysample = new Sample(path);
             mysample.load();
-            this.sample = mysample;
+            this.knobs.sample = mysample;
             this.retrig();
-            System.out.println("Sample is now " + path);
         };
         Thread thread = new Thread(runnable);
         thread.setPriority(Thread.MIN_PRIORITY);
         thread.start();
-    }
-
-    public void inlet(float msg) {
-        super.inlet(msg);
-        retrigTime = curTime;
-        if (sample != null) {
-            viewer.setBounds(knobs.getStartMin(), knobs.getStartMax(), knobs.getEndMin(), knobs.getEndMax(), sample.time());
-        }
+        return true;
     }
 
     protected float leftSignal() {
@@ -154,7 +156,7 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
             boolean shouldShowVoices = curTime - retrigTime > 0.5 * (44.1 * 1000);
             viewer.setShowVoices(shouldShowVoices);
             String name = viewer.getMatrix();
-            outlet(2,"jit_matrix",name);
+            outlet(10,"jit_matrix",name);
         }
         super.step();
     }

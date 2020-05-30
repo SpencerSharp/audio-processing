@@ -96,11 +96,11 @@ public class MidiSampler extends SamplePlayer {
         delayer.setDelay(d);
     }
 
-    protected float leftSignal() {
+    public float leftSignal() {
         return delayer.getLeftDelayed(super.leftSignal());
     }
 
-    protected float rightSignal() {
+    public float rightSignal() {
         return delayer.getRightDelayed(super.rightSignal());
     }
 
@@ -113,7 +113,7 @@ public class MidiSampler extends SamplePlayer {
         return curTime >= endTime;
     }
 
-    protected void step() {
+    public void step() {
         double start = 0.0;
         if (startFunc != null) {
             start = startFunc.calculate(curTime);
@@ -142,5 +142,9 @@ public class MidiSampler extends SamplePlayer {
 
         stepSize = Pitch.stepSize(pitch);
         super.step();
+    }
+
+    public void stepMe() {
+        step();
     }
 }

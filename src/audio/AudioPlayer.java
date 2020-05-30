@@ -29,7 +29,6 @@ public abstract class AudioPlayer extends StereoSignalDevice {
     private double pan;
 
 
-
     public AudioPlayer() {
         super();
         this.setup(0, new String[0]);
@@ -42,7 +41,10 @@ public abstract class AudioPlayer extends StereoSignalDevice {
 
     private void setup(int numOutlets, String[] outletNames) {
         int[] outletInfo = new int[numOutlets + NUM_OUTLETS];
-        for(int i = 0; i < outletInfo.length; i++) {
+        for(int i = 0; i < NUM_OUTLETS; i++) {
+            outletInfo[i] = SIGNAL;
+        }
+        for(int i = NUM_OUTLETS; i < outletInfo.length; i++) {
             outletInfo[i] = DataTypes.ALL;
         }
         declareOutlets(outletInfo);
@@ -128,8 +130,7 @@ public abstract class AudioPlayer extends StereoSignalDevice {
         return getGain();
     }
 
-    public void perform(MSPSignal[] ins, MSPSignal[] outs)
-	{
+    public void perform(MSPSignal[] ins, MSPSignal[] outs) {
 		float[] audioL = outs[0].vec;
 		float[] audioR = outs[1].vec;
 

@@ -13,8 +13,9 @@ import audio.AudioPlayer;
 My "instrument" archetype
 */
 public abstract class MidiReceiver extends AudioPlayer {
-    private static final int NUM_INLETS = 2;
+    private static final int NUM_INLETS = 3;
     private static final String[] INLET_NAMES = new String[]{
+        "messages",
 		"midi 2.0 in (last 32 bits)",
         "midi 2.0 in (first 32 bits)"
 	};
@@ -110,10 +111,11 @@ public abstract class MidiReceiver extends AudioPlayer {
         sendString(message);
     }
 
-    protected void sendString(String message) {
+    protected boolean sendString(String message) {
         if (message.equals("none")) {
-            return;
+            return true;
         }
+        return false;
     }
 
     protected int sendDouble(double msg) {
@@ -122,7 +124,7 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     protected int sendInt(int msg) {
-        int parent = 0;
+        int parent = -1;
         switch (getInlet()) {
             case 0:
                 last32bits.add(msg);
@@ -138,9 +140,5 @@ public abstract class MidiReceiver extends AudioPlayer {
                 break;
         }
         return parent + this.NUM_INLETS;
-    }
-
-    protected void step() {
-        super.step();
     }
 }

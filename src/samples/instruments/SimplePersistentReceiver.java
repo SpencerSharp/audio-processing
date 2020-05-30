@@ -19,39 +19,24 @@ public class SimplePersistentReceiver extends KnobControlledMidiReceiver {
     private static final int NUM_INLETS = 0;
     private static final String[] INLET_NAMES = new String[]{};
 
-    private static final int NUM_OUTLETS = 8;
-    private static final String[] OUTLET_NAMES = new String[]{
-        "knob1 val",
-        "knob2 val",
-        "knob3 val",
-        "knob4 val",
-        "knob5 val",
-        "knob6 val",
-        "knob7 val",
-        "knob8 val"
-    };
-
     SamplerKnobControl knobs;
 
     public SimplePersistentReceiver() {
-        super(NUM_INLETS, INLET_NAMES, NUM_OUTLETS, OUTLET_NAMES);
+        super();
+        for (int i = 0; i < 8; i++) {
+            outlet(2+i, -47.0);
+        }
     }
 
     protected CustomKnobControl getKnobs() {
-        if (knobs != null) {
-            for (int i = 0; i < 8; i++) {
-                outlet(2+i, knobs.getValue(i));
-            }
-        } else {
-            for (int i = 0; i < 8; i++) {
-                outlet(2+i, -47.0);
-            }
-        }
         return knobs;
     }
 
     protected void setup() {
         knobs = new SamplerKnobControl(this, 3);
+        for (int i = 0; i < 8; i++) {
+            outlet(2+i, this.getKnobs().getValue(i));
+        }
     }
 
     protected float leftSignal() {
