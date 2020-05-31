@@ -47,12 +47,14 @@ public class SequencerKnobControl extends CustomKnobControl {
     };
 
     public SequencerKnobControl(MaxObject obj, int outlet) {
-        super(obj, outlet);
+        super();
+        super.init(null, obj, outlet);
+        // this.setup();
         // System.out.println("super done");
     }
 
     public void setup() {
         // System.out.println("BOT");
-        super.setup(KNOB_NAMES, KNOB_RANGES, KNOB_UNITS);
+        // super.setup(KNOB_NAMES, KNOB_RANGES, KNOB_UNITS);
     }
 }

@@ -2,13 +2,16 @@ package utils.global;
 
 import java.nio.channels.*;
 import java.io.*;
+import java.nio.file.*;
 import java.lang.*;
 import java.util.*;
 import org.mariuszgromada.math.mxparser.*;
 
+import persistence.*;
+
 public class GlobalFunction {
-    protected static final String GLOBAL_FUNCTION_FILE_PATH = 
-        "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/functions";
+    // public static final String GLOBAL_FUNCTION_FILE_PATH = 
+    //     "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/functions";
 
     public int id = -1;
     public String name;
@@ -18,7 +21,9 @@ public class GlobalFunction {
 
     private static ArrayList<GlobalFunction> functions = null;
 
-    private LockableFile functionFile = new LockableFile(GLOBAL_FUNCTION_FILE_PATH);
+    private static boolean needRefresh = true;
+
+    private static LockableFile functionFile;
 
     public GlobalFunction(String name) {
         this.name = name;
@@ -51,12 +56,26 @@ public class GlobalFunction {
         return !this.text.equals("error");
     }
 
-    public static void refresh() {
-        functions = null;
+    public static void refresh(PersistentObject obj) {
+        needRefresh = true;
+        if (functionFile == null) {
+            File parentDir = new File(PersistentInfo.getPath());
+            Path parentPath = parentDir.toPath();
+            Path channelPath = parentPath.resolve(""+obj.channel);
+            File channelFile = channelPath.toFile();
+
+            if (!channelFile.exists()) {
+                channelFile.mkdir();
+            }
+
+            Path myFilePath = channelPath.resolve("functions");
+
+            functionFile = new LockableFile(myFilePath.toAbsolutePath().toString());
+        }
     }
 
     public void load() {
-        if (functions == null) {
+        if (needRefresh) {
             System.out.println("LEGIT LOADING");
             functionFile.acquireLock();
 
@@ -68,6 +87,8 @@ public class GlobalFunction {
             } else {
                 this.text = "error";
             }
+
+            needRefresh = false;
 
             functionFile.releaseLock();
         } else {
@@ -95,7 +116,7 @@ public class GlobalFunction {
     private void setupGlobalMap() {
         BufferedReader reader = functionFile.getReadBuffer();
 
-        functions = new ArrayList<GlobalFunction>();
+        ArrayList<GlobalFunction> newFunctions = new ArrayList<GlobalFunction>();
 
         String line;
         try {
@@ -103,15 +124,19 @@ public class GlobalFunction {
                 StringTokenizer st = new StringTokenizer(line);
                 String curName = st.nextToken();
                 if (curName.equals(name)) {
-                    id = functions.size();
+                    id = newFunctions.size();
                 }
-                functions.add(new GlobalFunction(functions.size(), curName, line));
+                newFunctions.add(new GlobalFunction(newFunctions.size(), curName, line));
             }
             reader.close();
         } catch (IOException e) {}
 
         if (id == -1) {
-            id = functions.size();
+            id = newFunctions.size();
+        }
+
+        if (functions == null || newFunctions.size() > functions.size()) {
+            functions = newFunctions;
         }
     }
 

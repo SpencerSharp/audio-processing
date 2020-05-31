@@ -1,3 +1,4 @@
 SimplePersistentReceiver.java
 ProjectSetupDevice.java
 MidiSampleLoader.java
+FunctionSequencer.java

@@ -15,7 +15,6 @@ public class LockableFile {
             try {
                 this.file.createNewFile();
             } catch (Exception e) {}
-            
         }
     }
 

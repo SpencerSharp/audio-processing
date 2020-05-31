@@ -1,4 +1,4 @@
-package midi.patterns;
+package midi.sequencing.patterns;
 
 import com.cycling74.max.*;
 import com.cycling74.msp.*;
@@ -12,6 +12,7 @@ import datatypes.Note;
 import interfaces.*;
 import interfaces.custom.SequencerKnobControl;
 import midi.Midi2;
+import persistence.*;
 
 public class FunctionSequencer extends Sequencer {
     private static final int BASE_INLET = 1;
@@ -33,10 +34,14 @@ public class FunctionSequencer extends Sequencer {
 
     public FunctionSequencer() {
         super();
+        this.setup();
+        tickClock = new MaxClock(new Executable() { 
+            public void execute() { tick(); }});
+        tickClock.delay(10000);
     }
 
     private void initFunctions() {
-        GlobalFunction.refresh();
+        GlobalFunction.refresh(knobs);
 
         GlobalFunction pitchFunction = new GlobalFunction("p(t)");
         if (pitchFunction.isValid()) {
@@ -46,6 +51,7 @@ public class FunctionSequencer extends Sequencer {
 
     protected void setup() {
         knobs = new SequencerKnobControl(this, 3);
+        PersistentObject.channel = 1;
     }
 
     protected CustomKnobControl getKnobs() {

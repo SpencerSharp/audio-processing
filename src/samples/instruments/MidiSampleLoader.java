@@ -106,6 +106,7 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
         }
         String path = message.substring(message.indexOf(":")+1,message.length());
         Sample sample = getSample();
+        System.out.println("yo path is " + path);
         if (sample == null || sample.path.equals(path)) {
             return true;
         }

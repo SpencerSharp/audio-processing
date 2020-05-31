@@ -16,7 +16,10 @@ public class FileUtils {
                 FileUtils.deleteDirectory(sub,depth+1);
             }
         }
+        if (file.isDirectory() || file.getName().equals("functions")) {
 
-        file.delete();
+        } else {
+            file.delete();
+        }
     }
 }

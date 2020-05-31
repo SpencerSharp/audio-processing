@@ -99,6 +99,9 @@ public abstract class MidiSender extends MaxObject {
         outletNamesRay = outletNamesList.toArray(outletNamesRay); 
 
 		setOutletAssist(outletNamesRay);
+
+
+        notes = new PriorityQueue<Note>();
     }
 
     protected void sendOut(long msg) {
