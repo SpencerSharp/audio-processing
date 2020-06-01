@@ -11,6 +11,12 @@ KnobControlledMidiReceiver
 
 
 TODO
+- Fix snaresequencer
+- Devices
+    - ChannelFunctionEditor
+    - ProjectFunctionEditor
+    - FunctionSequencer
+        - Just reads specific channel and project functions from the file
 - Persistence
     - Implement, test freebang
     - Global project path set/get

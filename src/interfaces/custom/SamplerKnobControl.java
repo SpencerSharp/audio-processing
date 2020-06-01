@@ -48,28 +48,28 @@ public class SamplerKnobControl extends CustomKnobControl {
 
     public SamplerKnobControl(MaxObject obj, int outlet) {
         super(obj, outlet);
+        this.setup();
     }
 
     public SamplerKnobControl(MaxObject obj, int outlet, Sample sample) {
-        super();
-        super.init(null, obj, outlet);
+        super(obj, outlet);
         this.setSample(sample);
+        this.setup();
     }
 
     public void setSample(Sample s) {
         sample = s;
-        KNOB_RANGES = new int[]{
-            0,    (int)sample.time(),
-            0,    (int)sample.time(),
-            0,    (int)sample.time(),
+        sample.load();
+        this.KNOB_RANGES = new int[]{
+            1,    (int)sample.time(),
+            1,    (int)sample.time(),
+            1,    (int)sample.time(),
           -20,                  20,
-            0,    (int)sample.time(),
-            0,    (int)sample.time(),
-            0,    (int)sample.time(),
+            1,    (int)sample.time(),
+            1,    (int)sample.time(),
+            1,    (int)sample.time(),
             0,          0
         };
-        MaxBox knobControl = outputObj.getParentPatcher().getNamedBox("knobControl");
-        knobControl.send(KNOB_RANGES[1]);
     }
 
     public void setup() {

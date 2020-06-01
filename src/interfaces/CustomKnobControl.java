@@ -33,7 +33,7 @@ public abstract class CustomKnobControl extends PersistentObject {
     }
 
     public void assignValue(int knob, double value) {
-        values[knob] = value;
+        values[knob] = knobs[knob].setValue(value);
     }
 
     public double getValue(int knob) {
@@ -41,32 +41,19 @@ public abstract class CustomKnobControl extends PersistentObject {
     }
 
     protected void setup(String[] names, int[] ranges, int[] units) {
-        MaxBox knobControl = outputObj.getParentPatcher().getNamedBox("knobControl");
-        int zero = 0;
-        knobControl.send(ranges[1]);
-        try {
-            for (int i = 0; i < 200; i++) {
-                Thread.sleep(1);
-            }
-        } catch (InterruptedException e) {
-            System.out.println("interrupted rip");
-        }
-
-        MaxBox outBox = outputObj.getMaxBox();
-        MaxPatcher patcher = outputObj.getParentPatcher();
         for (int i = 1; i <= KnobControl.NUM_KNOBS; i++) {
-            Knob knob = new Knob("dial" + i, patcher);
+            Knob knob = new Knob("dial" + i, outputObj);
             knobs[i-1] = knob;
         }
         for (int i = 0; i < names.length; i++) {
             Knob knob = knobs[i];
-            patcher.connect(knob.myBox, 0, outBox, baseOutlet + i);
+            // patcher.connect(knob.myBox, 0, outBox, baseOutlet + i);
             knob.setName(names[i]);
             double min = (double) ranges[i*2];
             double max = (double) ranges[i*2+1];
             knob.setRange(min, max);
             knob.setUnit(units[i]);
-            knob.setValue(127.0);
+            assignValue(i, min);
             knobs[i] = knob;
         }
     }

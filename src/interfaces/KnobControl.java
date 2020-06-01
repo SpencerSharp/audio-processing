@@ -59,10 +59,10 @@ public class KnobControl extends MaxObject {
 
     protected void knobSetup() {
         System.out.println("heLL on eARth");
-        for (int i = 1; i <= NUM_KNOBS; i++) {
-            Knob knob = new Knob("dial" + i, i + 1, this);
-            knobs[i-1] = knob;
-        }
+        // for (int i = 1; i <= NUM_KNOBS; i++) {
+            // Knob knob = new Knob("dial" + i, i + 1, this);
+        //     knobs[i-1] = knob;
+        // }
     }
 
     public void inlet(int in) {

@@ -43,7 +43,9 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
 
     protected void setup() {
         System.out.println("setter");
-        knobs = new SamplerKnobControl(this, 3);
+        Sample sample = new Sample("/Users/spencersharp/Documents/Music/Files/Library/Audio/Electronic/WhereWeAre.wav");
+        knobs = new SamplerKnobControl(this, 3, sample);
+        System.out.println("knobs now " + knobs);
         for (int i = 0; i < 8; i++) {
             outlet(2+i, this.getKnobs().getValue(i));
         }
@@ -58,6 +60,14 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
             return null;
         }
         return knobs.sample;
+    }
+
+    protected int sendInt(int i) {
+        int parent = super.sendInt(i);
+        if (getInlet() >= parent - 8) {
+            this.retrig();
+        }
+        return parent;
     }
 
     public void handleMidiMsg(long msg) {
@@ -83,7 +93,7 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
                 System.out.println("MIDI IN");
                 voicePlayers.put(noteId, sampler);
             }
-        } else {
+        } else if (voicePlayers.containsKey(noteId)) {
             // System.out.println("num voices " + voicePlayers.keySet().size());
             // voicePlayers.remove(noteId);
             voicePlayers.get(noteId).end();
@@ -93,6 +103,9 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
     private void retrig() {
         if (voicePlayers != null) {
             voicePlayers.clear();
+            if (getSample() != null) {
+                viewer.setBounds(knobs.getStartMin(), knobs.getStartMax(), knobs.getEndMin(), knobs.getEndMax(), knobs.sample.time());
+            }
         } else {
             voicePlayers = new HashMap<Integer,MidiSampler>();
             viewer = new SampleViewer(voicePlayers);
@@ -107,15 +120,19 @@ public class MidiSampleLoader extends KnobControlledMidiReceiver {
         String path = message.substring(message.indexOf(":")+1,message.length());
         Sample sample = getSample();
         System.out.println("yo path is " + path);
-        if (sample == null || sample.path.equals(path)) {
+        if (sample != null && sample.path.equals(path)) {
             return true;
         }
         System.out.println("Loading " + path);
-        this.knobs.sample = null;
+        if (this.knobs != null) {
+            this.knobs.sample = null;
+        }
+        
         Runnable runnable = () -> {
             Sample mysample = new Sample(path);
-            mysample.load();
-            this.knobs.sample = mysample;
+            if (this.knobs != null) {
+                this.knobs.setSample(mysample);
+            }
             this.retrig();
         };
         Thread thread = new Thread(runnable);

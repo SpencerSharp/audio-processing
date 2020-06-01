@@ -6,7 +6,7 @@ import java.lang.Math;
 import java.io.*;
 
 class Knob {
-    MaxObject knobControl;
+    MaxObject mxjInstance;
     public MaxBox myBox;
     String name;
     String valType;
@@ -17,28 +17,23 @@ class Knob {
     int inlet;
     String val;
 
-    public Knob(String name, MaxPatcher patcher) {
+    public Knob(String name, MaxObject parent) {
         this.name = name;
+        mxjInstance = parent;
+        System.out.println("a");
+        MaxBox outBox = mxjInstance.getMaxBox();
+        System.out.println("b");
+        MaxPatcher patcher = mxjInstance.getParentPatcher();
+        System.out.println("c");
         myBox = patcher.getNamedBox(name);
-    }
-
-    public Knob(String name, int inlet, MaxObject knobControl) {
-        this.name = name;
-        this.inlet = inlet;
-        this.knobControl = knobControl;
+        System.out.println("d");
         this.setup();
     }
 
     private void setup() {
-        MaxPatcher patcher = knobControl.getParentPatcher();
+        // MaxPatcher patcher = mxjInstance.getParentPatcher();
 
-        System.out.println("patcher " + patcher);
-        
-        myBox = patcher.getNamedBox(name);
-
-        patcher.connect(knobControl.getMaxBox(), inlet, myBox, 0);
-        // patcher.connect(ctl, 0, myBox, 0);
-        // patcher.connect(myBox, 0, outputBox, inlet);
+        // patcher.connect(mxjInstance.getMaxBox(), inlet, myBox, 0);
 
         setAppearance(2);
 
@@ -106,10 +101,11 @@ class Knob {
         sendMsg("assign",f);
     }
 
-    public void setValue(double d) {
+    public double setValue(double d) {
         double f = d / 127.0;
-        double conv = min + f * (max - min);
+        double conv = min + (f * (max - min));
         float fmt = (float) conv;
         setRawValue(fmt);
+        return conv;
     }
 }
