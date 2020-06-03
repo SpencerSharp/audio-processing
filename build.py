@@ -67,3 +67,12 @@ if to_compile[0] == 'MODULES':
 else:
     compile_dir(max_dir,True,False)
 
+mxj_config_path_str = '/Applications/Ableton Live 10.1 Beta.app/Contents/App-Resources/Max/Max.app/Contents/Resources/C74/packages/max-mxj/java-classes'
+
+config_file_name = 'config.txt'
+
+mxj_config = Path(mxj_config_path_str) / ('max.java.' + config_file_name)
+local_mxj_config = local / config_file_name
+
+shutil.copyfile(local_mxj_config, mxj_config)
+
