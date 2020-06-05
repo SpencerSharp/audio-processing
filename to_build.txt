@@ -1,4 +1,2 @@
-SimplePersistentReceiver.java
+ExampleSamplePlayer.java
 ProjectSetupDevice.java
-MidiSampleLoader.java
-FunctionSequencer.java

@@ -5,8 +5,8 @@ import java.io.*;
 import java.lang.*;
 import java.util.*;
 
-public class LockableFile {
-    private File file;
+public class LockableFile implements Comparable<LockableFile> {
+    public File file;
     private FileLock lock;
 
     public LockableFile(String path) {
@@ -59,5 +59,9 @@ public class LockableFile {
             return reader;
         } catch(Exception e) {}
         return null;
+    }
+
+    public int compareTo(LockableFile otherFile) {
+        return file.compareTo(otherFile.file);
     }
 }

@@ -48,9 +48,7 @@ public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver 
 
     private void tryAssignValue(int knob, double val) {
         CustomKnobControl knobs = this.getKnobs();
-        System.out.println("truying");
         if (this.getKnobs() != null) {
-            System.out.println("successful assign value");
             this.getKnobs().assignValue(knob, val);
             outlet(2+knob, this.getKnobs().getValue(knob));
         }

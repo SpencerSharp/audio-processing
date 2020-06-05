@@ -10,8 +10,8 @@ import org.mariuszgromada.math.mxparser.*;
 import persistence.*;
 
 public class GlobalFunction {
-    // public static final String GLOBAL_FUNCTION_FILE_PATH = 
-    //     "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/functions";
+    public static final String GLOBAL_FUNCTION_FILE_PATH = 
+        "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/";
 
     public int id = -1;
     public String name;
@@ -23,7 +23,7 @@ public class GlobalFunction {
 
     private static boolean needRefresh = true;
 
-    private static LockableFile functionFile;
+    public static LockableFile functionFile;
 
     public GlobalFunction(String name) {
         this.name = name;
@@ -56,12 +56,12 @@ public class GlobalFunction {
         return !this.text.equals("error");
     }
 
-    public static void refresh(PersistentObject obj) {
+    public static void refresh() {
         needRefresh = true;
         if (functionFile == null) {
             File parentDir = new File(PersistentInfo.getPath());
             Path parentPath = parentDir.toPath();
-            Path channelPath = parentPath.resolve(""+obj.channel);
+            Path channelPath = parentPath.resolve(""+PersistentObject.channel);
             File channelFile = channelPath.toFile();
 
             if (!channelFile.exists()) {
@@ -76,7 +76,7 @@ public class GlobalFunction {
 
     public void load() {
         if (needRefresh) {
-            System.out.println("LEGIT LOADING");
+            System.out.println("LEGIT LOADING " + functionFile.file.getName());
             functionFile.acquireLock();
 
             setupGlobalMap();
@@ -122,11 +122,13 @@ public class GlobalFunction {
         try {
             while ((line = reader.readLine()) != null) {
                 StringTokenizer st = new StringTokenizer(line);
-                String curName = st.nextToken();
-                if (curName.equals(name)) {
-                    id = newFunctions.size();
+                if (st.hasMoreTokens()) {
+                    String curName = st.nextToken();
+                    if (curName.equals(name)) {
+                        id = newFunctions.size();
+                    }
+                    newFunctions.add(new GlobalFunction(newFunctions.size(), curName, line));
                 }
-                newFunctions.add(new GlobalFunction(newFunctions.size(), curName, line));
             }
             reader.close();
         } catch (IOException e) {}
@@ -135,7 +137,7 @@ public class GlobalFunction {
             id = newFunctions.size();
         }
 
-        if (functions == null || newFunctions.size() > functions.size()) {
+        if (functions == null || newFunctions.size() >= functions.size() || newFunctions.size() <= functions.size()) {
             functions = newFunctions;
         }
     }
@@ -158,22 +160,72 @@ public class GlobalFunction {
         writer.close();
     }
 
+    private String getParam(String fText) {
+        String noName = fText.replaceFirst(".*?\\(","(");
+        if (noName.contains(")")) {
+            return noName.substring(1,getOuterMatchingParen(noName));
+        }
+        return "";
+    }
+
+    private String escape(String s) {
+        return "\\Q"+s+"\\E";
+    }
+
+    private int getOuterMatchingParen(String s) {
+        boolean reachedFirst = false;
+        int depth = 0;
+        int ind = 0;
+        while (ind < s.length() && (!reachedFirst || depth != 0)) {
+            if (s.charAt(ind) == '(') {
+                reachedFirst = true;
+                depth++;
+            } else if (s.charAt(ind) == ')') {
+                depth--;
+            }
+            ind++;
+        }
+        return ind - 1;
+    }
+
+    private String extractFunc(String myText, String otherName) {
+        String shortName = otherName.replaceFirst("\\(.*?\\)","");
+        String oldParam = getParam(otherName);
+        String beforeParen = ".*?\\W+?" + escape(shortName + "(");
+        String afterParen = escape(")") + ".*?";
+        String replaceAllBeforeFunc = myText.replaceFirst(beforeParen,shortName + "(");
+        if (replaceAllBeforeFunc.equals(myText)) {
+            return "";
+        }
+        return replaceAllBeforeFunc.substring(0,getOuterMatchingParen(replaceAllBeforeFunc)+1);
+    }
+
+    private boolean containsFunc(String myText, String otherName) {
+        String res = extractFunc(myText, otherName);
+        // System.out.println("RES ! " + res + " ? " + myText);
+        return otherName.equals(myText) || !(res.equals(""));
+    }
+
     private void loadFunction() {
         String expandedText = this.getRightSide();
         boolean isDone = false;
         while (!isDone) {
             isDone = true;
             for (GlobalFunction function : functions) {
-                if (expandedText.contains(function.name)) {
-                    // System.out.println("found |" + function.name + "|");
+                if (containsFunc(expandedText, function.name)) {
+                    // System.out.println("----" + function.name + "|" + expandedText);
                     isDone = false;
-                    expandedText = expandedText.replace(function.name, "(" + function.getRightSide() + ")");
+                    String itsParam = getParam(function.name);
+                    String myCall = extractFunc(expandedText,function.name);
+                    String myParam = getParam(myCall);
+                    String newFunc = function.getRightSide().replace(itsParam, myParam);
+                    expandedText = expandedText.replace(myCall, "(" + newFunc + ")");
                 }
+                // System.out.println("~~~~" + function.name + "|" + expandedText);
             }
-            // System.out.println("|" + expandedText);
         }
-        // System.out.println(""+functions.size() + " | " + expandedText);
         expandedText = name + " =" + expandedText;
+        System.out.println(expandedText);
         this.function = new Function(expandedText);
     }
 }

@@ -103,10 +103,12 @@ public class ProjectSetupDevice extends MaxObject {
         if (!isSaving) {
             isSaving = true;
             File persistedDirFile = new File(PersistentInfo.getPath());
-            if (persistedDirFile.getName().equals("SharpVSTMetadata") && persistedDirFile.exists()) {
-                FileUtils.deleteDirectory(persistedDirFile);
+            // if (persistedDirFile.getName().equals("SharpVSTMetadata") && persistedDirFile.exists()) {
+            //     FileUtils.deleteDirectory(persistedDirFile);
+            // }
+            if (!persistedDirFile.exists()) {
+                persistedDirFile.mkdir();
             }
-            persistedDirFile.mkdir();
             outlet(0, "persist");
             isSaving = false;
         }
