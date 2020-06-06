@@ -62,6 +62,9 @@ public class LockableFile implements Comparable<LockableFile> {
     }
 
     public int compareTo(LockableFile otherFile) {
+        if (otherFile == null) {
+            return -1;
+        }
         return file.compareTo(otherFile.file);
     }
 }

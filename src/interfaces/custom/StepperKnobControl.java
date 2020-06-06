@@ -10,10 +10,12 @@ import interfaces.*;
 
 import samples.Sample;
 import datatypes.Units;
+import utils.math.*;
 
-public class StepperKnobControl extends CustomKnobControl implements Function<Integer,Double> {
-    public static final int MAX_VAL = 256;
-    public int ind;
+public class StepperKnobControl extends CustomKnobControl implements MutableFunction {
+    public static final int MAX_VAL = 512;
+
+    private boolean hasChanged = false;
 
     transient String[] KNOB_NAMES = {
         "128",
@@ -49,7 +51,7 @@ public class StepperKnobControl extends CustomKnobControl implements Function<In
     };
 
     public StepperKnobControl(MaxObject obj, int outlet) {
-        super(obj, outlet);
+        super(obj, outlet, false);
         this.setup();
     }
 
@@ -57,20 +59,29 @@ public class StepperKnobControl extends CustomKnobControl implements Function<In
         super.setup(KNOB_NAMES, KNOB_RANGES, KNOB_UNITS);
     }
 
+    public void assignValue(int knob, double value) {
+        super.assignValue(knob, value);
+        hasChanged = true;
+    }
+
+    public boolean hasChanged() {
+        return hasChanged;
+    }
+
     public Double apply(Integer ind) {
-        int totalVal = 1;
-        int val = 0;
-        int pow = 2;
-        for(int i = KNOB_NAMES.length - 1; i >= 0; i--) {
-            if (ind % pow >= pow/2) {
-                val += values[i];
-            }
-            totalVal += values[i];
-            pow *= 2;
-        }
-        double res = ((double)val) / totalVal;
-        System.out.println(res);
-        return res;
+        // int totalVal = 1;
+        // int val = 0;
+        // int pow = 2;
+        // for(int i = KNOB_NAMES.length - 1; i >= 0; i--) {
+        //     if (ind % pow >= (pow/2)) {
+        //         val += values[i];
+        //     }
+        //     totalVal += values[i];
+        //     pow *= 2;
+        // }
+        // double res = ((double)val) / totalVal;
+        hasChanged = false;
+        return 0.5;
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {

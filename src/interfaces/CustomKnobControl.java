@@ -12,11 +12,14 @@ public abstract class CustomKnobControl extends PersistentObject {
     transient protected double[] values;
 
     public CustomKnobControl() {
-        
     }
 
     public CustomKnobControl(MaxObject obj, int outlet) {
         this.init(PersistentObject.tryLoad(this), obj, outlet);
+    }
+
+    public CustomKnobControl(MaxObject obj, int outlet, boolean shouldTryLoading) {
+        this.init(null, obj, outlet);
     }
 
     protected void init(PersistentObject pers, MaxObject obj, int outlet) {
@@ -56,6 +59,7 @@ public abstract class CustomKnobControl extends PersistentObject {
             assignValue(i, min);
             knobs[i] = knob;
         }
+        System.out.println("KNOBBY WHY SLOW");
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {

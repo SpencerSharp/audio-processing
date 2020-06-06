@@ -18,6 +18,7 @@ import interfaces.custom.*;
 import samples.*;
 import persistence.*;
 import utils.global.*;
+import utils.math.*;
 
 /*
 How to decide names of functions?
@@ -28,9 +29,9 @@ Later can auto-declare it maybe
 public class ModulatedVariable {
     String name;
     String context;
-    double inpVal;
+    int inpVal;
     DomainBufferedFunction bufferedFunction;
-    Function<Integer,Double> javaFunction;
+    MutableFunction javaFunction;
 
     public ModulatedVariable(String name) {
         this(name, "device");
@@ -43,7 +44,7 @@ public class ModulatedVariable {
         while (bufferedFunction == null) { Thread.yield(); }
     }
 
-    public ModulatedVariable(Function<Integer,Double> func, int reso, int domainMultiplier) {
+    public ModulatedVariable(MutableFunction func, int reso, int domainMultiplier) {
         javaFunction = func;
         bufferedFunction = new DomainBufferedFunction(func, reso, domainMultiplier);
         this.context = "memory";
@@ -56,6 +57,7 @@ public class ModulatedVariable {
             }
             return;
         }
+        System.out.println("contextual opportunity");
         int tempChannel = PersistentObject.channel;
         int tempInd = PersistentObject.ind;
 
@@ -76,14 +78,15 @@ public class ModulatedVariable {
         myPath += "functions";
         
         LockableFile myFile = new LockableFile(myPath);
-        if (!myFile.equals(GlobalFunction.functionFile)) {
+        if (!(myFile.compareTo(GlobalFunction.functionFile) == 0)) {
+            System.out.println("DIFFFFFFFFFF!!!!!!   " + myPath );
             GlobalFunction.functionFile = myFile;
             GlobalFunction.refresh();
         }
         bufferedFunction = new DomainBufferedFunction(name);
     }
 
-    public void setInpVal(double inpVal) {
+    public void setInpVal(int inpVal) {
         this.inpVal = inpVal;
     }
 
@@ -91,11 +94,7 @@ public class ModulatedVariable {
         return bufferedFunction.getValueAt(inpVal);
     }
 
-    public double valAt(double inpVal) {
-        double oldInp = this.inpVal;
-        this.setInpVal(inpVal);
-        double ret = this.value();
-        this.setInpVal(oldInp);
-        return ret;
+    public double valAt(int pVal) {
+        return bufferedFunction.getValueAt(pVal);
     }
 }
