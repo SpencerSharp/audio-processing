@@ -17,8 +17,7 @@ public class DomainBufferedFunction {
     private int ratio;
 
     private boolean isValid = false;
-    private int firstValid;
-    private int lastValid;
+    private double lastInvalidTime = 0.0;
 
         // Callable javaFunction;
 
@@ -32,8 +31,6 @@ public class DomainBufferedFunction {
         this.mult = mult;
         this.resolution = reso;
         this.javaFunction = func;
-        this.setDomainFunction("l");
-        while (values == null) { Thread.yield(); }
     }
 
     public void invalidate() {
@@ -44,7 +41,7 @@ public class DomainBufferedFunction {
                 if (globalFunction != null) {
                     newvalues[i] = globalFunction.asFunction().calculate(i*ratio);
                 } else {
-                    newvalues[i] = domain * javaFunction.apply(i);
+                    newvalues[i] = (domain/mult) * javaFunction.apply(i);
                 }
             }
 
@@ -56,22 +53,37 @@ public class DomainBufferedFunction {
     }
 
     public void setDomainFunction(String name) {
-        // GlobalFunction domainFunc = new GlobalFunction(name+"(t)");
-        // domain = Integer.parseInt(domainFunc.getRightSide());
-        domain = 166154;
-        if (mult != 0) {
-            domain *= mult;
+        GlobalFunction domainFunc = new GlobalFunction(name+"(t)");
+        if (domainFunc.isValid()) {
+            domain = Integer.parseInt(domainFunc.getRightSide());
+            // domain = 166154;
+            if (mult != 0) {
+                domain *= mult;
+            }
+            ratio = (int) Math.ceil(((double)domain)/resolution);
+            this.invalidate();
+        } else {
+            values = new double[resolution];
         }
-        ratio = domain/resolution;
-        this.invalidate();
+        System.out.println("max ind is " + ((domain-1) / ratio) + " so dont worry");
     }
 
     public double getValueAt(int ind) {
-        // if (javaFunction != null) {
-        //     if (javaFunction.hasChanged()) {
-        //         this.invalidate();
-        //     }
-        // }
-        return values[ind / ratio];
+        if (ind % 4410 == 0) {
+            if (javaFunction != null) {
+                if (javaFunction.hasChanged()) {
+                    this.invalidate();
+                }
+            }
+        }
+        int modind = (ind % domain) / ratio;
+
+        if (modind < 0 || modind > values.length) {
+            modind = 0;
+        }
+
+        return values[modind];
+        // return 0.0;
+        // return (domain * 0.5);
     }
 }

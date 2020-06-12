@@ -75,7 +75,7 @@ public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver 
     protected void persist() {
         // PersistentObject.save(this.getKnobs());
         try {
-            Thread.sleep(100);
+            Thread.sleep(1100);
         } catch (Exception e) {}
     }
     

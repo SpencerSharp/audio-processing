@@ -56,7 +56,7 @@ public abstract class CustomKnobControl extends PersistentObject {
             double max = (double) ranges[i*2+1];
             knob.setRange(min, max);
             knob.setUnit(units[i]);
-            assignValue(i, min);
+            assignValue(i, 128.0/2);
             knobs[i] = knob;
         }
         System.out.println("KNOBBY WHY SLOW");

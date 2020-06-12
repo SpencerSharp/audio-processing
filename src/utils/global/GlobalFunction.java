@@ -97,9 +97,14 @@ public class GlobalFunction {
                 if(function.name.equals(name)) {
                     id = function.id;
                     text = function.text;
+                    if (function.function != null) {
+                        this.function = function.function;
+                    }
                 }
             }
-            loadFunction();
+            if (false) {
+                loadFunction();
+            }
         }
     }
 
@@ -109,6 +114,8 @@ public class GlobalFunction {
         setupGlobalMap();
         updateGlobalMap();
         loadFunction();
+
+        needRefresh = false;
 
         functionFile.releaseLock();
     }

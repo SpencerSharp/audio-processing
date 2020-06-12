@@ -22,7 +22,7 @@ public class Timer {
         try {
             e.execute();
         } catch(Exception ex) {
-            System.out.println("fatal exception " + ex);
+            ex.printStackTrace();
             int n = 4 / 0;
         }
         timers.get(id).release();

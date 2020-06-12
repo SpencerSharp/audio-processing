@@ -40,8 +40,8 @@ public class FunctionSequencer extends Sequencer {
         tickClock.delay(10000);
     }
 
-    private void initFunctions() {
-        GlobalFunction.refresh(knobs);
+    protected void initFunctions() {
+        GlobalFunction.refresh();
 
         GlobalFunction pitchFunction = new GlobalFunction("p(t)");
         if (pitchFunction.isValid()) {
@@ -64,10 +64,14 @@ public class FunctionSequencer extends Sequencer {
         }
         Note newNote = new Note(pitch, vel);
         sendOut(newNote.asMessage(Midi2.noteOn));
+        endNote();
+        notes.add(newNote);
+    }
+
+    protected void endNote() {
         if (notes.size() > 0) {
             sendOut(notes.poll().asMessage(Midi2.noteOff));
         }
-        notes.add(newNote);
     }
 
     protected void tick() {

@@ -21,7 +21,7 @@ import utils.global.*;
 import utils.math.*;
 
 public class ExampleSamplePlayer extends KnobControlledMidiReceiver {
-    private static final double GRAIN_MS_LENGTH_FRAC = 0.4;
+    public static int GRAIN_LENGTH = 840;
 
     protected Sample sample;
 	protected double indexInSample;
@@ -33,6 +33,8 @@ public class ExampleSamplePlayer extends KnobControlledMidiReceiver {
 
     private float[] gainTable;
 
+    protected static ArrayList<SampleVoice> voices = new ArrayList<SampleVoice>();
+
     public CustomKnobControl getKnobs() {
         return stepperKnobs;
     }
@@ -42,129 +44,122 @@ public class ExampleSamplePlayer extends KnobControlledMidiReceiver {
     }
 
     protected void setup() {
-        this.sample = new Sample("/Users/spencersharp/Documents/Music/Files/Library/Audio/Electronic/WhereWeAre.wav");
+        this.sample = new Sample("/Users/spencersharp/Music/Ableton/User Library/Samples/Library/Audio/Instruments/Guitar/DopeStrings.wav");
         sample.load();
         try {
             PersistentObject.getFile(false);
         } catch (IOException ex) {
             System.out.println("yikers");
         }
+
         
         indexInSample = 0.0;
 
-        gainTable = new float[256];
+        gainTable = new float[128];
 
-        for(int i = 0; i < 256; i++) {
-            gainTable[i] = (float) Math.sin(Math.PI*(i / 256.0));
+        for(int i = 0; i < 128; i++) {
+            gainTable[i] = (float) Math.sin(Math.PI*(((double)i) / 128));
         }
 
         stepperKnobs = new StepperKnobControl(this, 3);
 
+        startInd = new ModulatedVariable(stepperKnobs, StepperKnobControl.MAX_VAL, 8);
+        new GlobalFunction("l(t)","l(t) = " + sample.length());
+        startInd.reload();
+
+
         // endInd = new ModulatedVariable("n");
-        startInd = new ModulatedVariable(stepperKnobs, StepperKnobControl.MAX_VAL, 1);
+        
         // stepSize = new ModulatedVariable("m");
 
         this.refresh();
     }
 
     private int getSampleEnd() {
-        return 166154;
+        return sample.length();
     }
 
-    private double getCurLength() {
-        return GRAIN_MS_LENGTH_FRAC;
-    }
+    // private double getCurLength() {
+    //     return GRAIN_MS_LENGTH_FRAC;
+    // }
 
     public void retrig() {
-        indexInSample = startInd.valAt(curTime);
+        indexInSample = startInd.value();
         // System.out.println("indin is NOW " + indexInSample);
     }
 
     protected void step() {
-        startInd.setInpVal(curTime);
-        // endInd.setInpVal(curTime);
-        // stepSize.setInpVal(curTime);
-        // indexInSample += stepSize.value();
-        indexInSample += 1.0;
-
-        // double totalPct = indexInSample / getSampleEnd();
-        // System.out.println(totalPct);
-        if (indexInSample >= startInd.value()) {
-            if (indexInSample >= (getSampleEnd()-1)) {
-                retrig();
-            }
-        } else {
-            retrig();
+        if (startInd != null) {
+            startInd.setInpVal(curTime);
+        }
+        for (SampleVoice voice : voices) {
+            voice.step();
         }
         super.step();
     }
 
+    public static void alertVoicesOfChange() {
+        for (SampleVoice voice : voices) {
+            voice.setGrainLength(GRAIN_LENGTH);
+        }
+    }
+
     private void refresh() {
-        // Runnable runnable = () -> {
-        //     System.out.println("startInd " + startInd + " endInd " + endInd + " stepSize " + stepSize);
-        //     new GlobalFunction("l(t)","l(t) = " + sample.length());
-        //     System.out.println("aaaaaaaaaaaaaa");
-        //     endInd.reload();
-        //     System.out.println("bbbbbbbbbbbbb");
-        //     startInd.reload();
-        //     System.out.println("ccccccccccc");
-        //     stepSize.reload();
-        //     System.out.println("ddddddddddd");
-        // };
-        // Thread thread = new Thread(runnable);
-        // thread.setPriority(Thread.MIN_PRIORITY);
-        // thread.start();
+        ArrayList<SampleVoice> tmpVoices = new ArrayList<SampleVoice>();
+        SampleVoice base = new SampleVoice(sample, gainTable, startInd, GRAIN_LENGTH, 0);
+        tmpVoices.add(base);
+        SampleVoice complement = new SampleVoice(sample, gainTable, startInd, GRAIN_LENGTH, GRAIN_LENGTH/2);
+        tmpVoices.add(complement);
+        voices = tmpVoices;
+
+        // int three = 4 / 0;
+        /*
+        Runnable runnable = () -> {
+
+            // System.out.println("startInd " + startInd + " endInd " + endInd + " stepSize " + stepSize);
+            
+            // System.out.println("aaaaaaaaaaaaaa");
+            // endInd.reload();
+            // System.out.println("bbbbbbbbbbbbb");
+            // startInd.reload();
+            // System.out.println("ccccccccccc");
+            // stepSize.reload();
+            // System.out.println("ddddddddddd");
+
+        };
+        Thread thread = new Thread(runnable);
+        thread.setPriority(Thread.MIN_PRIORITY);
+        thread.start();
+        */
     }
 
-    public boolean sendString(String str) {
-        if (!super.sendString(str)) {
-            if (str.equals("persist")) {
-                this.refresh();
-            } else if (str.equals("setupfromdisc")) {
-                this.refresh();
-            }
-        }
-        return true;
-    }
-
-    protected float leftSignal() {
-        float sig = super.leftSignal();
-        sig = 1.0f;
-        int floor = (int) indexInSample;
-        int ceil = floor + 1;
-        if (ceil >= getSampleEnd()) {
-            sig *= sample.left(floor);
-        } else {
-            double w1 = (1 - (indexInSample - floor)) * sample.left(floor);
-            double w2 = (1 - (ceil - indexInSample)) * sample.left(ceil);
-            sig *= (float) (w1 + w2);
-        }
-        return sig;
-    }
-
-    // protected float getGain(double pct) {
-        // if (pct > 1.0 || pct < 0.0) {
-        //     System.out.println(pct);
-        // }
-        // float ret = gainTable[(int) (0.5 * 256)];
-        // if (curTime % 50000 == 0) {
-        //     System.out.println("gain at " + pct + " is " + ret + " startInd " + startInd.value() + " endInd " + endInd.value());
-        // }
-        // return ret;
+    // public boolean sendString(String str) {
+    //     if (!super.sendString(str)) {
+    //         if (str.equals("persist")) {
+    //             this.refresh();
+    //         } else if (str.equals("setupfromdisc")) {
+    //             this.refresh();
+    //         }
+    //     }
+    //     return true;
     // }
 
-    protected float rightSignal() {
-        float sig = super.rightSignal();
-        sig = 1.0f;
-        int floor = (int) indexInSample;
-        int ceil = floor + 1;
-        if (ceil >= getSampleEnd()) {
-            sig *= sample.right(floor);
-        } else {
-            double w1 = (1 - (indexInSample - floor)) * sample.right(floor);
-            double w2 = (1 - (ceil - indexInSample)) * sample.right(ceil);
-            sig *= (float) (w1 + w2);
+
+
+
+    protected float leftSignal() {
+        float total = 0.0f;
+        for (SampleVoice voice : voices) {
+            total += voice.leftSignal();
         }
-        return sig;
+        return total;
+    }
+
+    protected float rightSignal() {
+        float total = 0.0f;
+        for (SampleVoice voice : voices) {
+            total += voice.rightSignal();
+        }
+        return total;
     }
 }

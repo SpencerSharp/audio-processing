@@ -46,16 +46,17 @@ public class ModulatedVariable {
 
     public ModulatedVariable(MutableFunction func, int reso, int domainMultiplier) {
         javaFunction = func;
-        bufferedFunction = new DomainBufferedFunction(func, reso, domainMultiplier);
         this.context = "memory";
+        this.reload();
+        bufferedFunction = new DomainBufferedFunction(func, reso, domainMultiplier);
     }
 
     public void reload() {
         if (javaFunction != null) {
             if (bufferedFunction != null) {
                 bufferedFunction.setDomainFunction("l");
+                return;
             }
-            return;
         }
         System.out.println("contextual opportunity");
         int tempChannel = PersistentObject.channel;
@@ -83,7 +84,9 @@ public class ModulatedVariable {
             GlobalFunction.functionFile = myFile;
             GlobalFunction.refresh();
         }
-        bufferedFunction = new DomainBufferedFunction(name);
+        if (javaFunction == null) {
+            bufferedFunction = new DomainBufferedFunction(name);
+        }
     }
 
     public void setInpVal(int inpVal) {

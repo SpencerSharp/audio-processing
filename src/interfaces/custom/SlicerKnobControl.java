@@ -7,7 +7,6 @@ import java.lang.*;
 import java.io.*;
 import java.util.function.*;
 import interfaces.*;
-import tools.modulators.*;
 
 import samples.Sample;
 import datatypes.Units;
@@ -19,25 +18,25 @@ public class StepperKnobControl extends CustomKnobControl implements MutableFunc
     private double changedTime = 0.0;
 
     transient String[] KNOB_NAMES = {
-        "Grain Length",
-        "Base",
-        "32",
-        "16",
-        "8",
-        "4",
-        "2",
-        "1"
+        "Pos #",
+        "Pos Macro",
+        "Pos Fine",
+        "",
+        "Grain Size",
+        "Pos 6",
+        "Pos 7",
+        "Pos 8"
     };
 
     transient int[] KNOB_RANGES = new int[]{
-        138,    2205*10,
-        -64,    63,
-        -64,    63,
-        -64,    63,
-        -64,    63,
-        -64,    63,
-        -64,    63,
-        -64,    63
+        0,    64,
+        0,    64,
+        0,    64,
+        0,    64,
+        0,    64,
+        0,    64,
+        0,    64,
+        0,    64
     };
 
     transient int[] KNOB_UNITS = {
@@ -66,37 +65,26 @@ public class StepperKnobControl extends CustomKnobControl implements MutableFunc
     }
 
     public boolean hasChanged() {
-        if (changedTime > 0 && MaxClock.getTime() - 50.0 > changedTime) {
-            changedTime = 0;
-            ExampleSamplePlayer.GRAIN_LENGTH = (int) this.getValue(0);
-            ExampleSamplePlayer.alertVoicesOfChange();
+        if (MaxClock.getTime() - 50.0 > changedTime) {
             return true;
         }
         return false;
     }
 
     public Double apply(Integer ind) {
-        double frac = 0.5 + (values[1]/128.0);
+        int totalVal = 65 - ((int)values[0]);
+        int val = 0;
         int pow = 2;
-        int[] powray = new int[KNOB_NAMES.length];
-        for(int i = KNOB_NAMES.length - 1; i > 1; i--) {
-            powray[i] = pow;
+        for(int i = KNOB_NAMES.length - 1; i > 0; i--) {
+            if (ind % pow < (pow/2)) {
+                val += values[i];
+            }
+            totalVal += values[i];
             pow *= 2;
         }
-        for(int i = 2; i < KNOB_NAMES.length; i++) {
-            if (ind % powray[i] < (powray[i]/2)) {
-                double val = values[i];
-                if (val >= 1.0) {
-                    frac += (1.0 - frac) * (val / 64.0);
-                } else if (val <= -1.0) {
-                    frac += frac * (val/64.0);
-                }
-            }
-        }
-        if (frac >= 1.0) {
-            frac = 0.999;
-        }
-        return frac;
+        double res = ((double)val) / totalVal;
+        // return 0.5;
+        return res;
     }
 
     private void writeObject(ObjectOutputStream s) throws IOException {

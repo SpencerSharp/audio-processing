@@ -45,8 +45,8 @@ max.system.jar.dir /Users/spencersharp/Documents/Coding/Active/audio-processing/
 max.jvm.option -XX:+UseShenandoahGC
 max.jvm.option -XX:+UnlockExperimentalVMOptions
 ; max.jvm.option -Xincgc ;
-max.jvm.option -Xms64m
-max.jvm.option -Xmx256m
+max.jvm.option -Xms256m
+max.jvm.option -Xmx1024m
 
 ; uncomment these options(i.e. remove surrounding semi colons ;
 ; to cause the JVM to be created ;
