@@ -29,7 +29,7 @@ Later can auto-declare it maybe
 public class ModulatedVariable {
     String name;
     String context;
-    int inpVal;
+    int inpVal = 0;
     DomainBufferedFunction bufferedFunction;
     MutableFunction javaFunction;
 
@@ -41,7 +41,15 @@ public class ModulatedVariable {
         this.name = name;
         this.context = context;
         this.reload();
-        while (bufferedFunction == null) { Thread.yield(); }
+        bufferedFunction = new DomainBufferedFunction(name);
+    }
+
+    public ModulatedVariable(String name, String context, int domain) {
+        this.name = name;
+        this.context = context;
+        this.inpVal = domain;
+        this.reload();
+        bufferedFunction = new DomainBufferedFunction(name, domain);
     }
 
     public ModulatedVariable(MutableFunction func, int reso, int domainMultiplier) {
@@ -55,8 +63,8 @@ public class ModulatedVariable {
         if (javaFunction != null) {
             if (bufferedFunction != null) {
                 bufferedFunction.setDomainFunction("l");
-                return;
             }
+            return;
         }
         System.out.println("contextual opportunity");
         int tempChannel = PersistentObject.channel;
@@ -83,9 +91,6 @@ public class ModulatedVariable {
             System.out.println("DIFFFFFFFFFF!!!!!!   " + myPath );
             GlobalFunction.functionFile = myFile;
             GlobalFunction.refresh();
-        }
-        if (javaFunction == null) {
-            bufferedFunction = new DomainBufferedFunction(name);
         }
     }
 

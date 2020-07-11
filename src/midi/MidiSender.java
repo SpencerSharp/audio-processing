@@ -54,10 +54,11 @@ public abstract class MidiSender extends MaxObject {
         sendString(message);
     }
 
-    protected void sendString(String message) {
+    protected boolean sendString(String message) {
         if (message.equals("none")) {
-            return;
+            return true;
         }
+        return false;
     }
 
     private void setup(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {

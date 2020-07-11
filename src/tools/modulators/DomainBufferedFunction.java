@@ -27,6 +27,13 @@ public class DomainBufferedFunction {
         while (values == null) { Thread.yield(); }
     }
 
+    public DomainBufferedFunction(String name, int domain) {
+        this.globalFunction = new GlobalFunction(name+"(t)");
+        this.domain = domain;
+        this.invalidate();
+        while (values == null) { Thread.yield(); }
+    }
+
     public DomainBufferedFunction(MutableFunction func, int reso, int mult) {
         this.mult = mult;
         this.resolution = reso;
@@ -34,6 +41,7 @@ public class DomainBufferedFunction {
     }
 
     public void invalidate() {
+        ratio = (int) Math.ceil(((double)domain)/resolution);
         Runnable runnable = () -> {
             double[] newvalues = new double[resolution];
 
@@ -60,7 +68,6 @@ public class DomainBufferedFunction {
             if (mult != 0) {
                 domain *= mult;
             }
-            ratio = (int) Math.ceil(((double)domain)/resolution);
             this.invalidate();
         } else {
             values = new double[resolution];

@@ -13,6 +13,7 @@ import interfaces.*;
 import interfaces.custom.SequencerKnobControl;
 import midi.Midi2;
 import persistence.*;
+import tools.modulators.ModulatedVariable;
 
 public class FunctionSequencer extends Sequencer {
     private static final int BASE_INLET = 1;
@@ -24,7 +25,7 @@ public class FunctionSequencer extends Sequencer {
     protected int vel = 127;
     protected int dur = 0;
 
-    private Function pitchFunc;
+    private ModulatedVariable curPitch;
 
     private MaxClock tickClock;
 
@@ -41,12 +42,7 @@ public class FunctionSequencer extends Sequencer {
     }
 
     protected void initFunctions() {
-        GlobalFunction.refresh();
-
-        GlobalFunction pitchFunction = new GlobalFunction("p(t)");
-        if (pitchFunction.isValid()) {
-            pitchFunc = pitchFunction.asFunction();
-        }
+        curPitch = new ModulatedVariable("p");
     }
 
     protected void setup() {
@@ -75,11 +71,12 @@ public class FunctionSequencer extends Sequencer {
     }
 
     protected void tick() {
-        if (this.state % BASE_BEAT_LENGTH == 0) {
+        if (this.state == 0) {
             initFunctions();
         }
         double inp = ((double)state)/BASE_BEAT_LENGTH;
-        double calc = pitchFunc.calculate(inp);
+        curPitch.setInpVal((int)inp);
+        double calc = curPitch.value();
 
         pitch = (int) Math.round(BASE_PITCH + calc);
 

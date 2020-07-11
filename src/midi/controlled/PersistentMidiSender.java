@@ -9,7 +9,7 @@ import java.util.stream.Stream;
 import java.util.Arrays;
 
 import midi.MidiSender;
-import utils.ArrayUtils;
+import utils.*;
 import interfaces.custom.*;
 import persistence.*;
 
@@ -28,16 +28,21 @@ public abstract class PersistentMidiSender extends MidiSender {
         super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), numOutlets, outletNames);
     }
 
-    protected void sendString(String message) {
-        super.sendString(message);
+    protected boolean sendString(String message) {
+        if (super.sendString(message)) {
+            return true;
+        }
+        System.out.println("received message " + message);
         if (message.equals("persist")) {
-            persist();
-            return;
+            Timer.sleep(1000, new Executable() {public void execute() { persist(); }});
+            return true;
         }
         if (message.equals("setupfromdisc")) {
-            setup();
-            return;
+            Timer.sleep(1000, new Executable() {public void execute() { setup(); }});
+            return true;
         }
+        System.out.println("couldnt perform action " + message);
+        return false;
     }
 
     protected int sendDouble(double d) {
@@ -49,12 +54,12 @@ public abstract class PersistentMidiSender extends MidiSender {
         int parent = super.sendInt(i);
         switch (getInlet() - parent) {
             case 0:
-                // System.out.println("Channel is " + i);
-                // PersistentObject.channel = i;
+                System.out.println("Channel is " + i);
+                PersistentObject.channel = i;
                 break;
             case 1:
-                // System.out.println("Index is " + i);
-                // PersistentObject.ind = i;
+                System.out.println("Index is " + i);
+                PersistentObject.ind = i;
                 break;
         }
         return parent + this.NUM_INLETS;

@@ -5,7 +5,9 @@ import java.util.*;
 import java.lang.Math;
 import java.io.*;
 
-class Knob {
+import utils.math.*;
+
+class Knob implements MutableFunction {
     MaxObject mxjInstance;
     public MaxBox myBox;
     String name;
@@ -107,5 +109,13 @@ class Knob {
         float fmt = (float) conv;
         setRawValue(fmt);
         return conv;
+    }
+
+    public double getValue() {
+        
+    }
+
+    public double apply(int inp) {
+
     }
 }

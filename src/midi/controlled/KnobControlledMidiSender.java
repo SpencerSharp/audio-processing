@@ -26,20 +26,31 @@ public abstract class KnobControlledMidiSender extends PersistentMidiSender {
         "knob8 in"
     };
 
-    private static final int NUM_OUTLETS = 0;
-    private static final String[] OUTLET_NAMES = new String[]{};
+    private static final int NUM_OUTLETS = 8;
+    private static final String[] OUTLET_NAMES = new String[]{
+        "knob1 out",
+        "knob2 out",
+        "knob3 out",
+        "knob4 out",
+        "knob5 out",
+        "knob6 out",
+        "knob7 out",
+        "knob8 out"
+    };
 
     public KnobControlledMidiSender() {
         super(NUM_INLETS, INLET_NAMES, NUM_OUTLETS, OUTLET_NAMES);
     }
 
     public KnobControlledMidiSender(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
-        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), numOutlets, outletNames);
+        super(NUM_INLETS + numInlets, ArrayUtils.addAll(INLET_NAMES, inletNames), NUM_OUTLETS + numOutlets, ArrayUtils.addAll(OUTLET_NAMES, outletNames));
     }
 
     private void tryAssignValue(int knob, double val) {
-        if (getKnobs() != null) {
-            getKnobs().assignValue(knob, val);
+        CustomKnobControl knobs = this.getKnobs();
+        if (knobs != null) {
+            knobs.assignValue(knob, val);
+            outlet(2+knob, knobs.getValue(knob));
         }
     }
 
@@ -62,7 +73,7 @@ public abstract class KnobControlledMidiSender extends PersistentMidiSender {
     }
 
     protected void persist() {
-        PersistentObject.save(this.getKnobs());
+        // PersistentObject.save(this.getKnobs());
     }
     
     protected abstract CustomKnobControl getKnobs();
