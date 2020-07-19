@@ -6,8 +6,9 @@ import java.lang.Math;
 import java.io.*;
 
 import utils.math.*;
+import utils.Evaluatable;
 
-class Knob implements MutableFunction {
+class Knob implements Evaluatable {
     MaxObject mxjInstance;
     public MaxBox myBox;
     String name;
@@ -17,7 +18,7 @@ class Knob implements MutableFunction {
     double max;
 
     int inlet;
-    String val;
+    double val = Double.NaN;
 
     public Knob(String name, MaxObject parent) {
         this.name = name;
@@ -106,20 +107,13 @@ class Knob implements MutableFunction {
     public double setValue(double d) {
         double f = d / 127.0;
         double conv = min + (f * (max - min));
+        this.val = conv;
         float fmt = (float) conv;
         setRawValue(fmt);
         return conv;
     }
 
     public double getValue() {
-        return Double.NaN;
-    }
-
-    public boolean hasChanged() {
-        return false;
-    }
-
-    public Double apply(Integer inp) {
-        return Double.NaN;
+        return val;
     }
 }

@@ -39,6 +39,10 @@ public abstract class CustomKnobControl extends PersistentObject {
         values[knob] = knobs[knob].setValue(value);
     }
 
+    public Knob get(int knob) {
+        return knobs[knob];
+    }
+
     public double getValue(int knob) {
         return values[knob];
     }

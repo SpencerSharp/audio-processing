@@ -1,3 +1,0 @@
-MidiViewerDevice.java
-FunctionSequencer.java
-ProjectSetupDevice.java

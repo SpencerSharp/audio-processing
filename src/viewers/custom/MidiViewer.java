@@ -7,8 +7,8 @@ import com.cycling74.jitter.*;
 import java.util.*;
 
 import viewers.*;
-import utils.Colors;
 import datatypes.Note;
+import utils.*;
 
 public class MidiViewer extends Viewer {
     private static final int matrix_cols = 128;
@@ -19,29 +19,30 @@ public class MidiViewer extends Viewer {
     PriorityQueue<Note> notes;
     HashSet<Note> displayed;
 
-    private int minPitch = 0;
-    private int maxPitch = 127;
+    public Evaluatable yZoom;
+    public Evaluatable yOffset;
 
-    private double zoomPct = 100.0;
+    private int minPitch ;
+    private int maxPitch;
+
+    private double zoomPct;
 
     public MidiViewer(PriorityQueue<Note> notes) {
         this.notes = notes;
         displayed = new HashSet<Note>();
+        yZoom = new Constant(100.0);
+        yOffset = new Constant(0);
     }
 
-    public void setYZoom(double pct) {
-        zoomPct = pct;
+    private void updateVals() {
+        zoomPct = yZoom.getValue();
+        minPitch = (int) yOffset.getValue();
         maxPitch = minPitch + ((int)((127 - minPitch) * (zoomPct/100.0)));
-        System.out.println("minPitch " + minPitch + " maxPitch " + maxPitch);
-    }
-
-    public void setYOffset(double amt) {
-        minPitch = (int) amt;
-        maxPitch = minPitch + ((int)((127 - minPitch) * (zoomPct/100.0)));
-        System.out.println("minPitch " + minPitch + " maxPitch " + maxPitch);
     }
 
     public String getMatrix() {
+        updateVals();
+
         int dim[] = jm.getDim();
 
         HashSet<Note> current = new HashSet<Note>();

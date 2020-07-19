@@ -47,7 +47,7 @@ public class SampleVoice extends Voice {
     }
 
     public void retrig() {
-        indexInSample = startInd.value();
+        indexInSample = startInd.getValue();
     }
 
     public void setGrainLength(int len) {

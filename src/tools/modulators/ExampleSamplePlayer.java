@@ -84,7 +84,7 @@ public class ExampleSamplePlayer extends KnobControlledMidiReceiver {
     // }
 
     public void retrig() {
-        indexInSample = startInd.value();
+        indexInSample = startInd.getValue();
         // System.out.println("indin is NOW " + indexInSample);
     }
 

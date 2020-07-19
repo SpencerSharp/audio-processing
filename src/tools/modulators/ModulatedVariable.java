@@ -19,6 +19,7 @@ import samples.*;
 import persistence.*;
 import utils.global.*;
 import utils.math.*;
+import utils.Evaluatable;
 
 /*
 How to decide names of functions?
@@ -26,7 +27,7 @@ For now, it goes in the constructor
 Later can auto-declare it maybe
 */
 
-public class ModulatedVariable {
+public class ModulatedVariable implements Evaluatable {
     String name;
     String context;
     int inpVal = 0;
@@ -106,7 +107,7 @@ public class ModulatedVariable {
         this.inpVal = inpVal;
     }
 
-    public double value() {
+    public double getValue() {
         return bufferedFunction.getValueAt(inpVal);
     }
 

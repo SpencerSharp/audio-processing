@@ -3,4 +3,4 @@ to_build.txt
 mxj-java-classes
 ExternalRepos
 .gradle
-global
+global/*
