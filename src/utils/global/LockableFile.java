@@ -57,7 +57,7 @@ public class LockableFile implements Comparable<LockableFile> {
                 new InputStreamReader(
                     new FileInputStream(file)));
             return reader;
-        } catch(Exception e) {}
+        } catch(Exception e) { e.printStackTrace(); }
         return null;
     }
 
@@ -66,5 +66,9 @@ public class LockableFile implements Comparable<LockableFile> {
             return -1;
         }
         return file.compareTo(otherFile.file);
+    }
+
+    public String toString() {
+        return file.toString();
     }
 }

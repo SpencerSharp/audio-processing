@@ -112,10 +112,14 @@ class Knob implements MutableFunction {
     }
 
     public double getValue() {
-        
+        return Double.NaN;
     }
 
-    public double apply(int inp) {
+    public boolean hasChanged() {
+        return false;
+    }
 
+    public Double apply(Integer inp) {
+        return Double.NaN;
     }
 }

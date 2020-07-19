@@ -106,6 +106,8 @@ public abstract class MidiSender extends MaxObject {
     }
 
     protected void sendOut(long msg) {
+        int id = Midi2.getNoteId(msg);
+        System.out.println("SENDING : " + id + " | " + Midi2.isNoteOn(msg) + " | " + msg);
         outlet(0,(int)msg);
         outlet(1,(int)(msg >>> 32));
     }

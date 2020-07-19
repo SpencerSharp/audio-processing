@@ -56,6 +56,7 @@ public class FunctionSequencer extends Sequencer {
 
     protected void playNote(int pitch, int vel, int dur) {
         if (notes.size() > 1) {
+            System.out.println("SERIOUS LEAK ERROR");
             notes.clear();
         }
         Note newNote = new Note(pitch, vel);
@@ -74,6 +75,7 @@ public class FunctionSequencer extends Sequencer {
         if (this.state == 0) {
             initFunctions();
         }
+
         double inp = ((double)state)/BASE_BEAT_LENGTH;
         curPitch.setInpVal((int)inp);
         double calc = curPitch.value();

@@ -8,6 +8,7 @@ import java.io.*;
 import java.lang.*;
 
 import audio.AudioPlayer;
+import datatypes.Note;
 
 /*
 My "instrument" archetype
@@ -26,7 +27,7 @@ public abstract class MidiReceiver extends AudioPlayer {
     private ArrayList<Integer> first32bits;
     private ArrayList<Integer> last32bits;
 
-    // protected HashSet<Voice> voices;
+    protected PriorityQueue<Note> notes;
 
     public MidiReceiver() {
         super();
@@ -61,7 +62,7 @@ public abstract class MidiReceiver extends AudioPlayer {
         first32bits = new ArrayList<Integer>();
         last32bits = new ArrayList<Integer>();
 
-        // voices = new HashSet<Voice>();
+        notes = new PriorityQueue<Note>();
 
         this.curTime = 0;
     }
@@ -85,12 +86,12 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     public void handleMidiMsg(long msg) {
-        // int id = Midi2.getNoteId(msg);
-        // if (Midi2.isNoteOn(msg)) {
-        //     voices.add(new Voice(id, Midi2.getPitch(msg)));
-        // } else if (Midi2.isNoteOff(msg)) {
-        //     voices.remove(id);
-        // }
+        System.out.println("RECEIVING : " + Midi2.getNoteId(msg) + " | " + Midi2.isNoteOn(msg) + " | " + msg);
+        if (Midi2.isNoteOn(msg)) {
+            notes.add(Note.fromMessage(msg));
+        } else if (Midi2.isNoteOff(msg)) {
+            notes.remove(Note.fromMessage(msg));
+        }
     }
 
     private void handleMidiBits() {
@@ -124,15 +125,15 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     protected int sendInt(int msg) {
-        int parent = -1;
+        int parent = 0;
         switch (getInlet()) {
-            case 0:
+            case 1:
                 last32bits.add(msg);
                 if (first32bits.size() > 0) {
                     handleMidiBits();
                 }
                 break;
-            case 1:
+            case 2:
                 first32bits.add(msg);
                 if (last32bits.size() > 0) {
                     handleMidiBits();

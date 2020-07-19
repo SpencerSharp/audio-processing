@@ -78,7 +78,15 @@ public class ModulatedVariable {
                 myPath += '/';
             }
             if (!context.equals("project")) {
-                myPath += tempChannel + "/";
+                myPath += tempChannel;
+                File channelFile = new File(myPath);
+
+                if (!channelFile.exists()) {
+                    channelFile.mkdir();
+                }
+
+                myPath += "/";
+
                 if (context.equals("device")) {
                     myPath += tempInd + "_";
                 }

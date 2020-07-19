@@ -14,6 +14,10 @@ public class Note implements Comparable<Note> {
 
     }
 
+    public Note(int id) {
+        this.id = id;
+    }
+
     public Note(int pitch, int vel) {
         this.id = (int) (maxNoteNum++);
         this.pitch = (double) pitch;
@@ -45,7 +49,7 @@ public class Note implements Comparable<Note> {
 
     @Override
     public boolean equals(Object other) {
-        if(this == other) 
+        if(this == other)
             return true;
 
         if(other == null || other.getClass() != this.getClass()) 

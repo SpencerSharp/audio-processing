@@ -123,6 +123,8 @@ public class GlobalFunction {
     private void setupGlobalMap() {
         BufferedReader reader = functionFile.getReadBuffer();
 
+        System.out.println(functionFile);
+
         ArrayList<GlobalFunction> newFunctions = new ArrayList<GlobalFunction>();
 
         String line;

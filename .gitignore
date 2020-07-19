@@ -1,6 +1,6 @@
+to_build.txt
 .vscode
 mxj-java-classes
 ExternalRepos
 .gradle
 global
-**/to_build.txt
