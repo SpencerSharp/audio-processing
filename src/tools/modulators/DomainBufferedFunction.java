@@ -10,11 +10,11 @@ import utils.math.*;
 public class DomainBufferedFunction {
     private GlobalFunction globalFunction;
     private MutableFunction javaFunction;
-    private double[] values;
+    private double[] values = null;
     public int resolution = 64;
     private int domain;
     public int mult;
-    private int ratio;
+    private double ratio;
 
     private boolean isValid = false;
     private double lastInvalidTime = 0.0;
@@ -41,7 +41,16 @@ public class DomainBufferedFunction {
     }
 
     public void invalidate() {
-        ratio = (int) Math.ceil(((double)domain)/resolution);
+        if (domain < resolution) {
+
+            // domain 4
+            // reso   64
+
+            ratio = ((double)domain)/resolution;
+        } else {
+            ratio = (double) ((int) Math.ceil(((double)domain)/resolution));
+        }
+        
         Runnable runnable = () -> {
             double[] newvalues = new double[resolution];
 
@@ -56,7 +65,7 @@ public class DomainBufferedFunction {
             values = newvalues;
         };
         Thread thread = new Thread(runnable);
-        thread.setPriority(Thread.MIN_PRIORITY);
+        thread.setPriority(Thread.MAX_PRIORITY);
         thread.start();
     }
 
@@ -75,7 +84,7 @@ public class DomainBufferedFunction {
         System.out.println("max ind is " + ((domain-1) / ratio) + " so dont worry");
     }
 
-    public double getValueAt(int ind) {
+    public double getValueAt(double ind) {
         if (ind % 4410 == 0) {
             if (javaFunction != null) {
                 if (javaFunction.hasChanged()) {
@@ -83,7 +92,7 @@ public class DomainBufferedFunction {
                 }
             }
         }
-        int modind = (ind % domain) / ratio;
+        int modind = (int) ((ind % domain) / ratio);
 
         if (modind < 0 || modind > values.length) {
             modind = 0;

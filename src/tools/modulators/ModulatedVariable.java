@@ -30,12 +30,16 @@ Later can auto-declare it maybe
 public class ModulatedVariable implements Evaluatable {
     String name;
     String context;
-    int inpVal = 0;
+    double inpVal = 0;
     DomainBufferedFunction bufferedFunction;
     MutableFunction javaFunction;
 
     public ModulatedVariable(String name) {
         this(name, "device");
+    }
+
+    public ModulatedVariable(String name, int domain) {
+        this(name, "device", domain);
     }
 
     public ModulatedVariable(String name, String context) {
@@ -48,7 +52,7 @@ public class ModulatedVariable implements Evaluatable {
     public ModulatedVariable(String name, String context, int domain) {
         this.name = name;
         this.context = context;
-        this.inpVal = domain;
+        // this.inpVal = domain;
         this.reload();
         bufferedFunction = new DomainBufferedFunction(name, domain);
     }
@@ -104,6 +108,10 @@ public class ModulatedVariable implements Evaluatable {
     }
 
     public void setInpVal(int inpVal) {
+        this.inpVal = inpVal;
+    }
+
+    public void setInpVal(double inpVal) {
         this.inpVal = inpVal;
     }
 

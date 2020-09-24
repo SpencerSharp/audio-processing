@@ -43,7 +43,7 @@ public class FunctionSequencer extends Sequencer {
     }
 
     protected void initFunctions() {
-        curPitch = new ModulatedVariable("p");
+        curPitch = new ModulatedVariable("p", 4);
         BASE_BEAT_LENGTH = getKnobs().get(0);
     }
 
@@ -62,6 +62,7 @@ public class FunctionSequencer extends Sequencer {
             notes.clear();
         }
         Note newNote = new Note(pitch, vel);
+        System.out.println(newNote);
         sendOut(newNote.asMessage(Midi2.noteOn));
         endNote();
         notes.add(newNote);
@@ -79,7 +80,7 @@ public class FunctionSequencer extends Sequencer {
         }
 
         double inp = ((double)state)/BASE_BEAT_LENGTH.getValue();
-        curPitch.setInpVal((int)inp);
+        curPitch.setInpVal(inp);
         double calc = curPitch.getValue();
 
         pitch = (int) Math.round(BASE_PITCH + calc);

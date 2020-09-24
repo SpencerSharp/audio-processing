@@ -76,4 +76,9 @@ public class Note implements Comparable<Note> {
         }
         return 0;
     }
+
+    public String toString() {
+
+        return String.format("%.2f",this.pitch);
+    }
 }

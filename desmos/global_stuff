@@ -1,0 +1,15 @@
+l(t) = 166154
+r(t) = mod(t,l(t))
+a(t) = min(1,floor((2*r(t))/l(t)))
+b(t) = a(r(2*t))
+c(t) = b(r(2*t))
+d(t) = c(r(2*t))
+q(t) = d(r(2*t))
+
+f(t) = 16*a(t) + 2*b(t) + 1*c(t) + 8*d(t) + 4*q(t)
+u(t) = 44100 * (1/1000)
+v(t) = l(t) / (2^7)
+
+s(t) = (f(t)/32) * l(t)
+n(t) = min(s(t)+v(t),l(t))
+m(t) = 1

@@ -6,8 +6,8 @@ import java.nio.file.*;
 // https://www.baeldung.com/java-serialization
 
 public class PersistentObject implements Serializable {
-    public static int channel = 2;
-    public static int ind = 3;
+    public static int channel = 1;
+    public static int ind = 1;
 
     public String name;
     public int inlet;

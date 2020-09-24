@@ -26,7 +26,7 @@
 ; some example options one may use ;
 
 ; add all jars in /Users/topher/java/lib to the system classpath i.e. immutable classpath ;
-max.system.jar.dir /Users/spencersharp/Documents/Coding/Active/audio-processing/bin
+; max.system.jar.dir /Users/spencersharp/Documents/Coding/Active/audio-processing/bin ;
 
 ; add /Users/topher/foo to the system classpath i.e. immutable classpath ;
 ; max.system.class.dir /Users/topher/foo      ;
@@ -38,12 +38,12 @@ max.system.jar.dir /Users/spencersharp/Documents/Coding/Active/audio-processing/
 ; max.dynamic.class.dir /Users/spencersharp/Documents/Coding/Active/audio-processing ;
 
 ; add all jars in /Users/topher/myjars to the dynamic classpath of MXJClassLoader ;
-; max.dynamic.jar.dir /Users/spencersharp/Documents/Coding/Active/audio-processing/bin ;
+max.dynamic.jar.dir /Users/spencersharp/Documents/Coding/Active/audio-processing/bin
 
 
 ; specify some jvm options ;
-max.jvm.option -XX:+UseShenandoahGC
-max.jvm.option -XX:+UnlockExperimentalVMOptions
+; max.jvm.option -XX:+UseShenandoahGC ;
+; max.jvm.option -XX:+UnlockExperimentalVMOptions ;
 ; max.jvm.option -Xincgc ;
 max.jvm.option -Xms256m
 max.jvm.option -Xmx1024m

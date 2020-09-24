@@ -22,7 +22,7 @@ public class MidiViewer extends Viewer {
     public Evaluatable yZoom;
     public Evaluatable yOffset;
 
-    private int minPitch ;
+    private int minPitch;
     private int maxPitch;
 
     private double zoomPct;

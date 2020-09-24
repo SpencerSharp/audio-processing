@@ -55,11 +55,11 @@ public abstract class PersistentMidiSender extends MidiSender {
         switch (getInlet() - parent) {
             case 0:
                 System.out.println("Channel is " + i);
-                PersistentObject.channel = i;
+                // PersistentObject.channel = i;
                 break;
             case 1:
                 System.out.println("Index is " + i);
-                PersistentObject.ind = i;
+                // PersistentObject.ind = i;
                 break;
         }
         return parent + this.NUM_INLETS;
