@@ -53,6 +53,7 @@ public class MidiViewerDevice extends MidiForwarder {
         int knobBaseIn = 4;
         int knobBaseOut = 2;
         knobs = new MidiViewerKnobControl(this, knobBaseIn);
+        System.out.println("SETUP INIT KNOBS TO " + knobs);
         for (int i = 0; i < 8; i++) {
             outlet(knobBaseOut+i, this.getKnobs().getValue(i));
         }

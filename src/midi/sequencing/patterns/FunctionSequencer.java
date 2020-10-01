@@ -15,6 +15,7 @@ import midi.Midi2;
 import persistence.*;
 import tools.modulators.ModulatedVariable;
 import utils.*;
+import utils.Constant;
 
 public class FunctionSequencer extends Sequencer {
     private static final int BASE_INLET = 1;
@@ -36,7 +37,8 @@ public class FunctionSequencer extends Sequencer {
 
     public FunctionSequencer() {
         super();
-        this.setup();
+        // this.setup();
+        // curPitch = new Constant(0.0);
         tickClock = new MaxClock(new Executable() { 
             public void execute() { tick(); }});
         tickClock.delay(10000);
@@ -44,12 +46,19 @@ public class FunctionSequencer extends Sequencer {
 
     protected void initFunctions() {
         curPitch = new ModulatedVariable("p", 4);
+    }
+
+    protected void initKnobFunctions() {
+
         BASE_BEAT_LENGTH = getKnobs().get(0);
     }
 
     protected void setup() {
         knobs = new SequencerKnobControl(this, 3);
         PersistentObject.channel = 1;
+        GlobalFunction.refresh();
+        initFunctions();
+        initKnobFunctions();
     }
 
     protected CustomKnobControl getKnobs() {
@@ -57,6 +66,8 @@ public class FunctionSequencer extends Sequencer {
     }
 
     protected void playNote(int pitch, int vel, int dur) {
+
+        System.out.println("base beat : " + BASE_BEAT_LENGTH.getValue());
         if (notes.size() > 1) {
             System.out.println("SERIOUS LEAK ERROR");
             notes.clear();
@@ -75,21 +86,28 @@ public class FunctionSequencer extends Sequencer {
     }
 
     protected void tick() {
-        if (this.state == 0) {
-            initFunctions();
+
+        if (curPitch != null) {
+            double inp = ((double)state)/BASE_BEAT_LENGTH.getValue();
+            curPitch.setInpVal(inp);
+            double calc = curPitch.getValue();
+
+            pitch = (int) Math.round(BASE_PITCH + calc);
+
+            tickPlayNote();
         }
 
-        double inp = ((double)state)/BASE_BEAT_LENGTH.getValue();
-        curPitch.setInpVal(inp);
-        double calc = curPitch.getValue();
 
-        pitch = (int) Math.round(BASE_PITCH + calc);
+        state++;
+        tickClock.delay(1);
+    }
+
+    protected void tickPlayNote() {
+
 
         if (notes.size() == 0 || pitch != ((int)(notes.peek().pitch))) {
             playNote(pitch, vel, dur);
         }
-        state++;
-        tickClock.delay(1);
     }
 
     protected void notifyDeleted() {

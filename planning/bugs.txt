@@ -1,0 +1,3 @@
+doesn't initialize properly when loading up duplicated set for the first time
+    the files for the project metadata don't get created
+load button doesnt seem to work for functions

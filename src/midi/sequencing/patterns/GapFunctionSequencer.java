@@ -13,34 +13,54 @@ import interfaces.*;
 import interfaces.custom.SequencerKnobControl;
 import midi.Midi2;
 import persistence.*;
+import tools.modulators.ModulatedVariable;
 
 public class GapFunctionSequencer extends FunctionSequencer {
-    int pitchChanged;
-    Function gapFunc;
+    int trigger;
+    ModulatedVariable gapFunc;
 
     protected void initFunctions() {
         super.initFunctions();
 
-        GlobalFunction gapFunction = new GlobalFunction("g(t)");
-        if (gapFunction.isValid()) {
-            gapFunc = gapFunction.asFunction();
-        }
+        gapFunc = new ModulatedVariable("g", 4);
+
+        trigger = state;
+    }
+
+    // protected void endNote() {
+
+
+    // }
+
+    protected void tickPlayNote() {
+
+
     }
 
     protected void tick() {
         int pitchBefore = pitch;
         super.tick();
-        if (pitch != pitchBefore) {
-            pitchChanged = state;
-        }
-        double inp = ((double)state)/BASE_BEAT_LENGTH;
-        double calc = gapFunc.calculate(inp);
+        // if (pitch != pitchBefore) {
+        //     trigger = state;
+        // }
+        if (gapFunc != null) {
+            double inp = ((double)state)/BASE_BEAT_LENGTH.getValue();
+            gapFunc.setInpVal(inp);
+            double calc = gapFunc.getValue();
 
-        double curNoteLen = calc * BASE_BEAT_LENGTH;
-        int elapsedSinceNoteStarted = state - pitchChanged;
+            double curNoteLen = calc * BASE_BEAT_LENGTH.getValue();
+            int elapsedSinceNoteStarted = state - trigger;
 
-        if (elapsedSinceNoteStarted > curNoteLen) {
-            endNote();
+            if (elapsedSinceNoteStarted > curNoteLen) {
+                super.tickPlayNote();
+                // if (notes.size() > 0) {
+                //     sendOut(notes.poll().asMessage(Midi2.noteOff));
+                // }
+                trigger = state;
+            }
         }
+
     }
+
+
 }

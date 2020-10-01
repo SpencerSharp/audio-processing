@@ -93,17 +93,20 @@ public class GlobalFunction {
             functionFile.releaseLock();
         } else {
             text = "error";
+            GlobalFunction doppel = null;
             for (GlobalFunction function : functions) {
                 if(function.name.equals(name)) {
-                    id = function.id;
-                    text = function.text;
-                    if (function.function != null) {
-                        this.function = function.function;
-                    }
+                    doppel = function;
                 }
             }
-            if (false) {
-                loadFunction();
+            if (doppel != null) {
+
+                id = doppel.id;
+                text = doppel.text;
+                if (doppel.function == null) {
+                    loadFunction();
+                    doppel.function = this.function;
+                }
             }
         }
     }
@@ -146,7 +149,7 @@ public class GlobalFunction {
             id = newFunctions.size();
         }
 
-        if (functions == null || newFunctions.size() >= functions.size() || newFunctions.size() <= functions.size()) {
+        if (functions == null || newFunctions.size() > 0 || newFunctions.size() >= functions.size() || newFunctions.size() <= functions.size()) {
             functions = newFunctions;
         }
     }

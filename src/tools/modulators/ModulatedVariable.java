@@ -28,6 +28,7 @@ Later can auto-declare it maybe
 */
 
 public class ModulatedVariable implements Evaluatable {
+    static boolean initialized = false;
     String name;
     String context;
     double inpVal = 0;
@@ -54,7 +55,10 @@ public class ModulatedVariable implements Evaluatable {
         this.context = context;
         // this.inpVal = domain;
         this.reload();
-        bufferedFunction = new DomainBufferedFunction(name, domain);
+        // if (!initialized) {
+            bufferedFunction = new DomainBufferedFunction(name, domain);
+        // }
+        initialized = true;
     }
 
     public ModulatedVariable(MutableFunction func, int reso, int domainMultiplier) {
@@ -65,6 +69,10 @@ public class ModulatedVariable implements Evaluatable {
     }
 
     public void reload() {
+        if (initialized) {
+            return;
+        }
+        // 
         if (javaFunction != null) {
             if (bufferedFunction != null) {
                 bufferedFunction.setDomainFunction("l");
@@ -105,6 +113,7 @@ public class ModulatedVariable implements Evaluatable {
             GlobalFunction.functionFile = myFile;
             GlobalFunction.refresh();
         }
+        
     }
 
     public void setInpVal(int inpVal) {

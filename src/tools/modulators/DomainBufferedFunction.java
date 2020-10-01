@@ -31,7 +31,7 @@ public class DomainBufferedFunction {
         this.globalFunction = new GlobalFunction(name+"(t)");
         this.domain = domain;
         this.invalidate();
-        while (values == null) { Thread.yield(); }
+        // while (values == null) { Thread.yield(); }
     }
 
     public DomainBufferedFunction(MutableFunction func, int reso, int mult) {
@@ -50,23 +50,27 @@ public class DomainBufferedFunction {
         } else {
             ratio = (double) ((int) Math.ceil(((double)domain)/resolution));
         }
+
+        values = new double[resolution];
         
-        Runnable runnable = () -> {
-            double[] newvalues = new double[resolution];
+        // Runnable runnable = () -> {
+            // double[] 
+
+        System.out.println(globalFunction.asFunction().checkSyntax());
 
             for(int i = 0; i < resolution; i++) {
                 if (globalFunction != null) {
-                    newvalues[i] = globalFunction.asFunction().calculate(i*ratio);
+                    values[i] = globalFunction.asFunction().calculate(i*ratio);
                 } else {
-                    newvalues[i] = (domain/mult) * javaFunction.apply(i);
+                    values[i] = (domain/mult) * javaFunction.apply(i);
                 }
             }
 
-            values = newvalues;
-        };
-        Thread thread = new Thread(runnable);
-        thread.setPriority(Thread.MAX_PRIORITY);
-        thread.start();
+            // values = newvalues;
+        // };
+        // Thread thread = new Thread(runnable);
+        // thread.setPriority(Thread.MAX_PRIORITY);
+        // thread.start();
     }
 
     public void setDomainFunction(String name) {
