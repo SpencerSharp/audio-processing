@@ -44,6 +44,13 @@ public class ExampleSamplePlayer extends KnobControlledMidiReceiver {
     }
 
     protected void setup() {
+
+        stepperKnobs = new StepperKnobControl(this, 3);
+
+        startInd = new ModulatedVariable(stepperKnobs, StepperKnobControl.MAX_VAL, 8);
+        new GlobalFunction("l(t)","l(t) = " + sample.length());
+        // startInd.reload();
+
         this.sample = new Sample("/Users/spencersharp/Music/Ableton/User Library/Samples/Library/Audio/Instruments/Guitar/DopeStrings.wav");
         sample.load();
         try {
@@ -61,11 +68,7 @@ public class ExampleSamplePlayer extends KnobControlledMidiReceiver {
             gainTable[i] = (float) Math.sin(Math.PI*(((double)i) / 128));
         }
 
-        stepperKnobs = new StepperKnobControl(this, 3);
-
-        startInd = new ModulatedVariable(stepperKnobs, StepperKnobControl.MAX_VAL, 8);
-        new GlobalFunction("l(t)","l(t) = " + sample.length());
-        startInd.reload();
+        
 
 
         // endInd = new ModulatedVariable("n");

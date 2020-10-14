@@ -22,7 +22,7 @@ public class GapFunctionSequencer extends FunctionSequencer {
     protected void initFunctions() {
         super.initFunctions();
 
-        gapFunc = new ModulatedVariable("g", 4);
+        gapFunc = new ModulatedVariable("g", 128);
 
         trigger = state;
     }

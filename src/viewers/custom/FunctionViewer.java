@@ -4,8 +4,10 @@ import com.cycling74.max.*;
 import com.cycling74.jitter.*;
 import java.util.*;
 
+import tools.modulators.*;
 import viewers.*;
 import utils.Colors;
+
 import org.mariuszgromada.math.mxparser.*;
 
 public class FunctionViewer extends Viewer {
@@ -14,12 +16,16 @@ public class FunctionViewer extends Viewer {
 
     JitterMatrix jm = new JitterMatrix(4, "char", matrix_cols, matrix_rows);
 
-    private Function function;
+    private ModulatedVariable func;
 
-    public FunctionViewer(Function f) {
-        function = f;
-        System.out.println("f " + function);
-        System.out.println("fstr " + function.getFunctionExpressionString());
+    public FunctionViewer() {
+        
+        // System.out.println("f " + function);
+        // System.out.println("fstr " + function.getFunctionExpressionString());
+    }
+
+    public void setup() {
+        func = new ModulatedVariable("f", 4);
     }
 
     public void setYZoom(double d) {
@@ -38,7 +44,9 @@ public class FunctionViewer extends Viewer {
             for (int j = 0; j < dim[1]; j++) {
                 jm.setcell2d(i,j,Colors.black);
             }
-            jm.setcell2d(i,(int)(function.calculate(i/10.0)*50)+50,Colors.white);
+            if (func != null) {
+                jm.setcell2d(i,(int)(func.valAt(i/10)*50)+50,Colors.white);
+            }
         }
 
         return jm.getName();

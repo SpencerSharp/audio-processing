@@ -11,7 +11,7 @@ public class DomainBufferedFunction {
     private GlobalFunction globalFunction;
     private MutableFunction javaFunction;
     private double[] values = null;
-    public int resolution = 64;
+    public int resolution = 1024;
     private int domain;
     public int mult;
     private double ratio;

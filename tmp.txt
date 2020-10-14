@@ -1,10 +1,6 @@
-MODULES
-audio
-datatypes
-interfaces
-midi
-persistence
-samples
-tools
-utils
-viewers
+ProjectSetupDevice.java
+FunctionSequencer.java
+MidiViewerDevice.java
+GapFunctionSequencer.java
+ExampleSamplePlayer.java
+FunctionViewerDevice.java

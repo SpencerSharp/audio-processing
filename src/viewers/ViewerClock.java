@@ -33,6 +33,9 @@ public class ViewerClock {
     }
 
     private void updateView() {
+        if (viewer != null) {
+            
+        }
         String matrixName = viewer.getMatrix();
         parent.outlet(myOutlet, "jit_matrix", matrixName);
         internal.delay(FRAME_DELAY);

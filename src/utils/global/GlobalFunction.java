@@ -38,9 +38,15 @@ public class GlobalFunction {
     }
 
     private GlobalFunction(int id, String name, String func) {
+        System.out.println("created " + func);
         this.id = id;
         this.name = name;
         this.text = func;
+    }
+
+    public String toString() {
+
+        return this.text;
     }
 
     public String getRightSide() {
@@ -149,6 +155,8 @@ public class GlobalFunction {
             id = newFunctions.size();
         }
 
+        System.out.println(newFunctions);
+
         if (functions == null || newFunctions.size() > 0 || newFunctions.size() >= functions.size() || newFunctions.size() <= functions.size()) {
             functions = newFunctions;
         }
@@ -203,12 +211,27 @@ public class GlobalFunction {
     private String extractFunc(String myText, String otherName) {
         String shortName = otherName.replaceFirst("\\(.*?\\)","");
         String oldParam = getParam(otherName);
-        String beforeParen = ".*?\\W+?" + escape(shortName + "(");
+        String beforeParen = "(^|.*?\\W+?)" + escape(shortName + "(");
         String afterParen = escape(")") + ".*?";
-        String replaceAllBeforeFunc = myText.replaceFirst(beforeParen,shortName + "(");
-        if (replaceAllBeforeFunc.equals(myText)) {
+        String keyword = "QWERTY";
+        String replaceAllBeforeFunc = myText.replaceFirst(beforeParen,keyword);
+        // String newRegex = "^" + escape(shortName + "(");
+        // String tryNewRegex = myText.replaceFirst(newRegex,shortName + "(");
+
+        // String oldResult = replaceAllBeforeFunc.substring(0,getOuterMatchingParen(replaceAllBeforeFunc)+1);
+        // String newResult = tryNewRegex.substring(0,getOuterMatchingParen(tryNewRegex)+1);
+        // if (!oldResult.equals(newResult)) {
+        //     System.out.println("------------");
+        //     System.out.println("Looking for " + otherName);
+        //     System.out.println("old regex result " + oldResult);
+        //     System.out.println("new regex result: " + newResult);
+        //     System.out.println("------------");
+        // }
+        
+        if (!replaceAllBeforeFunc.contains(keyword)) {
             return "";
         }
+        replaceAllBeforeFunc = replaceAllBeforeFunc.replace(keyword, shortName + "(");
         return replaceAllBeforeFunc.substring(0,getOuterMatchingParen(replaceAllBeforeFunc)+1);
     }
 
@@ -224,13 +247,14 @@ public class GlobalFunction {
         while (!isDone) {
             isDone = true;
             for (GlobalFunction function : functions) {
+                System.out.println("Checking " + function.name);
                 if (containsFunc(expandedText, function.name)) {
-                    // System.out.println("----" + function.name + "|" + expandedText);
+                    
                     isDone = false;
                     String itsParam = getParam(function.name);
                     String myCall = extractFunc(expandedText,function.name);
                     String myParam = getParam(myCall);
-                    String newFunc = function.getRightSide().replace(itsParam, myParam);
+                    String newFunc = function.getRightSide().replace(itsParam, "("+myParam+")");
                     expandedText = expandedText.replace(myCall, "(" + newFunc + ")");
                 }
                 // System.out.println("~~~~" + function.name + "|" + expandedText);

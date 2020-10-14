@@ -73,10 +73,10 @@ public class SampleVoice extends Voice {
         // indexInSample += stepSize.value();
         indexInSample += 1.0;
 
-        if (indexInSample >= startInd.value()) {
+        if (indexInSample >= startInd.getValue()) {
             if (indexInSample >= (getSampleEnd()-3)) {
                 retrig();
-            } else if (indexInSample - startInd.value() >= grainLength) {
+            } else if (indexInSample - startInd.getValue() >= grainLength) {
                 retrig();
             }
         } else {
@@ -85,7 +85,7 @@ public class SampleVoice extends Voice {
     }
 
     protected float leftSignal() {
-        float sig = getGain(indexInSample - startInd.value());
+        float sig = getGain(indexInSample - startInd.getValue());
         int floor = (int) indexInSample;
         int ceil = floor + 1;
         if (ceil >= getSampleEnd()) {
@@ -99,7 +99,7 @@ public class SampleVoice extends Voice {
     }
 
     protected float rightSignal() {
-        float sig = getGain(indexInSample - startInd.value());
+        float sig = getGain(indexInSample - startInd.getValue());
         int floor = (int) indexInSample;
         int ceil = floor + 1;
         if (ceil >= getSampleEnd()) {
