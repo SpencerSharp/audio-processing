@@ -45,7 +45,7 @@ public class FunctionSequencer extends Sequencer {
     }
 
     protected void initFunctions() {
-        curPitch = new ModulatedVariable("p", 64);
+        curPitch = new ModulatedVariable("p", 16);
     }
 
     protected void initKnobFunctions() {

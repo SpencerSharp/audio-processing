@@ -58,7 +58,7 @@ public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver 
     protected int sendDouble(double d) {
         int parent = super.sendDouble(d);
         int knobInd = getInlet() - parent;
-        System.out.println("Trying to assign value " + d + " to knob " + knobInd + " of " + getKnobs());
+        // System.out.println("Trying to assign value " + d + " to knob " + knobInd + " of " + getKnobs());
         if (knobInd >= 0 && knobInd < NUM_INLETS) {
             tryAssignValue(knobInd, d);
         }
@@ -68,7 +68,7 @@ public abstract class KnobControlledMidiReceiver extends PersistentMidiReceiver 
     protected int sendInt(int i) {
         int parent = super.sendInt(i);
         int knobInd = getInlet() - parent;
-        System.out.println("Trying to assign value " + i + " to knob " + knobInd + " of " + getKnobs());
+        // System.out.println("Trying to assign value " + i + " to knob " + knobInd + " of " + getKnobs());
 
         if (knobInd >= 0 && knobInd < NUM_INLETS) {
             tryAssignValue(knobInd, (double) i);

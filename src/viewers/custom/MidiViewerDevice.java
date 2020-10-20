@@ -1,13 +1,13 @@
 package viewers.custom;
 
 import viewers.ViewerClock;
-import midi.MidiForwarder;
+import midi.*;
 import interfaces.custom.MidiViewerKnobControl;
 import interfaces.CustomKnobControl;
 import utils.*;
 import datatypes.Note;
 
-public class MidiViewerDevice extends MidiForwarder {
+public class MidiViewerDevice extends MidiConverter {
 
 
     private static final int NUM_OUTLETS = 1;
@@ -28,7 +28,7 @@ public class MidiViewerDevice extends MidiForwarder {
 
         viewer = new MidiViewer(notes);
 
-        viewerClock = new ViewerClock(viewer,this,12,20.0);
+        viewerClock = new ViewerClock(viewer,this,11,20.0);
     }
 
     public MidiViewerDevice(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {

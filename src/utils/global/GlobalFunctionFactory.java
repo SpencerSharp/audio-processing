@@ -9,11 +9,9 @@ import org.mariuszgromada.math.mxparser.*;
 
 import persistence.*;
 
-public class GlobalFunction {
+public class GlobalFunctionFactory {
     public static final String GLOBAL_FUNCTION_FILE_PATH = 
         "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/";
-
-    private GlobalFunctionFactory maker;
 
     public int id = -1;
     public String name;
@@ -27,12 +25,19 @@ public class GlobalFunction {
 
     public LockableFile functionFile;
 
-    public GlobalFunction(String name) {
+    public GlobalFunctionFactory() {
+
+
+    }
+
+    public GlobalFunction get(String name) {
+
         this.name = name;
         this.load();
     }
 
-    public GlobalFunction(String name, String func) {
+    public GlobalFunction create(String name, String func) {
+
         this.name = name;
         this.text = func;
 
@@ -219,18 +224,6 @@ public class GlobalFunction {
         String afterParen = escape(")") + ".*?";
         String keyword = "QWERTY";
         String replaceAllBeforeFunc = myText.replaceFirst(beforeParen,keyword);
-        // String newRegex = "^" + escape(shortName + "(");
-        // String tryNewRegex = myText.replaceFirst(newRegex,shortName + "(");
-
-        // String oldResult = replaceAllBeforeFunc.substring(0,getOuterMatchingParen(replaceAllBeforeFunc)+1);
-        // String newResult = tryNewRegex.substring(0,getOuterMatchingParen(tryNewRegex)+1);
-        // if (!oldResult.equals(newResult)) {
-        //     System.out.println("------------");
-        //     System.out.println("Looking for " + otherName);
-        //     System.out.println("old regex result " + oldResult);
-        //     System.out.println("new regex result: " + newResult);
-        //     System.out.println("------------");
-        // }
         
         if (!replaceAllBeforeFunc.contains(keyword)) {
             return "";

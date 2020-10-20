@@ -1,0 +1,2 @@
+https://cycling74.com/articles/mxj-class-loading
+    AVOID KEYWORD STATIC

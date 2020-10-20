@@ -19,13 +19,10 @@ public class FunctionViewerDevice extends MidiForwarder {
     FunctionViewer viewer;
     protected ViewerClock viewerClock;
 
-    private Evaluatable zoom;
-    private Evaluatable offset;
-
     public FunctionViewerDevice() {
         super(0, new String[0], NUM_OUTLETS, OUTLET_NAMES);
 
-        notes.add(new Note(60, 127));
+        // notes.add(new Note(60, 127));
 
         viewer = new FunctionViewer();
 
@@ -34,6 +31,10 @@ public class FunctionViewerDevice extends MidiForwarder {
 
     public FunctionViewerDevice(int numInlets, String[] inletNames, int numOutlets, String[] outletNames) {
         super(numInlets, inletNames, NUM_OUTLETS + numOutlets, ArrayUtils.addAll(OUTLET_NAMES, outletNames));
+
+        viewer = new FunctionViewer();
+
+        viewerClock = new ViewerClock(viewer,this,12,20.0);
     }
 
     private MidiViewerKnobControl knobs;
@@ -45,6 +46,8 @@ public class FunctionViewerDevice extends MidiForwarder {
     protected void initFunctions() {
         // zoom = getKnobs().get(3);
         // offset = getKnobs().get(7);
+
+        GlobalFunction
 
         viewer.setup();
 
@@ -66,6 +69,8 @@ public class FunctionViewerDevice extends MidiForwarder {
 
         // declareOutlets(outletInfo);
         // setOutletAssist(outletNamesRay);
+
+        // GlobalFunction.refresh();
 
         this.initFunctions();
     }

@@ -10,8 +10,9 @@ import utils.math.*;
 public class DomainBufferedFunction {
     private GlobalFunction globalFunction;
     private MutableFunction javaFunction;
-    private double[] values = null;
+    
     public int resolution = 1024;
+    private double[] values = new double[resolution];
     private int domain;
     public int mult;
     private double ratio;
@@ -51,12 +52,12 @@ public class DomainBufferedFunction {
             ratio = (double) ((int) Math.ceil(((double)domain)/resolution));
         }
 
-        values = new double[resolution];
+        // values = new double[resolution];
         
         // Runnable runnable = () -> {
             // double[] 
 
-        System.out.println(globalFunction.asFunction().checkSyntax());
+        // System.out.println(globalFunction.asFunction().checkSyntax());
 
             for(int i = 0; i < resolution; i++) {
                 if (globalFunction != null) {
@@ -89,7 +90,7 @@ public class DomainBufferedFunction {
     }
 
     public double getValueAt(double ind) {
-        if (ind % 4410 == 0) {
+        if (ind % 441000 == 0) {
             if (javaFunction != null) {
                 if (javaFunction.hasChanged()) {
                     this.invalidate();

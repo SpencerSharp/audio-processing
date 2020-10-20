@@ -7,6 +7,7 @@ import java.util.*;
 import tools.modulators.*;
 import viewers.*;
 import utils.Colors;
+import utils.global.GlobalFunction;
 
 import org.mariuszgromada.math.mxparser.*;
 
@@ -16,7 +17,7 @@ public class FunctionViewer extends Viewer {
 
     JitterMatrix jm = new JitterMatrix(4, "char", matrix_cols, matrix_rows);
 
-    private ModulatedVariable func;
+    public ModulatedVariable func;
 
     public FunctionViewer() {
         
@@ -25,6 +26,11 @@ public class FunctionViewer extends Viewer {
     }
 
     public void setup() {
+
+        // super.initFunctions();
+
+        GlobalFunction.refresh();
+
         func = new ModulatedVariable("f", 4);
     }
 

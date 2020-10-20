@@ -25,7 +25,7 @@ public class SequencerKnobControl extends CustomKnobControl {
     };
 
     int[] KNOB_RANGES = new int[]{
-        1024,    4096,
+        256,    4096,
         0,          0,
         0,          0,
         0,        100,

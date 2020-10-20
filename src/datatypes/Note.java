@@ -1,6 +1,7 @@
 package datatypes;
 
 import midi.Midi2;
+import midi.Midi;
 
 public class Note implements Comparable<Note> {
     private static char maxNoteNum = 0;
@@ -35,12 +36,16 @@ public class Note implements Comparable<Note> {
         return Midi2.prepareMessage(messageType,id,pitch,velocity);
     }
 
+    public byte[] asSimpleMessage(long messageType) {
+        return Midi.prepareMessage(messageType,id,pitch,velocity);
+    }
+
     public static Note fromMessage(long message) {
         Note note = new Note();
         note.id = Midi2.getNoteId(message);
         note.pitch = (double) Midi2.getPitch(message);
         if (Midi2.isNoteOn(message)) {
-            note.velocity = (char) 1;
+            note.velocity = (char) 64;
         } else if (Midi2.isNoteOff(message)) {
             note.velocity = (char) 0;
         }

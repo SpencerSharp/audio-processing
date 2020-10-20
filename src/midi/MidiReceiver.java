@@ -86,7 +86,7 @@ public abstract class MidiReceiver extends AudioPlayer {
     }
 
     public void handleMidiMsg(long msg) {
-        System.out.println("RECEIVING : " + Midi2.getNoteId(msg) + " | " + Midi2.isNoteOn(msg) + " | " + msg);
+        // System.out.println("RECEIVING : " + Midi2.getNoteId(msg) + " | " + Midi2.isNoteOn(msg) + " | " + msg);
         if (Midi2.isNoteOn(msg)) {
             notes.add(Note.fromMessage(msg));
         } else if (Midi2.isNoteOff(msg)) {
