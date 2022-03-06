@@ -28,7 +28,6 @@ public abstract class AudioPlayer extends StereoSignalDevice {
     private double gain;
     private double pan;
 
-
     public AudioPlayer() {
         super();
         this.setup(0, new String[0]);
