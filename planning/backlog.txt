@@ -1,0 +1,10 @@
+performance enhancements
+    switch to zgc
+    make codebase more GC friendly
+    custom function parsing library (garbage friendly)
+    low-garbage sample loading
+    understand JVM with multiple mxj instances better
+refactors
+    get rid of the global stuff
+    reduce code duplication between MidiSender and Receiver
+    improve slot index code
