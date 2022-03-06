@@ -13,8 +13,6 @@ public class GlobalFunction {
     public static final String GLOBAL_FUNCTION_FILE_PATH = 
         "/Users/spencersharp/Documents/Coding/Active/audio-processing/global/";
 
-    private GlobalFunctionFactory maker;
-
     public int id = -1;
     public String name;
     public String text;

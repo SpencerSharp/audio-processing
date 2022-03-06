@@ -56,7 +56,7 @@ public class FunctionSequencer extends Sequencer {
     protected void setup() {
         knobs = new SequencerKnobControl(this, 3);
         PersistentObject.channel = 1;
-        GlobalFunction.refresh();
+        // GlobalFunction.refresh();
         initFunctions();
         initKnobFunctions();
     }

@@ -29,7 +29,7 @@ public class FunctionViewer extends Viewer {
 
         // super.initFunctions();
 
-        GlobalFunction.refresh();
+        // GlobalFunction.refresh();
 
         func = new ModulatedVariable("f", 4);
     }

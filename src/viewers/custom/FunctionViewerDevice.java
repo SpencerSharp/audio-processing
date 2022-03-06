@@ -47,7 +47,7 @@ public class FunctionViewerDevice extends MidiForwarder {
         // zoom = getKnobs().get(3);
         // offset = getKnobs().get(7);
 
-        GlobalFunction
+        // GlobalFunction
 
         viewer.setup();
 

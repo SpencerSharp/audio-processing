@@ -72,7 +72,7 @@ public class ModulatedVariable implements Evaluatable {
         if (initialized) {
             return;
         }
-        // 
+        /*
         if (javaFunction != null) {
             if (bufferedFunction != null) {
                 bufferedFunction.setDomainFunction("l");
@@ -113,6 +113,7 @@ public class ModulatedVariable implements Evaluatable {
             GlobalFunction.functionFile = myFile;
             GlobalFunction.refresh();
         }
+        */
         
     }
 
