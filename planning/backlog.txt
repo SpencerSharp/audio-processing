@@ -8,3 +8,9 @@ refactors
     get rid of the global stuff
     reduce code duplication between MidiSender and Receiver
     improve slot index code
+usability
+    improve build process
+        properly integrate gradle
+        switch from vscode to intellij
+    fix stability issues
+    make persistence code less janky

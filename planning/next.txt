@@ -1,4 +1,10 @@
 sample workflow project
-    streamline overall process
+    make MidiSampleLoader work
+    create SourceSampler
+        given a source, lets you create and name samples
+    create SampleManager
+        SourceSampler sends sample info to SampleManager, which saves the sample to disc properly
+    create SampleSearcher
+        UI for searching through sample library, previewing, etc.
     get screenshotter working
     
