@@ -4,3 +4,6 @@ mxj-java-classes
 ExternalRepos
 .gradle
 global/*
+
+# Ignore Gradle build output directory
+build
